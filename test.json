@@ -1,0 +1,173 @@
+[{
+    "quizname": "World Flags",
+    "quizthumbnnail": false,
+    "questions": [
+        {
+            "questiontitle": "Which country has this flag?",
+            "ïmg": "Flag of Israel",
+            "answers": [{
+                            "answer": "China",
+                            "iscorrect": false
+                        },{
+                            "answer": "Brazil",
+                            "iscorrect": false
+                        },{
+                            "answer": "Israel",
+                            "iscorrect": true
+                        },{
+                            "answer": "Germany",
+                            "iscorrect": false
+                        }]
+        },{
+            "questiontitle": "Which country has this flag?",
+            "ïmg": "Flag of Greenland",
+            "answers": [{
+                            "answer": "Canada",
+                            "iscorrect": false
+                        },{
+                            "answer": "Poland",
+                            "iscorrect": false
+                        },{
+                            "answer": "Greenland",
+                            "iscorrect": true
+                        },{
+                            "answer": "Indonesia",
+                            "iscorrect": false
+                        }]
+        },{
+            "questiontitle": "Which country has this flag?",
+            "ïmg": "Flag of France",
+            "answers": [{
+                            "answer": "United Kingdom",
+                            "iscorrect": false
+                        },{
+                            "answer": "United States",
+                            "iscorrect": false
+                        },{
+                            "answer": "Netherlands",
+                            "iscorrect": false
+                        },{
+                            "answer": "France",
+                            "iscorrect": true
+                        }]
+        },{
+            "questiontitle": "Which country has this flag?",
+            "ïmg": "Flag of Australia",
+            "answers": [{
+                            "answer": "Australia",
+                            "iscorrect": true
+                        },{
+                            "answer": "New Zealand",
+                            "iscorrect": false
+                        },{
+                            "answer": "Denmark",
+                            "iscorrect": false
+                        },{
+                            "answer": "Algeria",
+                            "iscorrect": false
+                        }]
+        },{
+            "questiontitle": "Which country has this flag?",
+            "ïmg": "Flag of Morocco",
+            "answers": [{
+                            "answer": "China",
+                            "iscorrect": false
+                        },{
+                            "answer": "Brazil",
+                            "iscorrect": false
+                        },{
+                            "answer": "Vietnam",
+                            "iscorrect": false
+                        },{
+                            "answer": "Morocco",
+                            "iscorrect": true
+                        }]
+        }
+    ]
+}, {
+    "quizname": "Physics for babies",
+    "quizthumbnnail": false,
+    "questions": [
+        {
+            "questiontitle": "What are the Three states of matter?",
+            "ïmg": "Peridic table",
+            "answers": [{
+                            "answer": "Pungent, Smell, Taste",
+                            "iscorrect": false
+                        },{
+                            "answer": "Sulfurous, Oil, Crystal",
+                            "iscorrect": false
+                        },{
+                            "answer": "Solid, Liquid, Gas",
+                            "iscorrect": true
+                        },{
+                            "answer": "Metal, Gear, Solid",
+                            "iscorrect": false
+                        }]
+        },{
+            "questiontitle": "What is the Boiling Point of Water?",
+            "ïmg": "Boiling Water",
+            "answers": [{
+                            "answer": "373 Kelvin",
+                            "iscorrect": true
+                        },{
+                            "answer": "200 Celcius",
+                            "iscorrect": false
+                        },{
+                            "answer": "100 Fahrenheit",
+                            "iscorrect": false
+                        },{
+                            "answer": "100 Celcius",
+                            "iscorrect": true
+                        }]
+        },{
+            "questiontitle": "Which of these do NOT relate to Electricity?",
+            "ïmg": "Electrical Current",
+            "answers": [{
+                            "answer": "Newton",
+                            "iscorrect": true
+                        },{
+                            "answer": "Watt",
+                            "iscorrect": false
+                        },{
+                            "answer": "Amperage",
+                            "iscorrect": false
+                        },{
+                            "answer": "Volt",
+                            "iscorrect": false
+                        }]
+        },{
+            "questiontitle": "What element does Au refer to?",
+            "ïmg": "Some Rocks",
+            "answers": [{
+                            "answer": "Potassium",
+                            "iscorrect": false
+                        },{
+                            "answer": "Gold",
+                            "iscorrect": true
+                        },{
+                            "answer": "Copper",
+                            "iscorrect": false
+                        },{
+                            "answer": "Neon",
+                            "iscorrect": false
+                        }]
+        },{
+            "questiontitle": "When a Gas turns into a Liquid thats called",
+            "ïmg": "",
+            "answers": [{
+                            "answer": "Vaporization",
+                            "iscorrect": false
+                        },{
+                            "answer": "Boiling",
+                            "iscorrect": false
+                        },{
+                            "answer": "Condensation",
+                            "iscorrect": true
+                        },{
+                            "answer": "Melting",
+                            "iscorrect": false
+                        }]
+        }
+    ]
+}]
