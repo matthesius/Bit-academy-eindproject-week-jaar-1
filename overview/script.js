@@ -51,8 +51,13 @@ function renderQuizzes(quiz) {
 
         const stats = document.createElement("div");
         stats.className = "quiz-stats";
+<<<<<<< HEAD
         stats.textContent = `${quiz[i].questions.length} vragen`;
 
+=======
+        stats.textContent = `${quiz.questions.length} vragen`;
+                                                                                                                                          
+>>>>>>> 5a1972a02c4c91031b9bb9941f108b8f66cc817e
         const button = document.createElement("button");
         button.className = "start-btn";
 
