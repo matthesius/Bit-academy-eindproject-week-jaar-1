@@ -30,7 +30,7 @@ async function loadQuizzes() {
 
 function renderQuizzes(quizzes) {
 
-    quizContainer.innerHTML = ""; // alleen container resetten
+    quizContainer.innerHTML = "";
 
     quizzes.forEach((quiz, index) => {
 
@@ -55,7 +55,7 @@ function renderQuizzes(quizzes) {
         const stats = document.createElement("div");
         stats.className = "quiz-stats";
         stats.textContent = `${quiz.questions.length} vragen`;
-
+                                                                                                                                          
         const button = document.createElement("button");
         button.className = "start-btn";
         button.textContent = "Start Quiz";
