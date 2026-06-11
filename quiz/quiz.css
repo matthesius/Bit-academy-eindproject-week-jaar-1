@@ -1,0 +1,10 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div#questions {
+    overflow-y: scroll;
+    width: 100%;
+}

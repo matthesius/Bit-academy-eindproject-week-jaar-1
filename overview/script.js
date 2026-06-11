@@ -4,7 +4,7 @@ loadQuizzes();
 
 async function loadQuizzes() {
     try {
-        const response = await fetch("./test.json");
+        const response = await fetch("../test.json");
 
         if (!response.ok) {
             throw new Error(`HTTP Error ${response.status}`);
@@ -19,75 +19,67 @@ async function loadQuizzes() {
 
         const errorDiv = document.createElement("div");
         errorDiv.className = "error";
-        errorDiv.innerHTML = `
-            Fout bij laden van quizzen<br>
-            ${error.message}
-        `;
+        errorDiv.innerHTML = `Fout bij laden van quizzen<br> ${error.message}`;
 
         quizContainer.appendChild(errorDiv);
     }
 }
 
-function renderQuizzes(quizzes) {
+function renderQuizzes(quiz) {
 
-    quizContainer.innerHTML = ""; // alleen container resetten
+    quizContainer.innerHTML = "";
 
-    quizzes.forEach((quiz, index) => {
+    for (let i = 0; i < quiz.length; i++) {
 
         const card = document.createElement("div");
         card.className = "quiz-card";
 
         const img = document.createElement("img");
         img.className = "quiz-image";
-        img.src = quiz.quizthumbnnail;
-        img.alt = quiz.quizname;
+        img.src = quiz[i].quizthumbnnail;
+        img.alt = quiz[i].quizname;
 
         const content = document.createElement("div");
         content.className = "quiz-content";
 
         const title = document.createElement("h2");
-        title.textContent = quiz.quizname;
+        title.textContent = quiz[i].quizname;
 
         const desc = document.createElement("p");
         desc.className = "quiz-description";
-        desc.textContent = quiz.desc ?? "Geen beschrijving";
+        desc.textContent = quiz[i].desc ?? "Geen beschrijving";
 
         const stats = document.createElement("div");
         stats.className = "quiz-stats";
-        stats.textContent = `${quiz.questions.length} vragen`;
+        stats.textContent = `${quiz[i].questions.length} vragen`;
 
         const button = document.createElement("button");
         button.className = "start-btn";
-        button.textContent = "Start Quiz";
 
         button.addEventListener("click", () => {
-            startQuiz(index);
+            startQuiz(quiz, i);
         });
+
+        const linktoquiz = document.createElement("a");
+        linktoquiz.href = "../quiz/quiz.html";
+        linktoquiz.textContent = "Start Quiz"
 
         content.appendChild(title);
         content.appendChild(desc);
         content.appendChild(stats);
         content.appendChild(button);
+        button.appendChild(linktoquiz);
 
         card.appendChild(img);
         card.appendChild(content);
 
         quizContainer.appendChild(card);
-    });
-
-    window.quizzes = quizzes;
+    };
 }
 
-function startQuiz(index) {
-
-    const selectedQuiz = window.quizzes[index];
-
-    localStorage.setItem(
-        "selectedQuiz",
-        JSON.stringify(selectedQuiz)
-    );
-
-    console.log(selectedQuiz);
-
-    alert(`Quiz gestart: ${selectedQuiz.quizname}`);
+function startQuiz(quiz, index) {
+    if (localStorage.getItem("selectedquiz")) {
+        localStorage.removeItem("selectedquiz");
+    }
+    localStorage.setItem("selectedquiz", JSON.stringify(quiz[index]));
 }
