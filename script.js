@@ -16,8 +16,8 @@ async function loadQuizzes() {
 
         quizContainer.innerHTML = `
             <div class="error">
-                Fout bij laden van quizzen<br>
-                ${error.message}
+                <p>Fout bij laden van quizzen<br>
+                ${error.message}</p>
             </div>
         `;
     }
@@ -44,13 +44,10 @@ function renderQuizzes(quizzes) {
                 </p>
 
                 <div class="quiz-stats">
-                    ${quiz.questions.length} vragen
+                    <p>${quiz.questions.length} vragen</p>
                 </div>
 
-                <button
-                    class="start-btn"
-                    onclick="startQuiz(${index})"
-                >
+                <button class="start-btn" onclick="startQuiz(${index})">
                     Start Quiz
                 </button>
             </div>
