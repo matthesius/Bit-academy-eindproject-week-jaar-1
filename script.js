@@ -5,56 +5,72 @@ loadQuizzes();
 async function loadQuizzes() {
     try {
         const response = await fetch("./test.json");
+
         if (!response.ok) {
             throw new Error(`HTTP Error ${response.status}`);
         }
+
         const quizzes = await response.json();
         renderQuizzes(quizzes);
+
     } catch (error) {
 
         console.error(error);
 
-        quizContainer.innerHTML = `
-            <div class="error">
-                Fout bij laden van quizzen<br>
-                ${error.message}
-            </div>
+        const errorDiv = document.createElement("div");
+        errorDiv.className = "error";
+        errorDiv.innerHTML = `
+            Fout bij laden van quizzen<br>
+            ${error.message}
         `;
+
+        quizContainer.appendChild(errorDiv);
     }
 }
 
 function renderQuizzes(quizzes) {
-    quizContainer.innerHTML = "";
+
+    quizContainer.innerHTML = ""; // alleen container resetten
+
     quizzes.forEach((quiz, index) => {
+
         const card = document.createElement("div");
         card.className = "quiz-card";
-        card.innerHTML = `
-            <img
-                class="quiz-image"
-                src="${quiz.quizthumbnnail}"
-                alt="${quiz.quizname}"
-            >
 
-            <div class="quiz-content">
+        const img = document.createElement("img");
+        img.className = "quiz-image";
+        img.src = quiz.quizthumbnnail;
+        img.alt = quiz.quizname;
 
-                <h2>${quiz.quizname}</h2>
+        const content = document.createElement("div");
+        content.className = "quiz-content";
 
-                <p class="quiz-description">
-                    ${quiz.desc ?? "Geen beschrijving"}
-                </p>
+        const title = document.createElement("h2");
+        title.textContent = quiz.quizname;
 
-                <div class="quiz-stats">
-                    ${quiz.questions.length} vragen
-                </div>
+        const desc = document.createElement("p");
+        desc.className = "quiz-description";
+        desc.textContent = quiz.desc ?? "Geen beschrijving";
 
-                <button
-                    class="start-btn"
-                    onclick="startQuiz(${index})"
-                >
-                    Start Quiz
-                </button>
-            </div>
-        `;
+        const stats = document.createElement("div");
+        stats.className = "quiz-stats";
+        stats.textContent = `${quiz.questions.length} vragen`;
+
+        const button = document.createElement("button");
+        button.className = "start-btn";
+        button.textContent = "Start Quiz";
+
+        button.addEventListener("click", () => {
+            startQuiz(index);
+        });
+
+        content.appendChild(title);
+        content.appendChild(desc);
+        content.appendChild(stats);
+        content.appendChild(button);
+
+        card.appendChild(img);
+        card.appendChild(content);
 
         quizContainer.appendChild(card);
     });
@@ -72,5 +88,6 @@ function startQuiz(index) {
     );
 
     console.log(selectedQuiz);
+
     alert(`Quiz gestart: ${selectedQuiz.quizname}`);
 }
