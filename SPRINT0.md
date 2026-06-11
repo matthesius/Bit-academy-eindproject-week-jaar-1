@@ -106,13 +106,13 @@
 
 | Type                                      | Datum         | Tijd   | Locatie                   |
 | ----------------------------------------- | ------------- | ------ | ------------------------- |
-| Sprint 1 **planning**                      | `<dd mmm yyyy>` | `10:00` | Lokaal Mars               |
-| Sprint 2 **review + planning**             | `<dd mmm yyyy>` | `10:00` | Lokaal Mars               |
-| Sprint 2 **retrospective**                 | `<dd mmm yyyy>` | `11:00` | Lokaal Mars               |
-| Sprint 3 **halfway presentatie**           | `<dd mmm yyyy>` | `10:00` | Lokaal Mars               |
-| Sprint 4 **review + planning**             | `<dd mmm yyyy>` | `10:00` | Lokaal Mars               |
-| Sprint 4 **retrospective**                 | `<dd mmm yyyy>` | `11:00` | Lokaal Mars               |
-| Sprint 5 **eindpresentatie**               | `<dd mmm yyyy>` | `10:00` | Lokaal Mars               |
+| Sprint 1 **planning**                      | `<dd mmm yyyy>` | `10:00` | Lokaal purmerend      |
+| Sprint 2 **review + planning**             | `<dd mmm yyyy>` | `10:00` | Lokaal purmerend      |
+| Sprint 2 **retrospective**                 | `<dd mmm yyyy>` | `11:00` | Lokaal purmerend      |
+| Sprint 3 **halfway presentatie**           | `<dd mmm yyyy>` | `10:00` | Lokaal purmerend      |
+| Sprint 4 **review + planning**             | `<dd mmm yyyy>` | `10:00` | Lokaal purmerend      |
+| Sprint 4 **retrospective**                 | `<dd mmm yyyy>` | `11:00` | Lokaal purmerend      |
+| Sprint 5 **eindpresentatie**               | `<dd mmm yyyy>` | `10:00` | Lokaal purmerend      |
 
 > Pas data aan op basis van jouw kalender. Alle meetings zijn fysiek, tenzij anders afgesproken met de coach/klant.
 
@@ -131,9 +131,9 @@
   - `<Hugo>`  : `<Dinsdag (08:30-15:00), Woensdag (08:30-15:00), Donderdag (08:30-15:00), Vrijdag (08:30-15:00)>`
 
 **Afwezigheid & afspraken**
-- [ ] Ziek/afwezig vóór **08:30** melden via **Mattermost**
-- [ ] Te laat? Direct melden in **teamchat**
-- [ ] Bij langdurige afwezigheid: taken herverdelen (Scrum Master)
+- [X] Ziek/afwezig vóór **08:30** melden via **Mattermost**
+- [X] Te laat? Direct melden in **teamchat**
+- [X] Bij langdurige afwezigheid: taken herverdelen (Scrum Master)
 
 **Communicatiekanalen**
 - **Team:** Mattermost (`<kanaalnaam>`)
@@ -146,30 +146,30 @@
 
 ### Definition of Ready (DoR)
 Een user story is *Ready* als:
-- [ ] Doel & acceptatiecriteria zijn duidelijk
-- [ ] Ontwerp/wireframe of voorbeeld beschikbaar (indien van toepassing)
-- [ ] Benodigde data/API’s bekend
-- [ ] Team kan inschatten (story points/t-shirt size)
-- [ ] Past binnen sprintcapaciteit
+- [X] Doel & acceptatiecriteria zijn duidelijk
+- [X] Ontwerp/wireframe of voorbeeld beschikbaar (indien van toepassing)
+- [X] Benodigde data/API’s bekend
+- [X] Team kan inschatten (story points/t-shirt size)
+- [X] Past binnen sprintcapaciteit
 
 ### Definition of Done (DoD)
 Een user story is *Done* als:
-- [ ] Werkt functioneel en technisch (incl. tests)
-- [ ] Peer review gedaan (min. 1 teamlid)
-- [ ] Voldoet aan acceptatiecriteria & design
-- [ ] Documentatie bijgewerkt (README/handleiding)
-- [ ] Ge-merged naar **main**
+- [X] Werkt functioneel en technisch (incl. tests)
+- [X] Peer review gedaan (min. 1 teamlid)
+- [X] Voldoet aan acceptatiecriteria & design
+- [X] Documentatie bijgewerkt (README/handleiding)
+- [X] Ge-merged naar **main**
 
 ---
 
 ## 🔧 Scrum werkwijze
 
-- [ ] Iedere sprint **eindigt met review** en **start met planning** (achter elkaar, met klant)
-- [ ] **Retrospectives** in **Sprint 2** en **Sprint 4**
-- [ ] Taken & user stories via **GitHub Projects**  
+- [X] Iedere sprint **eindigt met review** en **start met planning** (achter elkaar, met klant)
+- [X] **Retrospectives** in **Sprint 2** en **Sprint 4**
+- [X] Taken & user stories via **GitHub Projects**  
   Template: https://github.com/orgs/Bit-Academy-Students/projects/1
-- [ ] Communicatie: **Mattermost** voor team, e-mail voor klant
-- [ ] **Definition of Ready** en **Definition of Done** bekend bij alle teamleden
+- [X] Communicatie: **Mattermost** voor team, e-mail voor klant
+- [X] **Definition of Ready** en **Definition of Done** bekend bij alle teamleden
 
 ---
 
