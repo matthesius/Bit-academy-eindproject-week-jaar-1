@@ -2,6 +2,8 @@
 
 require_once '../DB.php';
 
+header("Access-Control-Allow-Origin: https://your-frontend-domain.com");
+
 $users = [];
 
 try {
