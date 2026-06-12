@@ -76,12 +76,12 @@
 > **Minimaal 5 stories.** Zet elke story in de juiste MoSCoW-categorie.
 
 ### ✅ Must have (M)
-- [ ] `<Als gebruiker van de website wil ik een lijst hebben van quizzes die ik kan maken en mijn score per quiz zien>`  
-- [ ] `<Als gebruiker van de website wil ik kunnen zien hoe veel tijd een quiz waarschijnlijk gaat duren>`
+- [ ] `<Als casual gebruiker van de website wil ik een lijst hebben van quizzes die ik kan maken en mijn score per quiz zien>`  
+- [ ] `<Als algemene gebruiker van de website wil ik kunnen zien hoe veel tijd een quiz waarschijnlijk gaat duren>`
 
 ### 🟠 Should have (S)
-- [ ] `<Als gebruiker wil ik een account/login systeem hebben om bij te houden hoe goed of slecht ik quizzes heb gemaakt>`  
-- [ ] `<Als gebruiker van de website wil ik graag mijn score en tijd kunnen vergelijken met andere gebruikers>`
+- [ ] `<Als competatieve gebruiker wil ik een account/login systeem hebben om bij te houden hoe goed of slecht ik quizzes heb gemaakt>`  
+- [ ] `<Als competatieve gebruiker van de website wil ik graag mijn score en tijd kunnen vergelijken met andere gebruikers>`
 
 ### 🔵 Could have (C)
 - [ ] `<Als beheerder van de website wil ik quizzes kunnen bewerken en toevoegen>`
@@ -104,15 +104,15 @@
 
 ### Meetings (fysiek – Lokaal Mars, Bit Academy)
 
-| Type                                      | Datum         | Tijd   | Locatie                   |
-| ----------------------------------------- | ------------- | ------ | ------------------------- |
-| Sprint 1 **planning**                      | `<dd mmm yyyy>` | `10:00` | Lokaal purmerend      |
-| Sprint 2 **review + planning**             | `<dd mmm yyyy>` | `10:00` | Lokaal purmerend      |
-| Sprint 2 **retrospective**                 | `<dd mmm yyyy>` | `11:00` | Lokaal purmerend      |
-| Sprint 3 **halfway presentatie**           | `<dd mmm yyyy>` | `10:00` | Lokaal purmerend      |
-| Sprint 4 **review + planning**             | `<dd mmm yyyy>` | `10:00` | Lokaal purmerend      |
-| Sprint 4 **retrospective**                 | `<dd mmm yyyy>` | `11:00` | Lokaal purmerend      |
-| Sprint 5 **eindpresentatie**               | `<dd mmm yyyy>` | `10:00` | Lokaal purmerend      |
+| Type                                       | Datum          | Tijd    | Locatie               |
+| ------------------------------------------ | -------------- | ------- | --------------------- |
+| Sprint 1 **planning**                      | `<12 06 2026>` | `13:30` | Lokaal purmerend      |
+| Sprint 2 **review + planning**             | `<19 06 2026>` | `10:00` | Lokaal purmerend      |
+| Sprint 2 **retrospective**                 | `<19 06 2026>` | `11:00` | Lokaal purmerend      |
+| Sprint 3 **halfway presentatie**           | `<19 06 2026>` | `12:00` | Lokaal purmerend      |
+| Sprint 4 **review + planning**             | `<26 06 2026>` | `10:00` | Lokaal purmerend      |
+| Sprint 4 **retrospective**                 | `<03 07 2026>` | `10:00` | Lokaal purmerend      |
+| Sprint 4 **eindpresentatie**               | `<03 07 2026>` | `12:00` | Lokaal purmerend      |
 
 > Pas data aan op basis van jouw kalender. Alle meetings zijn fysiek, tenzij anders afgesproken met de coach/klant.
 
@@ -122,7 +122,7 @@
 - Doel: *Gisteren / Vandaag / Blokkades*
 
 ### Teaminzet & beschikbaarheid
-- **Minimale aanwezigheid:** **ma, di, wo, do** voor alle teamleden
+- **Minimale aanwezigheid:** **di, wo, do, vr** voor alle teamleden
 - Overzicht per persoon:
   - `<Tomas>` : `<Dinsdag (09:30-15:00 vakles rekenen), Woensdag (08:30-15:00), Donderdag (08:30-15:00), Vrijdag (08:30-15:00)>`
   - `<Arne>`  : `<Dinsdag (08:30-15:00), Woensdag (08:30-15:00), Donderdag (08:30-15:00), Vrijdag (08:30-15:00)>`
