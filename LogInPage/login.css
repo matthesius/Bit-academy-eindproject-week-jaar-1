@@ -11,9 +11,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    font-family: Arial, sans-serif;
-
+    font-family: 'Courier New', Courier, monospace;
     background: linear-gradient(135deg,
             #4f46e5,
             #7c3aed);
@@ -22,13 +20,9 @@ body {
 .login-card {
     width: 400px;
     max-width: 90%;
-
     background: white;
-
     padding: 40px;
-
     border-radius: 20px;
-
     box-shadow:
         0 20px 40px rgba(0, 0, 0, .15);
 }
@@ -57,7 +51,6 @@ body {
 .input-group input {
     width: 100%;
     padding: 14px;
-
     border: 1px solid #ddd;
     border-radius: 10px;
 
@@ -72,17 +65,12 @@ body {
 button {
     width: 100%;
     border: none;
-
     padding: 15px;
-
     border-radius: 10px;
-
     background: #4f46e5;
     color: white;
-
     font-size: 1rem;
     font-weight: bold;
-
     cursor: pointer;
 }
 
@@ -92,7 +80,6 @@ button:hover {
 
 .links {
     margin-top: 25px;
-
     display: flex;
     justify-content: space-between;
 }
