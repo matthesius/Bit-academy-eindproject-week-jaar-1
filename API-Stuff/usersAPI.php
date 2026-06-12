@@ -2,16 +2,30 @@
 
 require_once '../DB.php';
 
+header("Content-Security-Policy: default-src 'self'; connect-src 'self' http://127.0.0.1:5500;");
 header("Access-Control-Allow-Origin: *");
-
-$users = [];
+header('Content-Type: application/json');
 
 try {
-    $stmt = $pdo->query("SELECT * FROM users");
-    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo "Fout bij uitvoeren van query: " . $e->getMessage() . "\n";
-}
+    if (isset($_GET['username'])) {
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->execute([$_GET['username']]);
 
-header('Content-Type: application/json');
-echo json_encode($users);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            echo json_encode($user);
+        } else {
+            echo json_encode([
+                "error" => "Gebruiker niet gevonden"
+            ]);
+        }
+    } else {
+        $stmt = $pdo->query("SELECT * FROM users");
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+    }
+} catch (PDOException $e) {
+    echo json_encode([
+        "error" => $e->getMessage()
+    ]);
+}
