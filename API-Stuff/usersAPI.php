@@ -3,15 +3,30 @@
 require_once '../DB.php';
 
 header("Access-Control-Allow-Origin: *");
-
-$users = [];
+header('Content-Type: application/json');
 
 try {
-    $stmt = $pdo->query("SELECT * FROM users");
-    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo "Fout bij uitvoeren van query: " . $e->getMessage() . "\n";
-}
+    if (isset($_GET['id'])) {
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->execute([$_GET['id']]);
 
-header('Content-Type: application/json');
-echo json_encode($users);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            echo json_encode($user);
+        } else {
+            echo json_encode([
+                "error" => "Gebruiker niet gevonden"
+            ]);
+        }
+    } else {
+        $stmt = $pdo->query("SELECT * FROM users");
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        echo json_encode($users);
+    }
+} catch (PDOException $e) {
+    echo json_encode([
+        "error" => $e->getMessage()
+    ]);
+}
