@@ -19,5 +19,3 @@ try {
     echo "Fout bij verbinden: " . $e->getMessage() . "\n";
     exit;
 }
-
-echo "Verbonden met de database!\n";
