@@ -54,22 +54,19 @@ function renderQuizzes(quiz) {
         stats.className = "quiz-stats";
         stats.textContent = `${quiz[i].questions.length} vragen`;
         
-        const button = document.createElement("button");
+        const button = document.createElement("a");
+        button.href = "../quiz/quiz.html";
+        button.textContent = "Start Quiz"
         button.className = "start-btn";
 
         button.addEventListener("click", () => {
             startQuiz(quiz, i);
         });
-
-        const linktoquiz = document.createElement("a");
-        linktoquiz.href = "../quiz/quiz.html";
-        linktoquiz.textContent = "Start Quiz"
-
+        
         content.appendChild(title);
         content.appendChild(desc);
         content.appendChild(stats);
         content.appendChild(button);
-        button.appendChild(linktoquiz);
 
         card.appendChild(img);
         card.appendChild(content);
