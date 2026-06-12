@@ -5,12 +5,15 @@ require '../DB.php';
 session_start();
 
 if (isset($_SESSION['loggedInUser'])) {
-    header("Location: login.php");
+    header("Location: login.html");
     exit;
 }
 
 $naam = null;
 $wachtwoord = null;
+
+// var_dump($_POST);
+// exit;
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
         $username = $_POST['username'];
@@ -29,12 +32,16 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     if ($user !== false) {
         $_SESSION['loggedInUser'] = $user['id'];
         unset($_SESSION['error']);
-        header("Location: login.html");
+        header("Location: HomePage/homepage.html");
         exit;
     } else {
         $_SESSION['error'] = "fout wachtwoord of gebruiker";
-        header("Location: login.html");
+        header("Location: login.html?test");
     }
+} else {
+    $_SESSION['error'] = "vul de velden in";
+    header("Location: login.html");
+    exit;
 }
 
 ?>
