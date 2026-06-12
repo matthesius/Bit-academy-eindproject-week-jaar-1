@@ -12,9 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     font-family: 'Courier New', Courier, monospace;
-    background: linear-gradient(135deg,
-            #4f46e5,
-            #7c3aed);
+    background:#4f46e5;
 }
 
 .login-card {
