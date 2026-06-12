@@ -1,6 +1,6 @@
 <?php
 
-require 'DB.php';
+require '../DB.php';
 
 session_start();
 
@@ -29,7 +29,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     if ($user !== false) {
         $_SESSION['loggedInUser'] = $user['id'];
         unset($_SESSION['error']);
-        header("Location: index.php");
+        header("Location: login.html");
         exit;
     } else {
         $_SESSION['error'] = "fout wachtwoord of gebruiker";
