@@ -21,7 +21,8 @@ function renderquestions(quiz) {
 
         questiondiv.id = `questionid${i}`;
         question.textContent = quiz.questions[i].questiontitle;
-        questionimage.src = "";
+        questionimage.setAttribute("src", quiz.questions[i].img);
+        console.log(quiz.questions[i].img);
         titlediv.class = "titlediv";
         titlediv.id = `titlediv${i}`;
 
@@ -53,9 +54,11 @@ function renderquestions(quiz) {
     const submit = document.createElement("button");
     submit.id = "submit";
     submit.textContent = "Submit Answers";
-    submit.addEventListener("click", () => {
 
+    submit.addEventListener("click", () => {
+        document.getElementById("resultsmodal")
     });
+
     document.body.appendChild(submit);
 }
 
