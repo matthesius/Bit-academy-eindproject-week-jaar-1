@@ -7,9 +7,9 @@ header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
 
 try {
-    if (isset($_GET['id'])) {
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
-        $stmt->execute([$_GET['id']]);
+    if (isset($_GET['username'])) {
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->execute([$_GET['username']]);
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -22,9 +22,7 @@ try {
         }
     } else {
         $stmt = $pdo->query("SELECT * FROM users");
-        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        echo json_encode($users);
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
     }
 } catch (PDOException $e) {
     echo json_encode([
