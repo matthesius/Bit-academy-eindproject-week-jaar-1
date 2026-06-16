@@ -28,16 +28,16 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     
     if ($user !== false) {
         $_SESSION['LoggedInQuizTaker'] = $user['id'];
-        unset($_SESSION['error']);
+        unset($_SESSION['loginError']);
         header("Location: ../HomePage/homepage.php");
         exit;
     } else {
-        $_SESSION['error'] = "fout wachtwoord of gebruiker";
-        header("Location: login.php?test");
+        $_SESSION['loginError'] = "fout wachtwoord of gebruiker";
+        header("Location: login.php");
     }
 } else {
-    $_SESSION['error'] = "vul de velden in";
-    header("Location: login.php?poep");
+    $_SESSION['loginError'] = "vul de velden in";
+    header("Location: login.php");
     exit;
 }
 
