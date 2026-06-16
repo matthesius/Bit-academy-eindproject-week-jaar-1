@@ -1,6 +1,6 @@
 <?php
 
-require_once '../LogInPage/login_check';
+require_once '../LogInPage/login_check.php';
 
 ?>
 
