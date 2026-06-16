@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="nl">
 
@@ -29,6 +35,10 @@
                     <label>Password</label>
                     <input type="password" id="password" name="password" required>
                 </div>
+
+                <?php if (isset($_SESSION['loginError'])) { ?>
+                    <span style="color : red"> <?= $_SESSION['loginError'] ?> </span> <br>
+                <?php } ?>
 
                 <button type="submit">Log in</button>
 
