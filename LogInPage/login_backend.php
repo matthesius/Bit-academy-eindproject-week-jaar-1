@@ -4,16 +4,13 @@ require '../DB.php';
 
 session_start();
 
-if (isset($_SESSION['loggedInUser'])) {
-    header("Location: login.php");
+if (isset($_SESSION['LoggedInQuizTaker'])) {
+    header("Location: ../HomePage/homepage.php");
     exit;
 }
 
 $naam = null;
 $wachtwoord = null;
-
-// var_dump($_POST);
-// exit;
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
         $username = $_POST['username'];
@@ -30,9 +27,9 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         $user = $stmt->fetch();
     
     if ($user !== false) {
-        $_SESSION['loggedInUser'] = $user['id'];
+        $_SESSION['LoggedInQuizTaker'] = $user['id'];
         unset($_SESSION['error']);
-        header("Location: HomePage/homepage.php");
+        header("Location: ../HomePage/homepage.php");
         exit;
     } else {
         $_SESSION['error'] = "fout wachtwoord of gebruiker";
@@ -40,7 +37,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     }
 } else {
     $_SESSION['error'] = "vul de velden in";
-    header("Location: login.php");
+    header("Location: login.php?poep");
     exit;
 }
 
