@@ -11,7 +11,7 @@ require_once '../LogInPage/login_check.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trivial</title>
     <link rel="stylesheet" href="homepage.css">
-        <link rel="icon" type="image/png" href="/Bit-academy-project-week-1//favicon/web-app-manifest-192x192.png" />
+        <link rel="icon" type="image/png" href="../favicon/web-app-manifest-192x192.png" />
 </head>
 <body>
 
@@ -21,14 +21,14 @@ require_once '../LogInPage/login_check.php';
         <div class="nav-links">
             <a href="homepage.php">Home</a>
             <a href="/Bit-academy-project-week-1/overview/index.php">Quizzen</a>
-    <a href="/Bit-academy-project-week-1/LogInPage/login.php" class="signup-btn">Sign Up</a>
+    <a href="../LogInPage/login.php" class="signup-btn">Sign Up</a>
 </div>
     </nav>
 
     <section class="hero">
         <h1>Test your knowledge</h1>
         <p>Play all sorts of quizes about numerous topics.</p>
-        <a href="/Bit-academy-project-week-1/overview/index.php" class="hero-btn">Start Now!</a>
+        <a href="../overview/index.php" class="hero-btn">Start Now!</a>
     </section>
 
     <section class="stats">
