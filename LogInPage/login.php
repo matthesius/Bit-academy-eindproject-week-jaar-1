@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="nl">
 
@@ -15,20 +21,24 @@
             <h1>Trivial</h1>
             <p>Log in to save your scores.</p>
 
-            <form method="post" action="login.php" id="loginForm">
+            <form method="post" action="login_backend.php" id="loginForm">
                 <div class="input-group">
                     <label>Username</label>
-                    <input type="text" id="username" required>
+                    <input type="text" id="username" name="username" required>
                 </div>
                 <div class="input-group">
                     <label>E-mail</label>
-                    <input type="email" id="email" required>
+                    <input type="email" id="email" name="email" required>
                 </div>
 
                 <div class="input-group">
                     <label>Password</label>
-                    <input type="password" id="password" required>
+                    <input type="password" id="password" name="password" required>
                 </div>
+
+                <?php if (isset($_SESSION['loginError'])) { ?>
+                    <span style="color : red"> <?= $_SESSION['loginError'] ?> </span> <br>
+                <?php } ?>
 
                 <button type="submit">Log in</button>
 
