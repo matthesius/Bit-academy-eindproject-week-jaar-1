@@ -32,7 +32,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     if ($user !== false) {
         $_SESSION['loggedInUser'] = $user['id'];
         unset($_SESSION['error']);
-        header("Location: HomePage/homepage.html");
+        header("Location: HomePage/homepage.php");
         exit;
     } else {
         $_SESSION['error'] = "fout wachtwoord of gebruiker";
