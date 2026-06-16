@@ -1,9 +1,6 @@
 <?php
 
-if (!isset($_SESSION['LoggedInQuizTaker'])) {
-    header("Location: ../LogInPage/login.php");
-    exit;
-}
+require_once '../LogInPage/login_check';
 
 ?>
 
