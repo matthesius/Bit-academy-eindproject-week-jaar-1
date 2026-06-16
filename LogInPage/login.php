@@ -1,40 +1,40 @@
-<?php
+<!DOCTYPE html>
+<html lang="nl">
 
-require '../DB.php';
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Trivial</title>
+    <link rel="stylesheet" href="login.css">
+</head>
 
-session_start();
+<body>
 
-if (isset($_SESSION['loggedInUser'])) {
-    header("Location: login.php");
-    exit;
-}
+    <div class="login-container">
+        <div class="login-card">
+            <h1>Trivial</h1>
+            <p>Log in to save your scores.</p>
 
-$naam = null;
-$wachtwoord = null;
+            <form method="post" action="login_backend.php" id="loginForm">
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label>E-mail</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
 
-if (isset($_POST['username']) && isset($_POST['password'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-    
-    
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username AND password = :password");
-    
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
-    
-        $stmt->execute();
-    
-        $user = $stmt->fetch();
-    
-    if ($user !== false) {
-        $_SESSION['loggedInUser'] = $user['id'];
-        unset($_SESSION['error']);
-        header("Location: login.html");
-        exit;
-    } else {
-        $_SESSION['error'] = "fout wachtwoord of gebruiker";
-        header("Location: login.html");
-    }
-}
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
 
-?>
+                <button type="submit">Log in</button>
+
+            </form>
+            <div class="links"></div>
+        </div>
+    </div>
+</body>
+</html>

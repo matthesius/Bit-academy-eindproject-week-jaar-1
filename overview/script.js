@@ -55,7 +55,7 @@ function renderQuizzes(quiz) {
         stats.textContent = `${quiz[i].questions.length} vragen`;
         
         const button = document.createElement("a");
-        button.href = "../quiz/quiz.html";
+        button.href = "../quiz/quiz.php";
         button.textContent = "Start Quiz"
         button.className = "start-btn";
 
