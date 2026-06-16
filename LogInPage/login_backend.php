@@ -5,7 +5,7 @@ require '../DB.php';
 session_start();
 
 if (isset($_SESSION['loggedInUser'])) {
-    header("Location: login.html");
+    header("Location: login.php");
     exit;
 }
 
@@ -36,11 +36,11 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         exit;
     } else {
         $_SESSION['error'] = "fout wachtwoord of gebruiker";
-        header("Location: login.html?test");
+        header("Location: login.php?test");
     }
 } else {
     $_SESSION['error'] = "vul de velden in";
-    header("Location: login.html");
+    header("Location: login.php");
     exit;
 }
 
