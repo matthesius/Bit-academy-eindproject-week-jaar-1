@@ -6,7 +6,7 @@ const GetCompiledAPI = class GetCompiledAPI {
 
     async getAllQuizzes() {
         const allquiz = [];
-        const quizresponse = await fetch("../API-Stuff/quizzesAPI.php");
+        const quizresponse = await fetch("../API-Stuff/quizzesAPI.php?id=1");
         //const questionresponse = await fetch();
         //const answerresponse = await fetch();
 
@@ -33,7 +33,10 @@ const GetCompiledAPI = class GetCompiledAPI {
     }
 }
 
-const test = new GetCompiledAPI.getAllQuizzes;
-console.log(test);
+async function call() {
+    const test = await new GetCompiledAPI().getAllQuizzes();
+    console.log(test);
+}
 
+call();
 //export default { GetCompiledAPI };
