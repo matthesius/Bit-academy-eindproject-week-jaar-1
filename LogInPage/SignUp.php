@@ -35,7 +35,7 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
             <h1>Sign up</h1>
             <p>Create your trivial account!.</p>
 
-            <form method="post" action="login_backend.php" id="loginForm">
+            <form method="post" action="SignUp_backend.php" id="loginForm">
                 <div class="input-group">
                     <label>Username</label>
                     <input type="text" id="username" name="username" placeholder="Name" required>
@@ -60,8 +60,8 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
                     required
                 ></div>
 
-                <?php if (isset($_SESSION['loginError'])) { ?>
-                    <span style="color : red"> <?= $_SESSION['loginError'] ?> </span> <br>
+                <?php if (isset($_SESSION['SignUpError'])) { ?>
+                    <span style="color : red"> <?= $_SESSION['SignUpError'] ?> </span> <br>
                 <?php } ?>
 
                 <a href="../LogInPage/login.php">Already have an account? Sign in instead here</a>
