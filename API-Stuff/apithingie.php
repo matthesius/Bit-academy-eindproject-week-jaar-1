@@ -39,7 +39,13 @@ class ApiThingie
 
     private function getQuizzes()
     {
-        $stmt = $this->pdo->query("SELECT * FROM quizzes ORDER BY created_at DESC");
+        $stmt = $this->pdo->query("
+        SELECT q.*, COUNT(qu.id) AS question_count
+        FROM quizzes q
+        LEFT JOIN questions qu ON qu.quiz_id = q.id
+        GROUP BY q.id
+        ORDER BY q.created_at DESC
+    ");
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
     }
 
