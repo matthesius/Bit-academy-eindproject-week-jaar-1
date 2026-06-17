@@ -1,0 +1,202 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
+}
+
+.logo{
+    font-size:1.5rem;
+    font-weight:bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+
+    padding: 12px 20px;
+    border-radius: 12px;
+
+    background: linear-gradient(135deg,
+            #4f46e5,
+            #6366f1);
+
+    font-weight: 600;
+    font-size: 0.95rem;
+
+    box-shadow:
+        0 4px 12px rgba(79, 70, 229, 0.3);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.filters{
+    max-width:1000px;
+    margin:40px auto;
+    padding:0 20px;
+}
+
+.filter-box{
+    background:white;
+
+    padding:20px;
+
+    border-radius:16px;
+
+    display:flex;
+    gap:15px;
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.filter-box label{
+    font-weight:600;
+}
+
+.filter-box select{
+    padding:12px 16px;
+
+    border:1px solid #ddd;
+    border-radius:10px;
+
+    min-width:220px;
+
+    font-size:1rem;
+}
+
+.filter-btn{
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:10px;
+
+    background:#4f46e5;
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.2s;
+}
+
+.filter-btn:hover{
+    background:#4338ca;
+    transform:translateY(-2px);
+}
+
+.hero{
+    text-align:center;
+    padding:80px 20px;
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+    color:white;
+}
+
+.hero h1{
+    font-size:3rem;
+    margin-bottom:10px;
+}
+
+.top-three{
+    max-width:1000px;
+    margin:60px auto;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    gap:20px;
+}
+
+.podium{
+    background:white;
+    border-radius:20px;
+    text-align:center;
+    padding:20px;
+    width:220px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.first{
+    height:280px;
+    border:3px solid gold;
+}
+
+.second{
+    height:240px;
+}
+
+.third{
+    height:210px;
+}
+
+.avatar{
+    font-size:4rem;
+    margin-bottom:15px;
+}
+
+.podium h3{
+    margin-bottom:10px;
+}
+
+.podium span{
+    font-size:2rem;
+}
+
+.leaderboard{
+    max-width:1000px;
+    margin:40px auto 80px;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.leaderboard-header,
+.player-row{
+    display:grid;
+    grid-template-columns:
+        80px
+        1fr
+        150px
+        150px;
+
+    padding:20px;
+}
+
+.leaderboard-header{
+    background:#4f46e5;
+    color:white;
+    font-weight:bold;
+}
+
+.player-row{
+    border-bottom:1px solid #eee;
+}
+
+.player-row:hover{
+    background:#f8f9ff;
+}
+
