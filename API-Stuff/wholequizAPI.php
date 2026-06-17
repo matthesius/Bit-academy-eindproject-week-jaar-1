@@ -38,7 +38,7 @@ try {
 
         $quiz['questions'] = $questions;
         echo json_encode($quiz);
-    } elseif (isset($_GET['title'])) {                  //tijdelijke slop voor hugo
+    } elseif (isset($_GET['title'])) {                  //tijdelijke slop voor hugo. kopie van id code, maar dan met titels
         $title = $_GET['title'];
 
         $stmt = $pdo->prepare("SELECT * FROM quizzes WHERE title = ?");
@@ -69,6 +69,12 @@ try {
 
         $quiz['questions'] = $questions;
         echo json_encode($quiz);
+    } elseif (isset($_GET['overview'])) {           //test slop voor overview
+        $stmt = $pdo->prepare("SELECT * FROM quizzes");
+        $stmt->execute();
+        $quiz_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        echo json_encode($quiz_list);
     } else {                                        // einde van hugo slop
         echo json_encode(["error" => "quiz_id is verplicht"]);
     }
