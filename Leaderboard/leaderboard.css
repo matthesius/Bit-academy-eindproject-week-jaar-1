@@ -1,12 +1,14 @@
-*{
+html{
     margin:0;
     padding:0;
     box-sizing:border-box;
+    scrollbar-width: none;
 }
 
 body{
-    font-family:Arial,sans-serif;
+    font-family:'Courier New', Courier, monospace;
     background:#f5f7fb;
+    margin: 0;
 }
 
 nav {
@@ -18,9 +20,9 @@ nav {
     box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
 }
 
-.logo{
-    font-size:1.5rem;
-    font-weight:bold;
+.logo {
+    font-size: 1.9rem;
+    font-weight: bold;
 }
 
 .nav-links {
@@ -116,6 +118,7 @@ nav {
     color:white;
 }
 
+
 .hero h1{
     font-size:3rem;
     margin-bottom:10px;
@@ -142,14 +145,35 @@ nav {
 .first{
     height:280px;
     border:3px solid gold;
+
+    transition:
+     transform 0.25s ease;
+}
+
+.first:hover {
+    transform: scale(1.05) rotate(0.01turn);
+    
 }
 
 .second{
     height:240px;
+        transition:
+     transform 0.25s ease;
 }
 
+.second:hover {
+    transform: scale(1.03) rotate(0.007turn);
+    
+}
 .third{
     height:210px;
+        transition:
+     transform 0.25s ease;
+}
+
+.third:hover {
+    transform: scale(1.01) rotate(0.005turn);
+    
 }
 
 .avatar{

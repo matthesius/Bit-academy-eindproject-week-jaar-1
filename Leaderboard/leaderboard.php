@@ -12,9 +12,9 @@
         <div class="logo">Trivial</div>
 
         <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="quizzes.html">Quizzen</a>
-            <a href="leaderboard.html" class="active">Leaderboard</a>
+            <a href="..//HomePage/homepage.php">Home</a>
+            <a href="/Bit-academy-project-week-1/overview/index.php">Quizzen</a>
+            <a href="leaderboard.php" class="active">Leaderboard</a>
         </div>
     </nav>
 
