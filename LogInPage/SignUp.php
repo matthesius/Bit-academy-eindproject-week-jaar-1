@@ -14,6 +14,20 @@ session_start();
     <link rel="stylesheet" href="SignUp.css">
 </head>
 
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (password !== confirmPassword) {
+        e.preventDefault();
+        alert("Passwords do not match.");
+        return false;
+    }
+});
+</script>
+
 <body>
 
     <div class="login-container">
@@ -35,6 +49,16 @@ session_start();
                     <label>Password</label>
                     <input type="password" id="password" name="password" placeholder="don't make your password too simple!" required>
                 </div>
+                <div class="input-group">
+                                
+                <label>Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="Repeat your password"
+                    required
+                ></div>
 
                 <?php if (isset($_SESSION['loginError'])) { ?>
                     <span style="color : red"> <?= $_SESSION['loginError'] ?> </span> <br>

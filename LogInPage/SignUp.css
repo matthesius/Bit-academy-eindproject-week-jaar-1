@@ -1,28 +1,49 @@
-html {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scrollbar-width: none;
+}
 
+html {
+    scrollbar-width: none;
 }
 
 body {
     min-height: 100vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
+    padding: 20px;
+
     font-family: 'Courier New', Courier, monospace;
-    background:#4f46e5;
+
+    background: #4f46e5;
+}
+
+.login-container {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .login-card {
-    width: 400px;
-    max-width: 90%;
+    width: 100%;
+    max-width: 450px;
+
+    display: flex;
+    flex-direction: column;
+
     background: white;
-    padding: 40px;
+
+    padding: 25px;
+
     border-radius: 20px;
-    box-shadow:
-        0 20px 40px rgba(0, 0, 0, .15);
+
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .15);
 }
 
 .login-card h1 {
@@ -33,22 +54,30 @@ body {
 .login-card p {
     text-align: center;
     color: #666;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+}
+
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .input-group {
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .input-group label {
-    display: block;
-    margin-bottom: 8px;
     font-weight: 600;
 }
 
 .input-group input {
     width: 100%;
+
     padding: 14px;
+
     border: 1px solid #ddd;
     border-radius: 10px;
 
@@ -62,24 +91,61 @@ body {
 
 button {
     width: 100%;
+
     border: none;
+
     padding: 15px;
+
     border-radius: 10px;
+
     background: #4f46e5;
     color: white;
+
     font-size: 1rem;
     font-weight: bold;
+
     cursor: pointer;
+
+    transition: .2s;
 }
 
 button:hover {
     background: #4338ca;
 }
 
+.altbutton {
+    width: 100%;
+
+    border: 2px solid #4f46e5;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    background: white;
+    color: #4f46e5;
+
+    font-size: 1rem;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.altbutton:hover {
+    background: #f5f3ff;
+}
+
 .links {
-    margin-top: 25px;
+    margin-top: 20px;
+
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 12px;
 }
 
 .links a {
@@ -87,20 +153,6 @@ button:hover {
     color: #4f46e5;
 }
 
-
-.altbutton {
-  width: 100%;
-    border: none;
-    padding: 15px;
-    border-radius: 10px;
-    background: #ffffff;
-    color: #4338ca;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.altbutton:hover {
-    background-color: white;
+.links a:hover {
     text-decoration: underline;
 }
