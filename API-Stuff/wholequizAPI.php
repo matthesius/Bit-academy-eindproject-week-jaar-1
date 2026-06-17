@@ -52,10 +52,10 @@ try {
 
         $stmt = $pdo->prepare("
             SELECT * FROM questions
-            WHERE title = ?
+            WHERE quiz_id = ?
             ORDER BY position ASC
         ");
-        $stmt->execute([$title]);
+        $stmt->execute([$quiz['id']]);
         $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($questions as &$question) {
