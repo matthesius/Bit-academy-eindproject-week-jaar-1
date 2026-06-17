@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="websitetitle"></title>
-    <script defer src="quiz.js"></script>
+    <script type="module" defer src="quiz.js"></script>
     <link rel="stylesheet" href="quiz.css">
 </head>
 <body>

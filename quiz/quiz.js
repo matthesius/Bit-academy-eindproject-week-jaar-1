@@ -1,13 +1,15 @@
-function getquizinfo() {
-    const quiz = JSON.parse(localStorage.getItem("selectedquiz"));
-    document.getElementById("websitetitle").textContent = quiz.quizname;
+import GetCompiledAPI from "../API-Stuff/API-CALL.js";
+
+async function getquizinfo() {
+    const quizid = localStorage.getItem("selectedquiz");
+    const quiz = await new GetCompiledAPI(quizid, undefined).getQuizById();
     console.log(quiz);
-    renderquestions(quiz)
+    renderquestions(quiz);
 }
 
 function renderquestions(quiz) {
     const maindiv = document.getElementById("questions");
-    
+
     const quiztitle = document.createElement("h1");
     quiztitle.textContent = quiz.quizname;
     document.body.prepend(quiztitle);
@@ -20,7 +22,7 @@ function renderquestions(quiz) {
         const form = document.createElement("form");
 
         questiondiv.id = `questionid${i}`;
-        question.textContent = quiz.questions[i].questiontitle;
+        question.textContent = quiz.questions[i].question_text;
         questionimage.setAttribute("src", quiz.questions[i].img);
         titlediv.class = "titlediv";
         titlediv.id = `titlediv${i}`;
@@ -30,8 +32,8 @@ function renderquestions(quiz) {
         questiondiv.appendChild(form);
         titlediv.appendChild(question);
         titlediv.appendChild(questionimage);
-        
-        for (let j = 0; j < quiz.questions[i].answers.length; j++) {
+
+        for (let j = 0; j < quiz.questions[i].options.length; j++) {
             const answerdiv = document.createElement("div");
             const select = document.createElement("input");
             const answer = document.createElement("label");
@@ -40,16 +42,15 @@ function renderquestions(quiz) {
             select.name = `answers${i}`;
             select.id = `option${i}-${j}`;
 
-            answer.textContent = quiz.questions[i].answers[j].answer;
+            answer.textContent = quiz.questions[i].options[j].option_text;
             answer.for = `option${j}`;
 
-            
+
             form.appendChild(answerdiv);
             answerdiv.appendChild(select);
             answerdiv.appendChild(answer);
         }
     }
-
     const submit = document.createElement("button");
     submit.id = "submit";
     submit.textContent = "Submit Answers";
@@ -58,16 +59,18 @@ function renderquestions(quiz) {
         let points = 0;
         document.getElementById("resultsmodal").style.display = "block";
         for (let i = 0; i < quiz.questions.length; i++) {
-            for (let j = 0; j < quiz.questions[i].answers.length; j++) {
-                if (document.getElementById(`option${i}-${j}`).checked == true && quiz.questions[i].answers[j].iscorrect == true) {
+            for (let j = 0; j < quiz.questions[i].options.length; j++) {
+                if (document.getElementById(`option${i}-${j}`).checked == true && quiz.questions[i].options[j].is_correct == true) {
                     points++;
                 }
             }
         }
         console.log(points);
     });
-
     document.body.appendChild(submit);
+
 }
+
+
 
 getquizinfo();
