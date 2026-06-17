@@ -17,22 +17,19 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         $password = $_POST['password'];
     
     
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username AND password = :password");
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
     
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
-    
         $stmt->execute();
-    
         $user = $stmt->fetch();
-    
-    if ($user !== false) {
+
+    if (password_verify("$password", $user['password'])) {
         $_SESSION['LoggedInQuizTaker'] = $user['id'];
         unset($_SESSION['loginError']);
         header("Location: ../HomePage/homepage.php");
         exit;
     } else {
-        $_SESSION['loginError'] = "fout wachtwoord of gebruiker";
+        $_SESSION['loginError'] = "foute gebruikersnaam of wachtwoord";
         header("Location: login.php");
     }
 } else {
