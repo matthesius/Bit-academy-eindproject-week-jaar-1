@@ -129,8 +129,8 @@ class ApiThingie
 $api = new ApiThingie($pdo);
 $api->handle();
 
-//All quizzes = apithingie.php?action=getQuizzes
-//One full quiz = apithingie.php?action=getQuiz&quiz_id=1
-//Leaderboard = apithingie.php?action=getLeaderboard&quiz_id=1
-//All users = apithingie.php?action=getUsers
-//One user = apithingie.php?action=getUsers&username=arne
+//All quizzes = ../API-Stuff/apithingie.php?action=getQuizzes
+//One full quiz = ../API-Stuff/apithingie.php?action=getQuiz&quiz_id=1
+//Leaderboard = ../API-Stuff/apithingie.php?action=getLeaderboard&quiz_id=1
+//All users = ../API-Stuff/apithingie.php?action=getUsers
+//One user = ../API-Stuff/apithingie.php?action=getUsers&username=arne
