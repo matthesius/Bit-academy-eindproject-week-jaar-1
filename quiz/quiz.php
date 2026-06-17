@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="quiz.css">
 </head>
 <body>
-    <div style="display: none;" id="resultsmodal">
-        
+    <div id="outermodal">
+        <div style="display: none;" id="resultsmodal">
+            
+        </div>
     </div>
     <div id="questions"></div>
 </body>

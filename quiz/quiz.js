@@ -22,7 +22,6 @@ function renderquestions(quiz) {
         questiondiv.id = `questionid${i}`;
         question.textContent = quiz.questions[i].questiontitle;
         questionimage.setAttribute("src", quiz.questions[i].img);
-        console.log(quiz.questions[i].img);
         titlediv.class = "titlediv";
         titlediv.id = `titlediv${i}`;
 
@@ -39,7 +38,7 @@ function renderquestions(quiz) {
 
             select.type = "radio";
             select.name = `answers${i}`;
-            select.id = `option${j}`;
+            select.id = `option${i}-${j}`;
 
             answer.textContent = quiz.questions[i].answers[j].answer;
             answer.for = `option${j}`;
@@ -56,7 +55,16 @@ function renderquestions(quiz) {
     submit.textContent = "Submit Answers";
 
     submit.addEventListener("click", () => {
-        document.getElementById("resultsmodal")
+        let points = 0;
+        document.getElementById("resultsmodal").style.display = "block";
+        for (let i = 0; i < quiz.questions.length; i++) {
+            for (let j = 0; j < quiz.questions[i].answers.length; j++) {
+                if (document.getElementById(`option${i}-${j}`).checked == true && quiz.questions[i].answers[j].iscorrect == true) {
+                    points++;
+                }
+            }
+        }
+        console.log(points);
     });
 
     document.body.appendChild(submit);
