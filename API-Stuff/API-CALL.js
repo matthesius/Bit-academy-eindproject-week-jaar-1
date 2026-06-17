@@ -5,13 +5,13 @@ class GetCompiledAPI {
     };
 
     async getAllQuizzes() {
-        const res = await fetch(`../API-Stuff/wholequizAPI.php?overview`); // Works! //
+        const res = await fetch(`../API-Stuff/apithingie.php?action=getQuizzes`); // Works! //
         const data = res.json();
         return data;
     }
 
     async getQuizById() {
-        const res = await fetch(`../API-Stuff/wholequizAPI.php?quiz_id=${this.id}`); // Works! //
+        const res = await fetch(`../API-Stuff/apithingie.php?action=getQuiz&quiz_id=${this.id}`); // Works! //
         const data = res.json();
         return data;
     }
@@ -42,7 +42,7 @@ class GetCompiledAPI {
 }
 
 async function call() {
-    const test = await new GetCompiledAPI(undefined, "Programmeren").getQuizByName();
+    const test = await new GetCompiledAPI(undefined, "Programmeren").getAllQuizzes();
     console.log(test);
 }
 
