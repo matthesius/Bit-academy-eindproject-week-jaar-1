@@ -15,6 +15,9 @@ body{
 }
 
 header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background:linear-gradient(135deg,#4f46e5,#7c3aed);
     color:white;
     text-align:center;
@@ -116,3 +119,18 @@ a.start-btn{
     margin-bottom:15px;
     font-weight:bold;
 }
+
+#searchbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    margin-top: 15px;
+}
+
+input[type="text"] {
+    padding: 5px;
+    margin-right: 15px;
+
+}
+

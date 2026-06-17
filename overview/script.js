@@ -1,27 +1,29 @@
-const quizContainer = document.getElementById("quizContainer");
+import GetCompiledAPI from "../API-Stuff/API-CALL.js";
 
 loadQuizzes();
+const quizContainer = document.getElementById("quizContainer");
 
-async function loadQuizzes() {
+document.getElementById("search").addEventListener("input", () => {
+    const searchitem = document.getElementById("search").value;
+    loadQuizzes(searchitem);
+})
+
+async function loadQuizzes(search) {
     try {
-        const response = await fetch("../test.json");
-
-        if (!response.ok) {
-            throw new Error(`HTTP Error ${response.status}`);
+        let quizzes = undefined;
+        if (!search) {
+            quizzes = await new GetCompiledAPI().getAllQuizzes();
+        } else {
+            quizzes = await new GetCompiledAPI(undefined, `${search}`).getQuizByName();
         }
 
-        const quizzes = await response.json();
         console.log(quizzes);
         renderQuizzes(quizzes);
-
     } catch (error) {
-
         console.error(error);
-
         const errorDiv = document.createElement("div");
         errorDiv.className = "error";
         errorDiv.innerHTML = `Fout bij laden van quizzen<br> ${error.message}`;
-
         quizContainer.appendChild(errorDiv);
     }
 }
@@ -44,15 +46,15 @@ function renderQuizzes(quiz) {
         content.className = "quiz-content";
 
         const title = document.createElement("h2");
-        title.textContent = quiz[i].quizname;
+        title.textContent = quiz[i].title;
 
         const desc = document.createElement("p");
         desc.className = "quiz-description";
-        desc.textContent = quiz[i].desc ?? "Geen beschrijving";
+        desc.textContent = quiz[i].description ?? "Geen beschrijving";
 
         const stats = document.createElement("div");
         stats.className = "quiz-stats";
-        stats.textContent = `${quiz[i].questions.length} vragen`;
+        stats.textContent =  `${quiz[i].id} vragen` //`${quiz[i].questions.length} vragen`; //
         
         const button = document.createElement("a");
         button.href = "../quiz/quiz.php";
@@ -60,7 +62,7 @@ function renderQuizzes(quiz) {
         button.className = "start-btn";
 
         button.addEventListener("click", () => {
-            startQuiz(quiz, i);
+            startQuiz(quiz[i].id);
         });
         
         content.appendChild(title);
@@ -75,9 +77,9 @@ function renderQuizzes(quiz) {
     };
 }
 
-function startQuiz(quiz, index) {
+function startQuiz(id) {
     if (localStorage.getItem("selectedquiz")) {
         localStorage.removeItem("selectedquiz");
     }
-    localStorage.setItem("selectedquiz", JSON.stringify(quiz[index]));
+    localStorage.setItem("selectedquiz", JSON.stringify(id));
 }

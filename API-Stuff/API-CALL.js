@@ -5,47 +5,47 @@ class GetCompiledAPI {
     };
 
     async getAllQuizzes() {
-        const res = await fetch(`wholequizAPI.php`); // needs proper endpoint //
+        const res = await fetch(`../API-Stuff/wholequizAPI.php?overview`); // Works! //
         const data = res.json();
         return data;
     }
 
     async getQuizById() {
-        const res = await fetch(`wholequizAPI.php?quiz_id=${this.id}`); // Works! //
+        const res = await fetch(`../API-Stuff/wholequizAPI.php?quiz_id=${this.id}`); // Works! //
         const data = res.json();
         return data;
     }
 
     async getQuizByName() {
-        const res = await fetch(`wholequizAPI.php?title=${this.id}`); // Needs proper Endpoint //
+        const res = await fetch(`../API-Stuff/wholequizAPI.php?title=${this.name}`); // Works! //
         const data = res.json();
         return data;
     }
 
     async getAllUsers() {
-        const res = await fetch(`usersAPI.php`); // Works! //
+        const res = await fetch(`../API-Stuff/usersAPI.php`); // Works! //
         const data = res.json();
         return data;
     }
 
     async getLeaderboardbyId() {
-        const res = await fetch(`leaderboardAPI.PHP?quiz_id=${this.id}`);
+        const res = await fetch(`../API-Stuff/leaderboardAPI.PHP?quiz_id=${this.id}`); // ? //
         const data = res.json();
         return data;
     }
 
     async getUserByName() {
-        const res = await fetch(`usersAPI.php?username=${this.name}`); // Works! //
+        const res = await fetch(`../API-Stuff/usersAPI.php?username=${this.name}`); // Works! //
         const data = res.json();
         return data;
     }
 }
 
 async function call() {
-    const test = await new GetCompiledAPI(2, "arne").getQuizByName();
+    const test = await new GetCompiledAPI(undefined, "Programmeren").getQuizByName();
     console.log(test);
 }
 
-call();
+//call();
 
 export default GetCompiledAPI;
