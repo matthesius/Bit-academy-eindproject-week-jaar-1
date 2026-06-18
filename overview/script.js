@@ -9,8 +9,8 @@ document.getElementById("search").addEventListener("input", () => {
 
 async function filter() {
     const quizzes = await new GetCompiledAPI().getAllQuizzes();
-    const searchitem = document.getElementById("search").value;
-    const filter = quizzes.filter(quizzes => quizzes.title.includes(searchitem) == true);
+    const searchitem = document.getElementById("search").value.toLowerCase();
+    const filter = quizzes.filter(quizzes => quizzes.title.toLowerCase().includes(searchitem) == true);
     console.log(filter);
     loadQuizzes(filter);
 }

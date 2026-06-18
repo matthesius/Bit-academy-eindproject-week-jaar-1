@@ -11,8 +11,10 @@
 </head>
 <body>
     <div id="outermodal">
-        <div style="display: none;" id="resultsmodal">
-            
+        <div id="flexmodal">
+            <div id="resultsmodal">
+                <h2>Results:</h2>
+            </div>
         </div>
     </div>
     <div id="questions"></div>

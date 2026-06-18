@@ -1,7 +1,6 @@
 <?php
+    require 'userpage_backend.php';
     require '../navbar.php';
-    require '../DB.php';
-    require '../LogInPage/login_check.php';
 ?>
 
 <!DOCTYPE html>
@@ -18,21 +17,21 @@
 
     <header class="hero">
         <h1>My Profile</h1>
-        <p>Welcome back, <?php echo htmlspecialchars($username); ?>!</p>
+        <p>Welcome back, <?= $user['username'];?>!</p>
     </header>
 
     <main class="user-dashboard">
         
         <section class="profile-card">
             <div class="avatar-large">
-                <?php echo strtoupper(substr($username, 0, 1)); ?>
+                <?php echo strtoupper(substr($user['username'], 0, 1)); ?>
             </div>
             <div class="profile-info">
-                <h2><?php echo htmlspecialchars($username); ?></h2>
-                <?php if ($user && isset($user['email'])): ?>
+                <h2><?php echo htmlspecialchars($user['username']); ?></h2>
+                <?php if ($user && isset($user['email'])) : ?>
                     <p class="email"><?php echo htmlspecialchars($user['email']); ?></p>
                 <?php endif; ?>
-                <?php if ($user && isset($user['created_at'])): ?>
+                <?php if ($user && isset($user['created_at'])) : ?>
                     <p class="join-date">Joined: <?php echo date('F j, Y', strtotime($user['created_at'])); ?></p>
                 <?php endif; ?>
             </div>
@@ -43,7 +42,7 @@
                 <h3><?php echo count($quizScores); ?></h3>
                 <p>Quizzes Completed</p>
             </div>
-            <?php if (!empty($quizScores)): ?>
+            <?php if (!empty($quizScores)) : ?>
                 <div class="stat-card">
                     <h3><?php 
                         $avgScore = array_sum(array_column($quizScores, 'percentage')) / count($quizScores);
@@ -56,9 +55,9 @@
 
         <section class="quiz-scores">
             <h2>Quiz Scores</h2>
-            <?php if (!empty($quizScores)): ?>
+            <?php if (!empty($quizScores)) : ?>
                 <div class="scores-list">
-                    <?php foreach ($quizScores as $score): ?>
+                    <?php foreach ($quizScores as $score) : ?>
                         <div class="score-item">
                             <div class="quiz-name"><?php echo htmlspecialchars($score['quiz_title']); ?></div>
                             <div class="score-details">
@@ -69,7 +68,7 @@
                         </div>
                     <?php endforeach; ?>
                 </div>
-            <?php else: ?>
+            <?php else : ?>
                 <p class="no-scores">You haven't completed any quizzes yet. <a href="../overview/index.php">Start a quiz!</a></p>
             <?php endif; ?>
         </section>
