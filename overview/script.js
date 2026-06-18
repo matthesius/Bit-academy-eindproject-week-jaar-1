@@ -63,7 +63,7 @@ function renderQuizzes(quiz) {
 
         const stats = document.createElement("div");
         stats.className = "quiz-stats";
-        stats.textContent =  `${quiz[i].id} vragen` //`${quiz[i].questions.length} vragen`; //
+        stats.textContent =  `${quiz[i].question_count} vragen` //`${quiz[i].questions.length} vragen`; //
         
         const button = document.createElement("a");
         button.href = "../quiz/quiz.php";
