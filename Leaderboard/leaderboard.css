@@ -33,24 +33,24 @@ nav {
 .nav-links a {
     text-decoration: none;
     color: white;
-
     padding: 12px 20px;
     border-radius: 12px;
-
-    background: linear-gradient(135deg,
-            #4f46e5,
-            #6366f1);
-
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
     font-weight: 600;
     font-size: 0.95rem;
 
-    box-shadow:
-        0 4px 12px rgba(79, 70, 229, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease,
-        background 0.2s ease;
+        background 0.2s ease; /* dit werkt trouwens niet denk ik maar whatever */
+}
+
+.nav-links a:hover {
+    transform: translateY(3px); /* sick ass animation */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #423bbf, #5456c9);
 }
 
 .filters {
@@ -220,4 +220,19 @@ nav {
 
 .player-row:hover {
     background: #f8f9ff;
+}
+
+.leaderboard-empty {
+    max-width: 1000px;
+    margin: 20px auto 80px;
+    padding: 20px;
+    text-align: center;
+    font-size: 1rem;
+    color: #6b7280;
+}
+
+.podium h3,
+.podium p,
+.podium span {
+    margin: 0;
 }

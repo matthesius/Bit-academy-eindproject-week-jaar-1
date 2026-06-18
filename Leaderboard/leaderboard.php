@@ -19,108 +19,60 @@
 
     <main>
 
-<section class="filters">
+        <section class="filters">
+            <div class="filter-box">
+                <label for="quizFilter">
+                    Select Quiz
+                </label>
 
-    <div class="filter-box">
+                <select id="quizFilter">
+                    <option value="">Loading quizzes...</option>
+                </select>
 
-        <label for="quizFilter">
-            Filter by Quiz
-        </label>
+                <button class="filter-btn" id="loadLeaderboardBtn">
+                    Load Leaderboard
+                </button>
+            </div>
+        </section>
 
-        <select id="quizFilter">
-            <option>World Flags</option>
-            <option>Physics for Babies</option>
-            <option>French Beginner</option>
-            <option>French Intermidiate</option>
-            <option>World 1787</option>
-        </select>
-
-        <button class="filter-btn">
-            Apply Filter
-        </button>
-
-    </div>
-
-</section>
-
-        <section class="top-three">
-
-            <div class="podium second">
-                <div class="avatar"></div>
-                <h3>Fox</h3>
-                <p>13 questions correct</p>
-                <br>
-                <p>*9 sec per question</p>
+        <section class="top-three" id="topThreeSection">
+            <div class="podium second" id="podiumSecond">
+                <div class="avatar">2</div>
+                <h3>Waiting...</h3>
+                <p></p>
                 <span></span>
             </div>
 
-            <div class="podium first">
-                <div class="avatar"></div>
-                <h3>Raffoxygames</h3>
-                <p>15 questions correct</p>
-                <br>
-                <p>*5 sec per question</p>
+            <div class="podium first" id="podiumFirst">
+                <div class="avatar">1</div>
+                <h3>Waiting...</h3>
+                <p></p>
                 <span></span>
             </div>
 
-            <div class="podium third">
-                <div class="avatar"></div>
-                <h3>Ragames</h3>
-                <p>13 questions correct</p>
-                <br>
-                <p>*11 sec per question</p>
+            <div class="podium third" id="podiumThird">
+                <div class="avatar">3</div>
+                <h3>Waiting...</h3>
+                <p></p>
                 <span></span>
             </div>
-
         </section>
 
         <section class="leaderboard">
-
             <div class="leaderboard-header">
                 <span>#</span>
                 <span>Player</span>
                 <span>Questions correct</span>
-                <span>*Time per question</span>
+                <span>Time per question</span>
             </div>
 
-            <div class="player-row">
-                <span>4</span>
-                <span>Hugo</span>
-                <span>8</span>
-                <span>12</span>
-            </div>
-
-            <div class="player-row">
-                <span>5</span>
-                <span>Thomas</span>
-                <span>7</span>
-                <span>32</span>
-            </div>
-
-            <div class="player-row">
-                <span>6</span>
-                <span>Arne</span>
-                <span>7</span>
-                <span>67</span>
-            </div>
-
-            <div class="player-row">
-                <span>7</span>
-                <span>Jairo</span>
-                <span>6</span>
-                <span>68</span>
-            </div>
-
-            <div class="player-row">
-                <span>8</span>
-                <span>Bram</span>
-                <span>6</span>
-                <span>560</span>
-            </div>
-
+            <div id="leaderboardRows"></div>
         </section>
+
+        <div class="leaderboard-empty" id="leaderboardEmpty">Choose a quiz and load the leaderboard.</div>
 
     </main>
 
+    <script src="leaderboard.js" defer></script>
 </body>
 </html>
