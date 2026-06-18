@@ -11,19 +11,13 @@ require_once '../LogInPage/login_check.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trivial</title>
     <link rel="stylesheet" href="homepage.css">
-        <link rel="icon" type="image/png" href="../favicon/web-app-manifest-192x192.png" />
+    <link rel="icon" type="image/png" href="../favicon/web-app-manifest-192x192.png" />
 </head>
 <body>
 
-    <nav>
-        <div class="logo">Trivial</div>
-
-        <div class="nav-links">
-            <a href="homepage.php">Home</a>
-            <a href="/Bit-academy-project-week-1/overview/index.php">Quizzen</a>
-    <a href="../LogInPage/login.php" class="signup-btn">Sign Up</a>
-</div>
-    </nav>
+    <?php
+        require '../navbar.php'
+    ?>
 
     <section class="hero">
         <h1>Test your knowledge</h1>
