@@ -32,6 +32,12 @@ class ApiThingie
             case 'getUsers':
                 $this->getUsers();
                 break;
+            case 'getQuizAttempts':
+                $this->getQuizAttempts();
+                break;
+            case 'getUserAttempts':
+                $this->getUserAttempts();
+                break;
             default:
                 echo json_encode(["error" => "Unknown action"]);
         }
@@ -130,6 +136,42 @@ class ApiThingie
             echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         }
     }
+
+    private function getQuizAttempts()
+    {
+        if (!isset($_GET['quiz_id'])) {
+            echo json_encode(["error" => "quiz_id is required"]);
+            return;
+        }
+
+        $stmt = $this->pdo->prepare("
+        SELECT a.*, u.username
+        FROM attempts a
+        JOIN users u ON u.id = a.user_id
+        WHERE a.quiz_id = ?
+        ORDER BY a.started_at DESC
+    ");
+        $stmt->execute([$_GET['quiz_id']]);
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+    }
+
+    private function getUserAttempts()
+    {
+        if (!isset($_GET['user_id'])) {
+            echo json_encode(["error" => "user_id is required"]);
+            return;
+        }
+
+        $stmt = $this->pdo->prepare("
+        SELECT a.*, q.title AS quiz_title
+        FROM attempts a
+        JOIN quizzes q ON q.id = a.quiz_id
+        WHERE a.user_id = ?
+        ORDER BY a.started_at DESC
+    ");
+        $stmt->execute([$_GET['user_id']]);
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+    }
 }
 
 $api = new ApiThingie($pdo);
@@ -140,3 +182,5 @@ $api->handle();
 //Leaderboard = ../API-Stuff/apithingie.php?action=getLeaderboard&quiz_id=1
 //All users = ../API-Stuff/apithingie.php?action=getUsers
 //One user = ../API-Stuff/apithingie.php?action=getUsers&username=arne
+//Quiz attempts = ../API-Stuff/apithingie.php?action=getQuizAttempts&quiz_id=1
+//User attempts = ../API-Stuff/apithingie.php?action=getUserAttempts&user_id=1
