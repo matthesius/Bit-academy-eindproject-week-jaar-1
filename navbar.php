@@ -8,7 +8,9 @@
         <a href="../Leaderboard/leaderboard.php" class="active">Leaderboard</a>
 
         <?php
-        session_start();
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();    
+        }
 
         if (isset($_SESSION['LoggedInQuizTaker'])) { ?>
             <a href="../LogInPage/logout.php">Log out</a>
