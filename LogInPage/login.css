@@ -26,15 +26,18 @@ body {
 
 .login-card {
     width: 100%;
+    max-width: 450px;
+
+    display: flex;
+    flex-direction: column;
 
     background: white;
 
-    padding: 24px;
+    padding: 25px;
 
     border-radius: 20px;
 
-    box-shadow:
-        0 20px 40px rgba(0, 0, 0, .15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .15);
 }
 
 .login-card h1 {
@@ -52,7 +55,7 @@ body {
 
 .login-card a {
     display: inline-block;
-    margin-bottom: 15px; /* space between link and button */
+    margin-bottom: 15px;
 }
 
 .input-group {
