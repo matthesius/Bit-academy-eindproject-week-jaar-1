@@ -10,6 +10,10 @@
 </head>
 <body>
 
+    <?php
+        require '../navbar.php';
+    ?>
+
     <header>
         <h1>Quiz Overzicht</h1>
         <p>Kies een quiz om te starten</p>
