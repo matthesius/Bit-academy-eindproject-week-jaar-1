@@ -1,9 +1,3 @@
-<?php
-
-require_once '../LogInPage/login_check.php';
-
-?>
-
 <!DOCTYPE html>
 <html lang="nl">
 
