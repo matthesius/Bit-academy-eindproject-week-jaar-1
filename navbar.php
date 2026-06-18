@@ -6,5 +6,14 @@
         <a href="../HomePage/homepage.php">Home</a>
         <a href="../overview/index.php">Quizzen</a>
         <a href="../Leaderboard/leaderboard.php" class="active">Leaderboard</a>
+
+        <?php
+
+        if (isset($_SESSION['LoggedInQuizTaker'])) { ?>
+            <a href="../LogInPage/logout.php">log out</a>
+        <?php } else { ?>
+            <a href="../LogInPage/login.php">log in</a>
+        <?php }          
+        ?>
     </div>
 </nav>
