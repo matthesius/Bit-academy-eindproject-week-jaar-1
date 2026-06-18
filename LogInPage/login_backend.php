@@ -26,6 +26,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     if (password_verify("$password", $user['password'])) {
         $_SESSION['LoggedInQuizTaker'] = $user['id'];
         unset($_SESSION['loginError']);
+        unset($_SESSION['SignUpError']);
         header("Location: ../HomePage/homepage.php");
         exit;
     } else {

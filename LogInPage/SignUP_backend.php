@@ -26,17 +26,15 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
     $stmt->execute();
     $user_check = $stmt->fetchall();
 
-//    var_dump($user_check);
-//    exit;
-
     try {
-        if (!isset($user_check)) {
-            throw new Exception("gebruikersnaam of email is al in gebruik" . PHP_EOL);
-        }
         if ($password1 !== $password2) {
             throw new Exception("wachtwoorden zijn verschillend" . PHP_EOL);
         }
+        if (!empty($user_check)) {
+            throw new Exception("gebruikersnaam of email is al in gebruik" . PHP_EOL);
+        }
         unset($_SESSION['SignUpError']);
+        unset($_SESSION['loginError']);
         $hashed_password = password_hash("$password1", PASSWORD_DEFAULT);
 
         $stmt = $pdo->prepare("INSERT INTO users (username, password, email) VALUES (:username, :password, :email);");
