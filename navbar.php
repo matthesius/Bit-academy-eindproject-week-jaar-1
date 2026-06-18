@@ -11,9 +11,9 @@
         session_start();
 
         if (isset($_SESSION['LoggedInQuizTaker'])) { ?>
-            <a href="../LogInPage/logout.php">log out</a>
+            <a href="../LogInPage/logout.php">Log out</a>
         <?php } else { ?>
-            <a href="../LogInPage/login.php">log in</a>
+            <a href="../LogInPage/login.php">Log in</a>
         <?php } ?>
     </div>
 </nav>
