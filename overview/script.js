@@ -4,23 +4,31 @@ loadQuizzes();
 const quizContainer = document.getElementById("quizContainer");
 
 document.getElementById("search").addEventListener("input", () => {
-    const searchitem = document.getElementById("search").value;
-    loadQuizzes(searchitem);
+    filter();
 })
 
-async function loadQuizzes(search) {
+async function filter() {
+    const quizzes = await new GetCompiledAPI().getAllQuizzes();
+    const searchitem = document.getElementById("search").value;
+    const filter = quizzes.filter(quizzes => quizzes.title.includes(searchitem) == true);
+    console.log(filter);
+    loadQuizzes(filter);
+}
+
+async function loadQuizzes(filter) {
     try {
         let quizzes = undefined;
-        if (!search) {
+        if (!filter) {
             quizzes = await new GetCompiledAPI().getAllQuizzes();
         } else {
-            quizzes = await new GetCompiledAPI(undefined, `${search}`).getQuizByName();
+            quizzes = filter;
         }
 
         console.log(quizzes);
         renderQuizzes(quizzes);
     } catch (error) {
         console.error(error);
+
         const errorDiv = document.createElement("div");
         errorDiv.className = "error";
         errorDiv.innerHTML = `Fout bij laden van quizzen<br> ${error.message}`;
@@ -31,6 +39,7 @@ async function loadQuizzes(search) {
 function renderQuizzes(quiz) {
 
     quizContainer.innerHTML = "";
+    console.log(quiz);
 
     for (let i = 0; i < quiz.length; i++) {
 
@@ -39,8 +48,8 @@ function renderQuizzes(quiz) {
 
         const img = document.createElement("img");
         img.className = "quiz-image";
-        img.src = quiz[i].quizthumbnnail;
-        img.alt = quiz[i].quizname;
+        img.src = quiz[i].image_url;
+        img.alt = quiz[i].title;
 
         const content = document.createElement("div");
         content.className = "quiz-content";
