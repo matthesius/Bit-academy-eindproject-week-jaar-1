@@ -8,15 +8,9 @@
 </head>
 <body>
 
-    <nav>
-        <div class="logo">Trivial</div>
-
-        <div class="nav-links">
-            <a href="..//HomePage/homepage.php">Home</a>
-            <a href="/Bit-academy-project-week-1/overview/index.php">Quizzen</a>
-            <a href="leaderboard.php" class="active">Leaderboard</a>
-        </div>
-    </nav>
+    <?php
+        require '../navbar.php';
+    ?>
 
     <header class="hero">
         <h1>Global Leaderboard</h1>

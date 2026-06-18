@@ -18,7 +18,7 @@ require_once '../LogInPage/login_check.php';
 <body>
 
     <?php
-        require '../navbar.php'
+        require '../navbar.php';
     ?>
 
     <section class="hero">

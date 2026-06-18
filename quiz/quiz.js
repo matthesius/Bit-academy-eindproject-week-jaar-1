@@ -11,7 +11,7 @@ function renderquestions(quiz) {
     const maindiv = document.getElementById("questions");
 
     const quiztitle = document.createElement("h1");
-    quiztitle.textContent = quiz.quizname;
+    quiztitle.textContent = quiz.title;
     document.body.prepend(quiztitle);
 
     for (let i = 0; i < quiz.questions.length; i++) {
