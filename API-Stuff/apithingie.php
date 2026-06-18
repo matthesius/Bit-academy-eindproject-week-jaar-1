@@ -152,7 +152,21 @@ class ApiThingie
         ORDER BY a.started_at DESC
     ");
         $stmt->execute([$_GET['quiz_id']]);
-        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+        $attempts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($attempts as &$attempt) {
+            $stmt = $this->pdo->prepare("
+            SELECT aa.*, q.question_text, o.option_text
+            FROM attempt_answers aa
+            JOIN questions q ON q.id = aa.question_id
+            LEFT JOIN options o ON o.id = aa.option_id
+            WHERE aa.attempt_id = ?
+        ");
+            $stmt->execute([$attempt['id']]);
+            $attempt['answers'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        echo json_encode($attempts);
     }
 
     private function getUserAttempts()
@@ -163,14 +177,29 @@ class ApiThingie
         }
 
         $stmt = $this->pdo->prepare("
-        SELECT a.*, q.title AS quiz_title
+        SELECT a.*, q.title AS quiz_title, u.username
         FROM attempts a
         JOIN quizzes q ON q.id = a.quiz_id
+        JOIN users u ON u.id = a.user_id
         WHERE a.user_id = ?
         ORDER BY a.started_at DESC
     ");
         $stmt->execute([$_GET['user_id']]);
-        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+        $attempts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($attempts as &$attempt) {
+            $stmt = $this->pdo->prepare("
+            SELECT aa.*, q.question_text, o.option_text
+            FROM attempt_answers aa
+            JOIN questions q ON q.id = aa.question_id
+            LEFT JOIN options o ON o.id = aa.option_id
+            WHERE aa.attempt_id = ?
+        ");
+            $stmt->execute([$attempt['id']]);
+            $attempt['answers'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        echo json_encode($attempts);
     }
 }
 
