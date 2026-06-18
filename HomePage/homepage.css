@@ -30,61 +30,25 @@ nav {
 .nav-links a {
     text-decoration: none;
     color: white;
-
     padding: 12px 20px;
     border-radius: 12px;
-
-    background: linear-gradient(135deg,
-            #4f46e5,
-            #6366f1);
-
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
     font-weight: 600;
     font-size: 0.95rem;
 
-    box-shadow:
-        0 4px 12px rgba(79, 70, 229, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease,
-        background 0.2s ease;
+        background 0.2s ease; /* dit werkt trouwens niet denk ik maar whatever */
 }
-
-.signup-btn {
-    background: linear-gradient(
-        135deg,
-        #f59e0b,
-        #f97316
-    ) !important;
-
-    color: white !important;
-
-    box-shadow:
-        0 6px 18px rgba(249, 115, 22, 0.35);
-
-    position: relative;
-}
-
-.signup-btn:hover {
-    transform: translateY(-3px) scale(1.03);
-
-    box-shadow:
-        0 10px 25px rgba(249, 115, 22, 0.45);
-}
-
 
 .nav-links a:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 8px 20px rgba(79, 70, 229, 0.4);
-
-    background: linear-gradient(135deg,
-            #4338ca,
-            #4f46e5);
+    transform: translateY(3px); /* sick ass animation */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #423bbf, #5456c9);
 }
-
-
 .hero {
     text-align: center;
     padding: 120px 20px;
