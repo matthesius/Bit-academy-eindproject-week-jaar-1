@@ -16,6 +16,7 @@ function shuffleArray(array) {
 }
 
 function renderquestions(quiz) {
+    const starttime = Temporal.Now.zonedDateTimeISO();
     for (const question of quiz.questions) {
         shuffleArray(question.options);
     }
@@ -68,6 +69,7 @@ function renderquestions(quiz) {
     submit.textContent = "Submit Answers";
 
     submit.addEventListener("click", () => {
+
         let points = 0;
         document.getElementById("resultsmodal").style.display = "block";
         for (let i = 0; i < quiz.questions.length; i++) {
@@ -110,9 +112,38 @@ function renderquestions(quiz) {
         resultspage.appendChild(buttondiv);
         buttondiv.appendChild(homepage);
         buttondiv.appendChild(overview);
+
+        constructTableOne(undefined, quiz, points, starttime);
     });
     document.body.appendChild(submit);
 
+}
+
+function constructTableOne(userid, quiz, score, startedat) {
+    const table1 = {
+        user_id: userid,
+        quiz_id: quiz.id,
+        score: score,
+        completed: true,
+        started_at: startedat,
+        finished_at: Temporal.Now.zonedDateTimeISO()
+    };
+
+    console.log(table1); 
+}
+
+function constructTableTwo(quiz) {
+    const table2 = {
+        attempt_id: "",
+        scores: [],
+        //question_id: "",//
+        //option_id: "",//
+        //is_correct: ""//
+    };
+
+    for (let i = 0; i < quiz.questions.length; i++) {
+        
+    }
 }
 
 console.log(document.querySelectorAll("input"));
