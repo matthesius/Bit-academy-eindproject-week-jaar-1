@@ -7,7 +7,19 @@ async function getquizinfo() {
     renderquestions(quiz);
 }
 
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
 function renderquestions(quiz) {
+    for (const question of quiz.questions) {
+        shuffleArray(question.options);
+    }
+
     const maindiv = document.getElementById("questions");
 
     const quiztitle = document.createElement("h1");
@@ -65,12 +77,44 @@ function renderquestions(quiz) {
                 }
             }
         }
-        console.log(points);
+        const resultspage = document.getElementById("resultsmodal");
+        document.getElementById("outermodal").style.display = "block";
+
+        const count = document.createElement("p");
+        const percentage = document.createElement("p");
+        const time = document.createElement("p");
+        const homepage = document.createElement("a");
+        const overview = document.createElement("a");
+        const buttondiv = document.createElement("div");
+
+        count.id = "count";
+        percentage.id = "percentage";
+        time.id = "time";
+        homepage.id = "homepage";
+        overview.id = "overview";
+        buttondiv.id = "buttondiv";
+
+        count.textContent = `${points} / ${quiz.questions.length} Correct`;
+        percentage.textContent = `${(points / quiz.questions.length) * 100}%`;
+        time.textContent = `Time: ${10}`;
+        homepage.href = "../HomePage/homepage.php";
+        homepage.textContent = "To Homepage";
+        overview.href = "../overview/index.html";
+        overview.textContent = "To Overview";
+
+        
+        
+        resultspage.appendChild(count);
+        resultspage.appendChild(percentage);
+        resultspage.appendChild(time);
+        resultspage.appendChild(buttondiv);
+        buttondiv.appendChild(homepage);
+        buttondiv.appendChild(overview);
     });
     document.body.appendChild(submit);
 
 }
 
-
+console.log(document.querySelectorAll("input"));
 
 getquizinfo();
