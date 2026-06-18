@@ -7,6 +7,7 @@
     <title>Trivial</title>
     <link rel="stylesheet" href="homepage.css">
     <link rel="icon" type="image/png" href="../favicon/web-app-manifest-192x192.png" />
+    <!-- to do: verander deze kut slop favicon AUB -->
 </head>
 
 <body>

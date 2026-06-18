@@ -6,6 +6,8 @@
     <title id="websitetitle"></title>
     <script type="module" defer src="quiz.js"></script>
     <link rel="stylesheet" href="quiz.css">
+    <link rel="icon" type="image/png" href="../favicon/web-app-manifest-192x192.png" />
+    <!-- to do: verander deze kut slop favicon AUB -->
 </head>
 <body>
     <div id="outermodal">
