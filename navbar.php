@@ -8,12 +8,12 @@
         <a href="../Leaderboard/leaderboard.php" class="active">Leaderboard</a>
 
         <?php
+        session_start();
 
         if (isset($_SESSION['LoggedInQuizTaker'])) { ?>
             <a href="../LogInPage/logout.php">log out</a>
         <?php } else { ?>
             <a href="../LogInPage/login.php">log in</a>
-        <?php }          
-        ?>
+        <?php } ?>
     </div>
 </nav>
