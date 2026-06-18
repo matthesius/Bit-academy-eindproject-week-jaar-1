@@ -17,15 +17,9 @@ require_once '../LogInPage/login_check.php';
 
 <body>
 
-    <nav>
-        <div class="logo">Trivial</div>
-
-        <div class="nav-links">
-            <a href="homepage.php">Home</a>
-            <a href="../overview/index.html">Quizzen</a>
-            <a href="../LogInPage/login.php" class="signup-btn">Sign Up</a>
-        </div>
-    </nav>
+    <?php
+        require '../navbar.php'
+    ?>
 
     <section class="hero">
         <h1>Test your knowledge</h1>
