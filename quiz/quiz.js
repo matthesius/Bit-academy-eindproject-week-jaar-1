@@ -22,7 +22,6 @@ function renderquestions(quiz) {
     }
 
     const maindiv = document.getElementById("questions");
-
     const quiztitle = document.createElement("h1");
     quiztitle.textContent = quiz.title;
     document.body.prepend(quiztitle);
@@ -42,12 +41,12 @@ function renderquestions(quiz) {
         questiondiv.appendChild(titlediv);
         questiondiv.appendChild(form);
         titlediv.appendChild(question);
-
         if (quiz.questions[i].img) {
             const questionimage = document.createElement("img");
             questionimage.setAttribute("src", quiz.questions[i].img);
             titlediv.appendChild(questionimage);
         }
+        
 
         for (let j = 0; j < quiz.questions[i].options.length; j++) {
             const answerdiv = document.createElement("div");
@@ -67,10 +66,10 @@ function renderquestions(quiz) {
             answerdiv.appendChild(answer);
         }
     }
+
     const submit = document.createElement("button");
     submit.id = "submit";
     submit.textContent = "Submit Answers";
-
     submit.addEventListener("click", () => {
         let answers = 0;
         for (let i = 0; i < quiz.questions.length; i++) {
@@ -90,6 +89,7 @@ function renderquestions(quiz) {
                     }
                 }
             }
+
             const resultspage = document.getElementById("resultsmodal");
             document.getElementById("outermodal").style.display = "block";
 
@@ -126,10 +126,12 @@ function renderquestions(quiz) {
             constructTableOne(quiz, points, starttime);
             constructTableTwo(quiz);
         } else {
+            if (document.getElementById("errormessage")) {
+                document.getElementById("errormessage").remove();
+            }
             const errormessage = document.createElement("h2")
+            errormessage.id = "errormessage";
             errormessage.textContent = "Please Answer all questions";
-            errormessage.style.color = "white";
-            errormessage.style.fontWeight = "bold";
             document.body.appendChild(errormessage);
         }
     });
