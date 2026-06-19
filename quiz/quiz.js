@@ -101,7 +101,7 @@ function renderquestions(quiz) {
         time.textContent = `Time: ${10}`;
         homepage.href = "../HomePage/homepage.php";
         homepage.textContent = "To Homepage";
-        overview.href = "../overview/index.html";
+        overview.href = "../overview/index.php";
         overview.textContent = "To Overview";
 
         
