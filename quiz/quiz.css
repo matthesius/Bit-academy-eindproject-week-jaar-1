@@ -143,3 +143,8 @@ a#homepage, a#overview {
     background: #4caf50;
     transition: width 0.3s ease;
 }
+
+#errormessage {
+    color: white;
+    font-weight: bold;
+}

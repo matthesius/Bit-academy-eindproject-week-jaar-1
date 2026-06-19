@@ -16,51 +16,12 @@ function shuffleArray(array) {
 }
 
 function renderquestions(quiz) {
-    function updateProgress() {
-        let answered = 0;
-
-        for (let i = 0; i < quiz.questions.length; i++) {
-            const selected = document.querySelector(
-                `input[name="answers${i}"]:checked`
-            );
-
-            if (selected) {
-                answered++;
-            }
-        }
-
-        progressBar.value = answered;
-        progressLabel.textContent =
-            `${answered} / ${quiz.questions.length} answered`;
-
-        const percent = (answered / quiz.questions.length) * 100;
-        progressFill.style.width = `${percent}%`;
-    }
-
     const starttime = Temporal.Now.zonedDateTimeISO();
     for (const question of quiz.questions) {
         shuffleArray(question.options);
     }
 
     const maindiv = document.getElementById("questions");
-
-    // Progress Bar 💯💯😂🤖🤖
-    const progressContainer = document.createElement("div");
-
-    const progressLabel = document.createElement("p");
-    progressLabel.id = "progressLabel";
-    progressLabel.textContent = `0 / ${quiz.questions.length} answered`;
-
-    const progressBar = document.createElement("progress");
-    progressBar.id = "progressBar";
-    progressBar.max = quiz.questions.length;
-    progressBar.value = 0;
-
-    progressContainer.appendChild(progressLabel);
-    progressContainer.appendChild(progressBar);
-
-    document.body.insertBefore(progressContainer, maindiv);
-
     const quiztitle = document.createElement("h1");
     quiztitle.textContent = quiz.title;
     document.body.prepend(quiztitle);
@@ -80,12 +41,12 @@ function renderquestions(quiz) {
         questiondiv.appendChild(titlediv);
         questiondiv.appendChild(form);
         titlediv.appendChild(question);
-
         if (quiz.questions[i].img) {
             const questionimage = document.createElement("img");
             questionimage.setAttribute("src", quiz.questions[i].img);
             titlediv.appendChild(questionimage);
         }
+        
 
         for (let j = 0; j < quiz.questions[i].options.length; j++) {
             const answerdiv = document.createElement("div");
@@ -95,7 +56,6 @@ function renderquestions(quiz) {
             select.type = "radio";
             select.name = `answers${i}`;
             select.id = `option${i}-${j}`;
-            select.addEventListener("change", updateProgress);
 
             answer.textContent = quiz.questions[i].options[j].option_text;
             answer.for = `option${j}`;
@@ -106,10 +66,10 @@ function renderquestions(quiz) {
             answerdiv.appendChild(answer);
         }
     }
+
     const submit = document.createElement("button");
     submit.id = "submit";
     submit.textContent = "Submit Answers";
-
     submit.addEventListener("click", () => {
         let answers = 0;
         for (let i = 0; i < quiz.questions.length; i++) {
@@ -129,6 +89,7 @@ function renderquestions(quiz) {
                     }
                 }
             }
+
             const resultspage = document.getElementById("resultsmodal");
             document.getElementById("outermodal").style.display = "block";
 
@@ -165,50 +126,14 @@ function renderquestions(quiz) {
             constructTableOne(quiz, points, starttime);
             constructTableTwo(quiz);
         } else {
+            if (document.getElementById("errormessage")) {
+                document.getElementById("errormessage").remove();
+            }
             const errormessage = document.createElement("h2")
+            errormessage.id = "errormessage";
             errormessage.textContent = "Please Answer all questions";
-            errormessage.style.color = "white";
-            errormessage.style.fontWeight = "bold";
             document.body.appendChild(errormessage);
         }
-<<<<<<< HEAD
-        const resultspage = document.getElementById("resultsmodal");
-        document.getElementById("outermodal").style.display = "block";
-
-        const count = document.createElement("p");
-        const percentage = document.createElement("p");
-        const time = document.createElement("p");
-        const homepage = document.createElement("a");
-        const overview = document.createElement("a");
-        const buttondiv = document.createElement("div");
-
-        count.id = "count";
-        percentage.id = "percentage";
-        time.id = "time";
-        homepage.id = "homepage";
-        overview.id = "overview";
-        buttondiv.id = "buttondiv";
-
-        count.textContent = `${points} / ${quiz.questions.length} Correct`;
-        percentage.textContent = `${(points / quiz.questions.length) * 100}%`;
-        time.textContent = `Time: ${10}`;
-        homepage.href = "../HomePage/homepage.php";
-        homepage.textContent = "To Homepage";
-        overview.href = "../overview/index.html";
-        overview.textContent = "To Overview";
-
-
-
-        resultspage.appendChild(count);
-        resultspage.appendChild(percentage);
-        resultspage.appendChild(time);
-        resultspage.appendChild(buttondiv);
-        buttondiv.appendChild(homepage);
-        buttondiv.appendChild(overview);
-
-        constructTableOne(undefined, quiz, points, starttime);
-=======
->>>>>>> 1f5ce6121d49837b6308a8d64f8268b9abc58881
     });
     document.body.appendChild(submit);
 }
@@ -229,9 +154,6 @@ function constructTableTwo(quiz) {
     const table2 = [];
 
     for (let i = 0; i < quiz.questions.length; i++) {
-<<<<<<< HEAD
-
-=======
         let questionid = quiz.questions[i].id;
 
         let optionid = undefined;
@@ -243,7 +165,6 @@ function constructTableTwo(quiz) {
         }
 
         table2.push({ question_id: questionid, option_id: optionid });
->>>>>>> 1f5ce6121d49837b6308a8d64f8268b9abc58881
     }
     console.log(table2);
 }
