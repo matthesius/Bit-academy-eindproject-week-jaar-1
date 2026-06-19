@@ -40,7 +40,7 @@ button#submit {
     background-color: green;
     border: 3px solid greenyellow;
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     padding: 12px;
     border-radius: 6px;
     color: white;
@@ -57,6 +57,8 @@ h1 {
 
 h2 {
     text-align: center;
+    margin: 0;
+    margin-bottom: 30px;
 }
 
 p {
@@ -73,6 +75,13 @@ img {
     max-width: 45%;
     border-radius: 15px;
     border-image: #7c3aed solid 3px;
+}
+
+progress {
+    width: 65%;
+    margin-bottom: 10px;
+    height: 50px;
+    color: black;
 }
 
 div[id^="titlediv"] {
@@ -142,4 +151,9 @@ a#homepage, a#overview {
     height: 100%;
     background: #4caf50;
     transition: width 0.3s ease;
+}
+
+#errormessage {
+    color: white;
+    font-weight: bold;
 }

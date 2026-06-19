@@ -92,6 +92,25 @@ body {
     border: 1px solid #d1d5db;
 }
 
+.form-row {
+    display: grid;
+    gap: 6px;
+}
+
+.form-row label {
+    font-weight: 600;
+    margin-bottom: 0;
+    display: block;
+}
+
+.form-row input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    font-size: 0.95rem;
+}
+
 .question-header {
     display: flex;
     justify-content: space-between;
