@@ -22,6 +22,19 @@
                 <label for="quizImage">Afbeelding URL</label>
                 <input type="url" id="quizImage" name="quizImage" placeholder="https://...jpg" required>
 
+                <div class="questions-section">
+                    <div class="questions-header">
+                        <h2>Vragen</h2>
+                        <button type="button" id="addQuestion" class="secondary-button">Voeg vraag toe</button>
+                    </div>
+                    <div id="questionList">
+                        <div class="question-item">
+                            <label for="question-1">Vraag 1</label>
+                            <textarea id="question-1" name="questionText" rows="3" placeholder="Typ hier de vraag" required></textarea>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="button-row">
                     <button type="submit">Maak quiz</button>
                 </div>
