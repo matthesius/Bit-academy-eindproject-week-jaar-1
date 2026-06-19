@@ -31,12 +31,10 @@ function renderquestions(quiz) {
         const questiondiv = document.createElement("div");
         const titlediv = document.createElement("div");
         const question = document.createElement("h3");
-        const questionimage = document.createElement("img");
         const form = document.createElement("form");
 
         questiondiv.id = `questionid${i}`;
         question.textContent = quiz.questions[i].question_text;
-        questionimage.setAttribute("src", quiz.questions[i].img);
         titlediv.class = "titlediv";
         titlediv.id = `titlediv${i}`;
 
@@ -44,7 +42,12 @@ function renderquestions(quiz) {
         questiondiv.appendChild(titlediv);
         questiondiv.appendChild(form);
         titlediv.appendChild(question);
-        titlediv.appendChild(questionimage);
+
+        if (quiz.questions[i].img) {
+            const questionimage = document.createElement("img");
+            questionimage.setAttribute("src", quiz.questions[i].img);
+            titlediv.appendChild(questionimage);
+        }
 
         for (let j = 0; j < quiz.questions[i].options.length; j++) {
             const answerdiv = document.createElement("div");
@@ -69,54 +72,68 @@ function renderquestions(quiz) {
     submit.textContent = "Submit Answers";
 
     submit.addEventListener("click", () => {
-
-        let points = 0;
-        document.getElementById("resultsmodal").style.display = "block";
+        let answers = 0;
         for (let i = 0; i < quiz.questions.length; i++) {
-            for (let j = 0; j < quiz.questions[i].options.length; j++) {
-                if (document.getElementById(`option${i}-${j}`).checked == true && quiz.questions[i].options[j].is_correct == true) {
-                    points++;
+                for (let j = 0; j < quiz.questions[i].options.length; j++) {
+                    if (document.getElementById(`option${i}-${j}`).checked == true) {
+                        answers++
+                    }
                 }
             }
+        if (answers == quiz.questions.length) {
+            let points = 0;
+            document.getElementById("resultsmodal").style.display = "block";
+            for (let i = 0; i < quiz.questions.length; i++) {
+                for (let j = 0; j < quiz.questions[i].options.length; j++) {
+                    if (document.getElementById(`option${i}-${j}`).checked == true && quiz.questions[i].options[j].is_correct == true) {
+                        points++;
+                    }
+                }
+            }
+            const resultspage = document.getElementById("resultsmodal");
+            document.getElementById("outermodal").style.display = "block";
+
+            const count = document.createElement("p");
+            const percentage = document.createElement("p");
+            const time = document.createElement("p");
+            const homepage = document.createElement("a");
+            const overview = document.createElement("a");
+            const buttondiv = document.createElement("div");
+
+            count.id = "count";
+            percentage.id = "percentage";
+            time.id = "time";
+            homepage.id = "homepage";
+            overview.id = "overview";
+            buttondiv.id = "buttondiv";
+
+            count.textContent = `${points} / ${quiz.questions.length} Correct`;
+            percentage.textContent = `${(points / quiz.questions.length) * 100}%`;
+            time.textContent = `Time: ${10}`;
+            homepage.href = "../HomePage/homepage.php";
+            homepage.textContent = "To Homepage";
+            overview.href = "../overview/index.php";
+            overview.textContent = "To Overview";
+
+
+
+            resultspage.appendChild(count);
+            resultspage.appendChild(percentage);
+            resultspage.appendChild(time);
+            resultspage.appendChild(buttondiv);
+            buttondiv.appendChild(homepage);
+
+            constructTableOne(quiz, points, starttime);
+            constructTableTwo(quiz);
+        } else {
+            const errormessage = document.createElement("h2")
+            errormessage.textContent = "Please Answer all questions";
+            errormessage.style.color = "white";
+            errormessage.style.fontWeight = "bold";
+            document.body.appendChild(errormessage);
         }
-        const resultspage = document.getElementById("resultsmodal");
-        document.getElementById("outermodal").style.display = "block";
-
-        const count = document.createElement("p");
-        const percentage = document.createElement("p");
-        const time = document.createElement("p");
-        const homepage = document.createElement("a");
-        const overview = document.createElement("a");
-        const buttondiv = document.createElement("div");
-
-        count.id = "count";
-        percentage.id = "percentage";
-        time.id = "time";
-        homepage.id = "homepage";
-        overview.id = "overview";
-        buttondiv.id = "buttondiv";
-
-        count.textContent = `${points} / ${quiz.questions.length} Correct`;
-        percentage.textContent = `${(points / quiz.questions.length) * 100}%`;
-        time.textContent = `Time: ${10}`;
-        homepage.href = "../HomePage/homepage.php";
-        homepage.textContent = "To Homepage";
-        overview.href = "../overview/index.php";
-        overview.textContent = "To Overview";
-
-        
-        
-        resultspage.appendChild(count);
-        resultspage.appendChild(percentage);
-        resultspage.appendChild(time);
-        resultspage.appendChild(buttondiv);
-        buttondiv.appendChild(homepage);
-        
-        constructTableOne(quiz, points, starttime);
-        constructTableTwo(quiz);
     });
     document.body.appendChild(submit);
-
 }
 
 function constructTableOne(quiz, score, startedat) {
@@ -128,7 +145,7 @@ function constructTableOne(quiz, score, startedat) {
         finished_at: Temporal.Now.zonedDateTimeISO()
     };
 
-    console.log(table1); 
+    console.log(table1);
 }
 
 function constructTableTwo(quiz) {
@@ -137,22 +154,15 @@ function constructTableTwo(quiz) {
     for (let i = 0; i < quiz.questions.length; i++) {
         let questionid = quiz.questions[i].id;
 
-        let optionid = "Unanswered";
+        let optionid = undefined;
         for (let j = 0; j < quiz.questions[i].options.length; j++) {
             if (document.getElementById(`option${i}-${j}`).checked == true) {
                 optionid = quiz.questions[i].options[j].id
-                
+
             }
         }
 
-        let iscorrect = false;
-        for (let j = 0; j < quiz.questions[i].options.length; j++) {
-            if (document.getElementById(`option${i}-${j}`).checked == true && quiz.questions[i].options[j].is_correct == true) {
-                iscorrect = true;
-            }
-        }
-
-        table2.push({question_id: questionid, option_id: optionid, is_correct: iscorrect});
+        table2.push({ question_id: questionid, option_id: optionid });
     }
     console.log(table2);
 }
