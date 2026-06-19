@@ -5,7 +5,7 @@
         <a href="../HomePage/homepage.php">Home</a>
         <a href="../overview/index.php">Quizzen</a>
         <a href="../Leaderboard/leaderboard.php">Leaderboard</a>
-        <a href="../quizcreator/quizcreator.php">Quiz Creator🛠️</a>
+        <a href="../quizcreator/quizcreator.php">Quiz Creator🔨</a>
 
 
         <?php
