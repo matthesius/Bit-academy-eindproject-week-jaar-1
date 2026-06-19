@@ -2,6 +2,10 @@
 
 require_once '../DB.php';
 
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
 header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Content-Type: application/json');
@@ -135,14 +139,22 @@ class ApiPostThingie
         }
 
         try {
+            if (!isset($_SESSION['LoggedInQuizTaker'])) {
+                echo json_encode(["error" => "Niet ingelogd"]);
+                return;
+            }
+
+            $userId = $_SESSION['LoggedInQuizTaker'];
+
             $this->pdo->beginTransaction();
 
             $stmt = $this->pdo->prepare("
-            INSERT INTO attempts (quiz_id, score, completed, started_at, finished_at)
-            VALUES (?, ?, ?, ?, ?)
-            RETURNING id, quiz_id, score, completed, started_at, finished_at
+            INSERT INTO attempts (user_id, quiz_id, score, completed, started_at, finished_at)
+            VALUES (?, ?, ?, ?, ?, ?)
+            RETURNING id, user_id, quiz_id, score, completed, started_at, finished_at
         ");
             $stmt->execute([
+                $userId,
                 $quizId,
                 $score,
                 $completed ? 'true' : 'false',
@@ -188,5 +200,5 @@ if ($action === 'createQuiz') {
     echo json_encode(["error" => "Onbekende actie"]);
 }
 
-//make a quiz = ../Api-Stuff/apiPostThingie.php?action=createQuiz
-//submit an attempt = ../Api-Stuff/apiPostThingie.php?action=submitAttempt
+//make a quiz = ../API-Stuff/apiPostThingie.php?action=createQuiz
+//submit an attempt = ../API-Stuff/apiPostThingie.php?action=submitAttempt
