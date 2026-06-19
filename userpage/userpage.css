@@ -1,15 +1,12 @@
-html {
+* {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     scrollbar-width: none;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Courier New', Courier, monospace ;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    padding-bottom: 50px;
 }
 
 .hero {
