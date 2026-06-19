@@ -39,7 +39,6 @@ main.user-dashboard {
     padding: 0 20px;
 }
 
-/* Profile Card */
 .profile-card {
     background: white;
     border-radius: 15px;
@@ -82,7 +81,6 @@ main.user-dashboard {
     font-size: 0.95rem;
 }
 
-/* Stats Overview */
 .stats-overview {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -116,7 +114,6 @@ main.user-dashboard {
     font-size: 1rem;
 }
 
-/* Quiz Scores */
 .quiz-scores {
     background: white;
     border-radius: 15px;
@@ -328,7 +325,6 @@ main.user-dashboard {
     color: #ef4444;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2rem;
