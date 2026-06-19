@@ -55,17 +55,8 @@
     <script>
         async function loadUserQuizzes() {
             try {
-                const username = "<?= $user['username']; ?>";
-                
-                const usersRes = await fetch('../API-Stuff/apithingie.php?action=getUsers&username=' + encodeURIComponent(username));
-                const userData = await usersRes.json();
-                
-                if (userData.error) {
-                    document.getElementById('quizzesContainer').innerHTML = '<p class="error">Could not load user data</p>';
-                    return;
-                }
-                
-                const userId = userData.id;
+                const username = "<?= $user['username']; ?>";    
+                const userId = "<?= $user['id']; ?>";
                 
                 const attemptsRes = await fetch('../API-Stuff/apithingie.php?action=getUserAttempts&user_id=' + userId);
                 const attempts = await attemptsRes.json();
