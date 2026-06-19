@@ -20,7 +20,7 @@ form.addEventListener('submit', event => {
     const quizData = {
         quizname: title,
         desc: description,
-        quizthumbnnail: imageUrl,
+        quizthumbnail: imageUrl,
         questions: []
     };
 

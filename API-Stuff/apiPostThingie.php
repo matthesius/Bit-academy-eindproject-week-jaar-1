@@ -2,7 +2,6 @@
 
 require_once '../DB.php';
 
-header("Content-Security-Policy: default-src 'self'; connect-src 'self' http://127.0.0.1:5500;");
 header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Content-Type: application/json');
@@ -35,7 +34,7 @@ class ApiPostThingie
 
         $title = trim($input['quizname'] ?? $input['title'] ?? '');
         $description = trim($input['desc'] ?? $input['description'] ?? '');
-        $imageUrl = trim($input['quizthumbnnail'] ?? $input['image_url'] ?? $input['quizThumbnail'] ?? '');
+        $imageUrl = trim($input['quizthumbnail'] ?? $input['image_url'] ?? $input['quizThumbnail'] ?? '');
 
         if ($title === '' || $description === '' || $imageUrl === '') {
             echo json_encode(["error" => "title, desc and image_url are required"]);
@@ -51,6 +50,12 @@ class ApiPostThingie
 }
 
 $api = new ApiPostThingie($pdo);
-$api->createQuiz();
+
+$action = $_GET['action'] ?? '';
+if ($action === 'createQuiz') {
+    $api->createQuiz();
+} else {
+    echo json_encode(["error" => "Onbekende actie"]);
+}
 
 //make a quiz = ../Api-Stuff/apiPostThingie.php?action=createQuiz
