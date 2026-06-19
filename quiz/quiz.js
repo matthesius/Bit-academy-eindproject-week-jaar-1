@@ -130,15 +130,15 @@ function renderquestions(quiz) {
             const table2 = constructTableTwo(quiz);
             console.log(JSON.stringify({ table1, table2 }));
 
-            fetch('../API-Stuff/apiPostThingie.php?action=createQuiz', {
+            fetch('../Api-Stuff/apiPostThingie.php?action=submitAttempt', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ table1, table2 })
-            });
+            })
         } else {
-            if (document.getElementById("errormessage")) {
+            if(document.getElementById("errormessage")) {
                 document.getElementById("errormessage").remove();
             }
             const errormessage = document.createElement("h2")
