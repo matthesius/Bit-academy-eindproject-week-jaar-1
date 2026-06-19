@@ -119,9 +119,8 @@ function renderquestions(quiz) {
 
 }
 
-function constructTableOne(userid, quiz, score, startedat) {
+function constructTableOne(quiz, score, startedat) {
     const table1 = {
-        user_id: userid,
         quiz_id: quiz.id,
         score: score,
         completed: true,
