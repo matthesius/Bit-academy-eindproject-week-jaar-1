@@ -132,16 +132,26 @@ function constructTableOne(quiz, score, startedat) {
 }
 
 function constructTableTwo(quiz) {
-    const table2 = {
-        attempt_id: "",
-        scores: [],
-        //question_id: "",//
-        //option_id: "",//
-        //is_correct: ""//
-    };
+    const table2 = [];
 
     for (let i = 0; i < quiz.questions.length; i++) {
-        
+        let questionid = quiz.questions[i].id;
+
+        let optionid = quiz.questions[i];
+        for (let j = 0; j < quiz.questions[i].options.length; j++) {
+            if (document.getElementById(`option${i}-${j}`).checked == true) {
+                optionid = quiz.questions[i].options[j].id
+            }
+        }
+
+        let iscorrect = false;
+        for (let j = 0; j < quiz.questions[i].options.length; j++) {
+            if (document.getElementById(`option${i}-${j}`).checked == true && quiz.questions[i].options[j].is_correct == true) {
+                iscorrect = true;
+            }
+        }
+
+        table2.scores.push({question_id: questionid, option_id: optionid, is_correct: iscorrect});
     }
 }
 
