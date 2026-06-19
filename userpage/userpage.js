@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Add animation keyframes
 const style = document.createElement('style');
 style.textContent = `
     @keyframes fadeInUp {
@@ -24,3 +23,5 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+

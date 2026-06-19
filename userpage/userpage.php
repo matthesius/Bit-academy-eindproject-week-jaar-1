@@ -10,8 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile - Trivial</title>
     <link rel="stylesheet" href="userpage.css">
-    <link rel="icon" type="image/png" href="../favicon/web-app-manifest-192x192.png" />
-    <!-- to do: verander deze kut slop favicon AUB -->
 </head>
 <body>
 
@@ -38,42 +36,83 @@
         </section>
 
         <section class="stats-overview">
-            <div class="stat-card">
-                <h3><?php echo count($quizScores); ?></h3>
-                <p>Quizzes Completed</p>
-            </div>
-            <?php if (!empty($quizScores)) : ?>
-                <div class="stat-card">
-                    <h3><?php 
-                        $avgScore = array_sum(array_column($quizScores, 'percentage')) / count($quizScores);
-                        echo round($avgScore, 1) . '%';
-                    ?></h3>
-                    <p>Average Score</p>
-                </div>
-            <?php endif; ?>
+
         </section>
 
-        <section class="quiz-scores">
-            <h2>Quiz Scores</h2>
-            <?php if (!empty($quizScores)) : ?>
-                <div class="scores-list">
-                    <?php foreach ($quizScores as $score) : ?>
-                        <div class="score-item">
-                            <div class="quiz-name"><?php echo htmlspecialchars($score['quiz_title']); ?></div>
-                            <div class="score-details">
-                                <span class="score"><?php echo $score['score']; ?>/<?php echo $score['total_questions']; ?></span>
-                                <span class="percentage"><?php echo $score['percentage']; ?>%</span>
-                                <span class="date"><?php echo date('M d, Y', strtotime($score['completed_at'])); ?></span>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            <?php else : ?>
-                <p class="no-scores">You haven't completed any quizzes yet. <a href="../overview/index.php">Start a quiz!</a></p>
-            <?php endif; ?>
+        <section class="quizzes-completed">
+            <h2>Quizzes Completed</h2>
+            <div id="quizzesContainer" class="quizzes-list">
+                <p class="loading">Loading quizzes...</p>
+            </div>
         </section>
 
     </main>
 
-</body>
-</html>
+    <script>
+        async function loadUserQuizzes() {
+            try {
+                const username = "<?= $user['username']; ?>";
+                
+                const usersRes = await fetch('../API-Stuff/apithingie.php?action=getUsers&username=' + encodeURIComponent(username));
+                const userData = await usersRes.json();
+                
+                if (userData.error) {
+                    document.getElementById('quizzesContainer').innerHTML = '<p class="error">Could not load user data</p>';
+                    return;
+                }
+                
+                const userId = userData.id;
+                
+                const attemptsRes = await fetch('../API-Stuff/apithingie.php?action=getUserAttempts&user_id=' + userId);
+                const attempts = await attemptsRes.json();
+                
+                if (attempts.error || attempts.length === 0) {
+                    document.getElementById('quizzesContainer').innerHTML = '<p class="no-quizzes">No quizzes completed yet. <a href="../overview/index.php">Start taking quizzes!</a></p>';
+                    return;
+                }
+                
+                let html = '';
+                attempts.forEach((attempt, index) => {
+                    const totalQuestions = attempt.answers ? attempt.answers.length : 0;
+                    const correctAnswers = attempt.score || 0;
+                    const percentage = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
+                    const completedDate = new Date(attempt.finished_at).toLocaleDateString();
+                    
+                    html += `
+                        <div class="quiz-card">
+                            <div class="quiz-header">
+                                <h3>${escapeHtml(attempt.quiz_title)}</h3>
+                                <span class="date">${completedDate}</span>
+                            </div>
+                            <div class="quiz-stats">
+                                <div class="stat">
+                                    <span class="label">Score</span>
+                                    <span class="value">${correctAnswers}/${totalQuestions}</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="label">Percentage</span>
+                                    <span class="value">${percentage}%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: ${percentage}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                document.getElementById('quizzesContainer').innerHTML = html;
+            } catch (error) {
+                console.error('Failed to load quizzes:', error);
+                document.getElementById('quizzesContainer').innerHTML = '<p class="error">Failed to load quizzes</p>';
+            }
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        loadUserQuizzes();
+    </script>
