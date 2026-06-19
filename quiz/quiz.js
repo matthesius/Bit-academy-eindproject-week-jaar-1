@@ -111,9 +111,9 @@ function renderquestions(quiz) {
         resultspage.appendChild(time);
         resultspage.appendChild(buttondiv);
         buttondiv.appendChild(homepage);
-        buttondiv.appendChild(overview);
-
-        constructTableOne(undefined, quiz, points, starttime);
+        
+        constructTableOne(quiz, points, starttime);
+        constructTableTwo(quiz);
     });
     document.body.appendChild(submit);
 
@@ -137,10 +137,11 @@ function constructTableTwo(quiz) {
     for (let i = 0; i < quiz.questions.length; i++) {
         let questionid = quiz.questions[i].id;
 
-        let optionid = quiz.questions[i];
+        let optionid = "Unanswered";
         for (let j = 0; j < quiz.questions[i].options.length; j++) {
             if (document.getElementById(`option${i}-${j}`).checked == true) {
                 optionid = quiz.questions[i].options[j].id
+                
             }
         }
 
@@ -151,10 +152,9 @@ function constructTableTwo(quiz) {
             }
         }
 
-        table2.scores.push({question_id: questionid, option_id: optionid, is_correct: iscorrect});
+        table2.push({question_id: questionid, option_id: optionid, is_correct: iscorrect});
     }
+    console.log(table2);
 }
-
-console.log(document.querySelectorAll("input"));
 
 getquizinfo();
