@@ -182,9 +182,9 @@ form.addEventListener('submit', event => {
 
     fetch('../API-Stuff/apiPostThingie.php?action=createQuiz', {
         method: 'POST',
-        headers: {
+       headers: {
             'Content-Type': 'application/json'
-        },
+        }, 
         body: JSON.stringify(quizData)
     })
     .then(response => response.json())
