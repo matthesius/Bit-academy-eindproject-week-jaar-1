@@ -16,12 +16,50 @@ function shuffleArray(array) {
 }
 
 function renderquestions(quiz) {
+    function updateProgress() {
+        let answered = 0;
+
+        for (let i = 0; i < quiz.questions.length; i++) {
+            const selected = document.querySelector(
+                `input[name="answers${i}"]:checked`
+            );
+
+            if (selected) {
+                answered++;
+            }
+        }
+
+        progressBar.value = answered;
+        progressLabel.textContent =
+            `${answered} / ${quiz.questions.length} answered`;
+
+        const percent = (answered / quiz.questions.length) * 100;
+        progressFill.style.width = `${percent}%`;
+    }
+
     const starttime = Temporal.Now.zonedDateTimeISO();
     for (const question of quiz.questions) {
         shuffleArray(question.options);
     }
 
     const maindiv = document.getElementById("questions");
+
+    // Progress Bar 💯💯😂🤖🤖
+    const progressContainer = document.createElement("div");
+
+    const progressLabel = document.createElement("p");
+    progressLabel.id = "progressLabel";
+    progressLabel.textContent = `0 / ${quiz.questions.length} answered`;
+
+    const progressBar = document.createElement("progress");
+    progressBar.id = "progressBar";
+    progressBar.max = quiz.questions.length;
+    progressBar.value = 0;
+
+    progressContainer.appendChild(progressLabel);
+    progressContainer.appendChild(progressBar);
+
+    document.body.insertBefore(progressContainer, maindiv);
 
     const quiztitle = document.createElement("h1");
     quiztitle.textContent = quiz.title;
@@ -54,6 +92,7 @@ function renderquestions(quiz) {
             select.type = "radio";
             select.name = `answers${i}`;
             select.id = `option${i}-${j}`;
+            select.addEventListener("change", updateProgress);
 
             answer.textContent = quiz.questions[i].options[j].option_text;
             answer.for = `option${j}`;
@@ -104,8 +143,8 @@ function renderquestions(quiz) {
         overview.href = "../overview/index.html";
         overview.textContent = "To Overview";
 
-        
-        
+
+
         resultspage.appendChild(count);
         resultspage.appendChild(percentage);
         resultspage.appendChild(time);
@@ -129,7 +168,7 @@ function constructTableOne(userid, quiz, score, startedat) {
         finished_at: Temporal.Now.zonedDateTimeISO()
     };
 
-    console.log(table1); 
+    console.log(table1);
 }
 
 function constructTableTwo(quiz) {
@@ -142,7 +181,7 @@ function constructTableTwo(quiz) {
     };
 
     for (let i = 0; i < quiz.questions.length; i++) {
-        
+
     }
 }
 
