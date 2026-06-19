@@ -138,7 +138,7 @@ function renderquestions(quiz) {
                 body: JSON.stringify({ table1, table2 })
             })
         } else {
-            if(document.getElementById("errormessage")) {
+            if (document.getElementById("errormessage")) {
                 document.getElementById("errormessage").remove();
             }
             const errormessage = document.createElement("h2")
@@ -155,8 +155,8 @@ function constructTableOne(quiz, score, startedat) {
         quiz_id: quiz.id,
         score: score,
         completed: true,
-        started_at: startedat,
-        finished_at: Temporal.Now.zonedDateTimeISO()
+        started_at: startedat.toString().split('[')[0],  // verwijdert de timezone naam
+        finished_at: Temporal.Now.zonedDateTimeISO().toString().split('[')[0]
     };
     return table1;
 }
