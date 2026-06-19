@@ -41,6 +41,10 @@ function createQuestionItem(index) {
             <button type="button" class="remove-question">Verwijder vraag</button>
         </div>
         <textarea id="question-${index}" name="questionText" rows="3" placeholder="Typ hier de vraag" required></textarea>
+        <div class="form-row">
+            <label for="question-image-${index}">Afbeelding URL (optioneel)</label>
+            <input type="url" id="question-image-${index}" name="questionImage" placeholder="https://...jpg">
+        </div>
         <div class="options-section">
             <div class="options-header">
                 <span>Antwoorden</span>
@@ -132,6 +136,7 @@ form.addEventListener('submit', event => {
 
     const questions = Array.from(questionItems).map((item, index) => {
         const questionText = item.querySelector('textarea[name="questionText"]').value.trim();
+        const questionImage = item.querySelector('input[name="questionImage"]')?.value.trim() || '';
         const optionItems = item.querySelectorAll('.option-item');
         const options = Array.from(optionItems).map(optionItem => ({
             option_text: optionItem.querySelector('input[name="optionText"]').value.trim(),
@@ -140,6 +145,7 @@ form.addEventListener('submit', event => {
 
         return {
             question_text: questionText,
+            question_image: questionImage,
             position: index + 1,
             options
         };

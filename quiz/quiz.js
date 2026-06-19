@@ -130,13 +130,24 @@ function renderquestions(quiz) {
             const table2 = constructTableTwo(quiz);
             console.log(JSON.stringify({ table1, table2 }));
 
-            fetch('../Api-Stuff/apiPostThingie.php?action=submitAttempt', {
+            fetch('../API-Stuff/apiPostThingie.php?action=submitAttempt', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ table1, table2 })
             })
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Server response:", data);
+
+                    if (data.error) {
+                        alert(data.error);
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                })
         } else {
             if (document.getElementById("errormessage")) {
                 document.getElementById("errormessage").remove();
