@@ -8,47 +8,6 @@ body {
 
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 10%;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
-}
-
-.logo {
-    font-size: 1.9rem;
-    font-weight: bold;
-}
-
-.nav-links {
-    display: flex;
-    gap: 20px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #4f46e5, #6366f1);
-    font-weight: 600;
-    font-size: 0.95rem;
-
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease; /* dit werkt trouwens niet denk ik maar whatever */
-}
-
-.nav-links a:hover {
-    transform: translateY(3px); /* sick ass animation */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(135deg, #423bbf, #5456c9);
-}
 .hero {
     text-align: center;
     padding: 120px 20px;
