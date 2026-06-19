@@ -1,6 +1,5 @@
 <?php
     require 'userpage_backend.php';
-    require '../navbar.php';
 ?>
 
 <!DOCTYPE html>
@@ -9,9 +8,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile - Trivial</title>
+    <link rel="stylesheet" href="../navbar.css">
     <link rel="stylesheet" href="userpage.css">
 </head>
 <body>
+
+    <?php
+        require '../navbar.php';
+    ?>
 
     <header class="hero">
         <h1>My Profile</h1>
