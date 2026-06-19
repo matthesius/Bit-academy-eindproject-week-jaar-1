@@ -101,7 +101,7 @@ function renderquestions(quiz) {
         time.textContent = `Time: ${10}`;
         homepage.href = "../HomePage/homepage.php";
         homepage.textContent = "To Homepage";
-        overview.href = "../overview/index.html";
+        overview.href = "../overview/index.php";
         overview.textContent = "To Overview";
 
         
@@ -111,9 +111,9 @@ function renderquestions(quiz) {
         resultspage.appendChild(time);
         resultspage.appendChild(buttondiv);
         buttondiv.appendChild(homepage);
-        buttondiv.appendChild(overview);
-
-        constructTableOne(undefined, quiz, points, starttime);
+        
+        constructTableOne(quiz, points, starttime);
+        constructTableTwo(quiz);
     });
     document.body.appendChild(submit);
 
@@ -132,19 +132,29 @@ function constructTableOne(quiz, score, startedat) {
 }
 
 function constructTableTwo(quiz) {
-    const table2 = {
-        attempt_id: "",
-        scores: [],
-        //question_id: "",//
-        //option_id: "",//
-        //is_correct: ""//
-    };
+    const table2 = [];
 
     for (let i = 0; i < quiz.questions.length; i++) {
-        
-    }
-}
+        let questionid = quiz.questions[i].id;
 
-console.log(document.querySelectorAll("input"));
+        let optionid = "Unanswered";
+        for (let j = 0; j < quiz.questions[i].options.length; j++) {
+            if (document.getElementById(`option${i}-${j}`).checked == true) {
+                optionid = quiz.questions[i].options[j].id
+                
+            }
+        }
+
+        let iscorrect = false;
+        for (let j = 0; j < quiz.questions[i].options.length; j++) {
+            if (document.getElementById(`option${i}-${j}`).checked == true && quiz.questions[i].options[j].is_correct == true) {
+                iscorrect = true;
+            }
+        }
+
+        table2.push({question_id: questionid, option_id: optionid, is_correct: iscorrect});
+    }
+    console.log(table2);
+}
 
 getquizinfo();
