@@ -1,0 +1,61 @@
+﻿const form = document.getElementById('quizForm');
+const titleInput = document.getElementById('quizTitle');
+const descInput = document.getElementById('quizDescription');
+const imageInput = document.getElementById('quizImage');
+const formError = document.getElementById('formError');
+
+form.addEventListener('submit', event => {
+    event.preventDefault();
+    formError.textContent = '';
+
+    const title = titleInput.value.trim();
+    const description = descInput.value.trim();
+    const imageUrl = imageInput.value.trim();
+
+    if (!title || !description || !imageUrl) {
+        formError.textContent = 'Vul eerst alle velden in.';
+        return;
+    }
+
+    const quizData = {
+        quizname: title,
+        desc: description,
+        quizthumbnnail: imageUrl,
+        questions: []
+    };
+
+    fetch('../API-Stuff/apithingie.php?action=createQuiz', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(quizData)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.error) {
+            formError.textContent = 'API-fout: ' + result.error;
+            return;
+        }
+
+        formError.textContent = 'Quiz succesvol verzonden naar API.';
+        form.reset();
+    })
+    .catch(error => {
+        formError.textContent = 'Fout bij verzenden naar API.';
+        console.error(error);
+    });
+});
+    if (!jsonResult.value.trim()) {
+        formError.textContent = 'Maak eerst de JSON voordat je kopieert.';
+        return;
+    }
+
+    navigator.clipboard.writeText(jsonResult.value)
+        .then(() => {
+            formError.textContent = 'JSON gekopieerd naar klembord!';
+        })
+        .catch(() => {
+            formError.textContent = 'Kopiëren is mislukt. Kopieer handmatig.';
+        });
+});
