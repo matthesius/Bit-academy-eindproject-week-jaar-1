@@ -3,7 +3,7 @@
 
     <div class="nav-links">
         <a href="../HomePage/homepage.php">Home</a>
-        <a href="../overview/index.php">Quizzen maken</a>
+        <a href="../overview/index.php">Answer quizzes</a>
         <a href="../Leaderboard/leaderboard.php">Leaderboard</a>
         <a href="../quizcreator/quizcreator.php">Quiz Creator</a>
 
