@@ -157,6 +157,44 @@ function renderquestions(quiz) {
             errormessage.textContent = "Please Answer all questions";
             document.body.appendChild(errormessage);
         }
+<<<<<<< HEAD
+        const resultspage = document.getElementById("resultsmodal");
+        document.getElementById("outermodal").style.display = "block";
+
+        const count = document.createElement("p");
+        const percentage = document.createElement("p");
+        const time = document.createElement("p");
+        const homepage = document.createElement("a");
+        const overview = document.createElement("a");
+        const buttondiv = document.createElement("div");
+
+        count.id = "count";
+        percentage.id = "percentage";
+        time.id = "time";
+        homepage.id = "homepage";
+        overview.id = "overview";
+        buttondiv.id = "buttondiv";
+
+        count.textContent = `${points} / ${quiz.questions.length} Correct`;
+        percentage.textContent = `${(points / quiz.questions.length) * 100}%`;
+        time.textContent = `Time: ${10}`;
+        homepage.href = "../HomePage/homepage.php";
+        homepage.textContent = "To Homepage";
+        overview.href = "../overview/index.html";
+        overview.textContent = "To Overview";
+
+
+
+        resultspage.appendChild(count);
+        resultspage.appendChild(percentage);
+        resultspage.appendChild(time);
+        resultspage.appendChild(buttondiv);
+        buttondiv.appendChild(homepage);
+        buttondiv.appendChild(overview);
+
+        constructTableOne(undefined, quiz, points, starttime);
+=======
+>>>>>>> 69a362052a8804854952b4aadeb9ea5db4ebe686
     });
     document.body.appendChild(submit);
 }
@@ -176,6 +214,10 @@ function constructTableTwo(quiz) {
     const table2 = [];
 
     for (let i = 0; i < quiz.questions.length; i++) {
+<<<<<<< HEAD
+
+=======
+>>>>>>> 69a362052a8804854952b4aadeb9ea5db4ebe686
         let questionid = quiz.questions[i].id;
 
         let optionid = undefined;
