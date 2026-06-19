@@ -171,7 +171,6 @@ function renderquestions(quiz) {
             errormessage.style.fontWeight = "bold";
             document.body.appendChild(errormessage);
         }
-<<<<<<< HEAD
         const resultspage = document.getElementById("resultsmodal");
         document.getElementById("outermodal").style.display = "block";
 
@@ -207,8 +206,6 @@ function renderquestions(quiz) {
         buttondiv.appendChild(overview);
 
         constructTableOne(undefined, quiz, points, starttime);
-=======
->>>>>>> 1f5ce6121d49837b6308a8d64f8268b9abc58881
     });
     document.body.appendChild(submit);
 }
@@ -229,9 +226,7 @@ function constructTableTwo(quiz) {
     const table2 = [];
 
     for (let i = 0; i < quiz.questions.length; i++) {
-<<<<<<< HEAD
 
-=======
         let questionid = quiz.questions[i].id;
 
         let optionid = undefined;
@@ -243,7 +238,6 @@ function constructTableTwo(quiz) {
         }
 
         table2.push({ question_id: questionid, option_id: optionid });
->>>>>>> 1f5ce6121d49837b6308a8d64f8268b9abc58881
     }
     console.log(table2);
 }
