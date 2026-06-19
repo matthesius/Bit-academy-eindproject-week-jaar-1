@@ -24,7 +24,7 @@ form.addEventListener('submit', event => {
         questions: []
     };
 
-    fetch('../API-Stuff/apithingie.php?action=createQuiz', {
+    fetch('../API-Stuff/apiPostThingie.php?action=createQuiz', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -46,16 +46,4 @@ form.addEventListener('submit', event => {
         console.error(error);
     });
 });
-    if (!jsonResult.value.trim()) {
-        formError.textContent = 'Maak eerst de JSON voordat je kopieert.';
-        return;
-    }
-
-    navigator.clipboard.writeText(jsonResult.value)
-        .then(() => {
-            formError.textContent = 'JSON gekopieerd naar klembord!';
-        })
-        .catch(() => {
-            formError.textContent = 'Kopiëren is mislukt. Kopieer handmatig.';
-        });
-});
+// End of submit handler
