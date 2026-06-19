@@ -1,3 +1,7 @@
+<?php
+    require 'homepage_backend.php';
+?>
+
 <!DOCTYPE html>
 <html lang="nl">
 
@@ -25,12 +29,12 @@
 
     <section class="stats">
         <div class="stat-card">
-            <h2 id="quizCount">69</h2>
+            <h2 id="quizCount"><?= $quiz['quiz_count'] ?></h2>
             <p>Quizzes</p>
         </div>
 
         <div class="stat-card">
-            <h2 id="questionCount">1787</h2>
+            <h2 id="questionCount"><?= $quiz['question_count'] ?></h2>
             <p>Questions</p>
         </div>
     </section>
