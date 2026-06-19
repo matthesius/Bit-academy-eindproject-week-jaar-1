@@ -99,7 +99,13 @@ function formatSeconds(value) {
     if (value === null || value === undefined || value === '-') {
         return '-';
     }
-    return Number(value).toFixed(2);
+
+    const num = Number(value);
+    if (Number.isNaN(num)) {
+        return '-';
+    }
+
+    return num.toFixed(2);
 }
 
 function escapeHtml(text) {

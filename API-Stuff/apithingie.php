@@ -105,9 +105,16 @@ class ApiThingie
 
         $stmt = $this->pdo->prepare("
             SELECT * FROM (
-                SELECT DISTINCT ON (a.user_id) u.username, a.score, a.finished_at
+                SELECT DISTINCT ON (a.user_id)
+                    u.username,
+                    a.score,
+                    a.started_at,
+                    a.finished_at,
+                    COUNT(q.id) OVER (PARTITION BY a.quiz_id) AS question_count,
+                    EXTRACT(EPOCH FROM (a.finished_at - a.started_at)) / NULLIF(COUNT(q.id) OVER (PARTITION BY a.quiz_id), 0) AS seconds_per_question
                 FROM attempts a
                 JOIN users u ON u.id = a.user_id
+                JOIN questions q ON q.quiz_id = a.quiz_id
                 WHERE a.quiz_id = ? AND a.completed = TRUE
                 ORDER BY a.user_id, a.score DESC
             ) ranked
