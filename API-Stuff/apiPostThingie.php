@@ -101,6 +101,80 @@ class ApiPostThingie
             echo json_encode(["error" => $e->getMessage()]);
         }
     }
+
+    public function submitAttempt()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode(["error" => "POST required"]);
+            return;
+        }
+
+        $input = json_decode(file_get_contents('php://input'), true);
+        if (!is_array($input)) {
+            echo json_encode(["error" => "Invalid JSON"]);
+            return;
+        }
+
+        $attempt = $input['table1'] ?? null;
+        $answers = $input['table2'] ?? null;
+
+        if (!$attempt || !is_array($answers) || count($answers) === 0) {
+            echo json_encode(["error" => "table1 en table2 zijn verplicht"]);
+            return;
+        }
+
+        $quizId     = $attempt['quiz_id']     ?? null;
+        $score      = $attempt['score']       ?? null;
+        $completed  = $attempt['completed']   ?? false;
+        $startedAt  = $attempt['started_at']  ?? null;
+        $finishedAt = $attempt['finished_at'] ?? null;
+
+        if ($quizId === null || $score === null || $startedAt === null || $finishedAt === null) {
+            echo json_encode(["error" => "quiz_id, score, started_at en finished_at zijn verplicht"]);
+            return;
+        }
+
+        try {
+            $this->pdo->beginTransaction();
+
+            $stmt = $this->pdo->prepare("
+            INSERT INTO attempts (quiz_id, score, completed, started_at, finished_at)
+            VALUES (?, ?, ?, ?, ?)
+            RETURNING id, quiz_id, score, completed, started_at, finished_at
+        ");
+            $stmt->execute([
+                $quizId,
+                $score,
+                $completed ? 'true' : 'false',
+                $startedAt,
+                $finishedAt
+            ]);
+            $createdAttempt = $stmt->fetch(PDO::FETCH_ASSOC);
+            $attemptId = $createdAttempt['id'];
+
+            $stmtAnswer = $this->pdo->prepare("
+            INSERT INTO attempt_answers (attempt_id, question_id, option_id)
+            VALUES (?, ?, ?)
+        ");
+
+            foreach ($answers as $answer) {
+                $questionId = $answer['question_id'] ?? null;
+                $optionId   = $answer['option_id']   ?? null;
+
+                if ($questionId === null || $optionId === null) {
+                    throw new Exception('Elk antwoord heeft een question_id en option_id nodig.');
+                }
+
+                $stmtAnswer->execute([$attemptId, $questionId, $optionId]);
+            }
+
+            $this->pdo->commit();
+            echo json_encode(["success" => true, "attempt" => $createdAttempt]);
+        } catch (Exception $e) {
+            $this->pdo->rollBack();
+            echo json_encode(["error" => $e->getMessage()]);
+        }
+    }
 }
 
 $api = new ApiPostThingie($pdo);
@@ -108,8 +182,11 @@ $api = new ApiPostThingie($pdo);
 $action = $_GET['action'] ?? '';
 if ($action === 'createQuiz') {
     $api->createQuiz();
+} elseif ($action === 'submitAttempt') {
+    $api->submitAttempt();
 } else {
     echo json_encode(["error" => "Onbekende actie"]);
 }
 
 //make a quiz = ../Api-Stuff/apiPostThingie.php?action=createQuiz
+//submit an attempt = ../Api-Stuff/apiPostThingie.php?action=submitAttempt
