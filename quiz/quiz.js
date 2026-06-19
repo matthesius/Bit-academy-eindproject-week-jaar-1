@@ -138,7 +138,7 @@ function renderquestions(quiz) {
                 body: JSON.stringify({ table1, table2 })
             })
         } else {
-            if(document.getElementById("errormessage")) {
+            if  (document.getElementById("errormessage")) {
                 document.getElementById("errormessage").remove();
             }
             const errormessage = document.createElement("h2")
