@@ -44,7 +44,14 @@
         </section>
 
         <section class="quizzes-completed">
-            <h2>Quizzes Completed</h2>
+            <div class="quizzes-header">
+                <h2>Quizzes Completed</h2>
+                <div class="filter-controls">
+                    <select id="quizFilter" class="filter-select">
+                        <option value="">All Quizzes</option>
+                    </select>
+                </div>
+            </div>
             <div id="quizzesContainer" class="quizzes-list">
                 <p class="loading">Loading quizzes...</p>
             </div>
@@ -53,6 +60,98 @@
     </main>
 
     <script>
+        let allAttempts = [];
+        
+        function formatDuration(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            
+            if (hours > 0) {
+                return `${hours}h ${minutes}m ${secs}s`;
+            } else if (minutes > 0) {
+                return `${minutes}m ${secs}s`;
+            } else {
+                return `${secs}s`;
+            }
+        }
+
+        function calculateTimeTaken(startedAt, finishedAt) {
+            if (!finishedAt) return 'In Progress';
+            const start = new Date(startedAt);
+            const finish = new Date(finishedAt);
+            const durationSeconds = Math.floor((finish - start) / 1000);
+            return formatDuration(durationSeconds);
+        }
+
+        function renderQuizzes(filteredAttempts) {
+            if (filteredAttempts.length === 0) {
+                document.getElementById('quizzesContainer').innerHTML = '<p class="no-quizzes">No quizzes completed yet. <a href="../overview/index.php">Start taking quizzes!</a></p>';
+                return;
+            }
+            
+            let html = '';
+            filteredAttempts.forEach((attempt, index) => {
+                const totalQuestions = attempt.answers ? attempt.answers.length : 0;
+                const correctAnswers = attempt.score || 0;
+                const percentage = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
+                const completedDate = new Date(attempt.finished_at).toLocaleDateString();
+                const timeTaken = calculateTimeTaken(attempt.started_at, attempt.finished_at);
+                
+                html += `
+                    <div class="quiz-card">
+                        <div class="quiz-header">
+                            <h3>${escapeHtml(attempt.quiz_title)}</h3>
+                            <span class="date">${completedDate}</span>
+                        </div>
+                        <div class="quiz-stats">
+                            <div class="stat">
+                                <span class="label">Score</span>
+                                <span class="value">${correctAnswers}/${totalQuestions}</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">Percentage</span>
+                                <span class="value">${percentage}%</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">Time Taken</span>
+                                <span class="value time-value">${timeTaken}</span>
+                            </div>
+                        </div>
+                        <div class="progress-section">
+                            <span class="progress-label">Score Progress</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: ${percentage}%">
+                                    <span class="progress-text">${percentage}%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('quizzesContainer').innerHTML = html;
+        }
+
+        function populateFilterOptions() {
+            const quizzes = [...new Set(allAttempts.map(a => a.quiz_title))];
+            const select = document.getElementById('quizFilter');
+            
+            quizzes.forEach(quiz => {
+                const option = document.createElement('option');
+                option.value = quiz;
+                option.textContent = escapeHtml(quiz);
+                select.appendChild(option);
+            });
+            
+            select.addEventListener('change', function() {
+                const filtered = this.value 
+                    ? allAttempts.filter(a => a.quiz_title === this.value)
+                    : allAttempts;
+                renderQuizzes(filtered);
+            });
+        }
+
         async function loadUserQuizzes() {
             try {
                 const username = "<?= $user['username']; ?>";    
@@ -66,37 +165,9 @@
                     return;
                 }
                 
-                let html = '';
-                attempts.forEach((attempt, index) => {
-                    const totalQuestions = attempt.answers ? attempt.answers.length : 0;
-                    const correctAnswers = attempt.score || 0;
-                    const percentage = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
-                    const completedDate = new Date(attempt.finished_at).toLocaleDateString();
-                    
-                    html += `
-                        <div class="quiz-card">
-                            <div class="quiz-header">
-                                <h3>${escapeHtml(attempt.quiz_title)}</h3>
-                                <span class="date">${completedDate}</span>
-                            </div>
-                            <div class="quiz-stats">
-                                <div class="stat">
-                                    <span class="label">Score</span>
-                                    <span class="value">${correctAnswers}/${totalQuestions}</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="label">Percentage</span>
-                                    <span class="value">${percentage}%</span>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress" style="width: ${percentage}%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-                
-                document.getElementById('quizzesContainer').innerHTML = html;
+                allAttempts = attempts;
+                populateFilterOptions();
+                renderQuizzes(allAttempts);
             } catch (error) {
                 console.error('Failed to load quizzes:', error);
                 document.getElementById('quizzesContainer').innerHTML = '<p class="error">Failed to load quizzes</p>';
