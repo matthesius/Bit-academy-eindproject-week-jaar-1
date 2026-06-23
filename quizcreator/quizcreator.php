@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Creator</title>
     <link rel="stylesheet" href="quizcreator.css">
+    <link rel="stylesheet" href="../navbar.css">
 </head>
 <body>
     <main class="creator-page">
+        <?php
+            require '../navbar.php';
+        ?>
         <section class="creator-card">
             <h1>Quiz Creator</h1>
             <p class="subtitle">Vul de titel, beschrijving en afbeelding in. De gegevens worden omgezet naar een quiz.</p>
