@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿<?php
+    require '../LogInPage/login_check.php';
+?>
+
+<!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
