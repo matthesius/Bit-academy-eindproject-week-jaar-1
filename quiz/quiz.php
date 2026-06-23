@@ -1,3 +1,8 @@
+<?php
+
+    require '../LogInPage/login_check.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
