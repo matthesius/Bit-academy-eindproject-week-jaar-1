@@ -26,14 +26,25 @@ div#questions {
 }
 
 div[id^="questionid"] {
+    display: flex;
     width: 50vw;
     border-radius: 15px;
     flex-direction: column;
+    align-items: center;
     border: 3px gray solid;
     background-color: white;
     margin-bottom: 7.5px;
     margin-top: 7.5px;
 
+}
+
+div.answerdiv {
+    width: 45%;
+    background-color: white;
+    border: 1px darkgray solid;
+    margin: 3px;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 button#submit {
@@ -66,9 +77,19 @@ p {
 }
 
 form {
+    background-color: lightgray;
     margin-left: 15px;
     margin-bottom: 15px;
     margin-top: 20px;
+    margin-right: 15px;
+    width: 90%;
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 img {
@@ -88,6 +109,10 @@ div[id^="titlediv"] {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+input {
+    margin-right: 10px;
 }
 
 div#outermodal {

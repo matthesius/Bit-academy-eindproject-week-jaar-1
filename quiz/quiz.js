@@ -58,12 +58,13 @@ function renderquestions(quiz) {
             const select = document.createElement("input");
             const answer = document.createElement("label");
 
+            answerdiv.setAttribute("class", "answerdiv");
             select.type = "radio";
             select.name = `answers${i}`;
             select.id = `option${i}-${j}`;
 
             answer.textContent = quiz.questions[i].options[j].option_text;
-            answer.for = `option${j}`;
+            answer.setAttribute("for", `option${i}-${j}`);
 
             form.appendChild(answerdiv);
             answerdiv.appendChild(select);
