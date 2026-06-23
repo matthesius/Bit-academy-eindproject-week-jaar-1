@@ -42,6 +42,7 @@
     <section class="featured">
         <h2>Popular Quizzes</h2>
         <div id="featuredContainer" class="featured-grid"></div>
+        <?php var_dump($quiz['top_quizzes']); ?>   <!-- geeft van de top 5 meest populaire quizzes de quiz_id -->
     </section>
 
     <section class="benefits">
