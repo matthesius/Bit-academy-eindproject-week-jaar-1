@@ -1,5 +1,4 @@
 const quizSelect = document.getElementById('quizFilter');
-const loadBtn = document.getElementById('loadLeaderboardBtn');
 const leaderboardRows = document.getElementById('leaderboardRows');
 const leaderboardEmpty = document.getElementById('leaderboardEmpty');
 const podiumFirst = document.getElementById('podiumFirst');
@@ -114,11 +113,11 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-loadBtn.addEventListener('click', async () => {
+quizSelect.addEventListener('change', async () => {
     const quizId = quizSelect.value;
     if (!quizId) {
         leaderboardEmpty.style.display = 'block';
-        leaderboardEmpty.textContent = 'Please select a quiz first.';
+        leaderboardEmpty.textContent = 'Choose a quiz and load the leaderboard.';
         return;
     }
 
