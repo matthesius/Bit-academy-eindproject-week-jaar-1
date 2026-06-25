@@ -1,7 +1,7 @@
 console.log(quizzes);
 const quizContainer = document.getElementById("featuredContainer");
 const array = 
-[quizzes.quiz_1, quizzes.quiz_2, quizzes.quiz_3, quizzes.quiz_4, quizzes.quiz_5];
+    [quizzes.quiz_1_id, quizzes.quiz_2_id, quizzes.quiz_3_id, quizzes.quiz_4_id, quizzes.quiz_5_id];
 
 async function renderPopQuizzes() {
     quizContainer.innerHTML = "";

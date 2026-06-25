@@ -26,7 +26,8 @@ $popular_quizzes = $stmt->fetchall();
 $index = 0;
 foreach ($popular_quizzes as $popular_quiz) {
     $index++;
-    $quiz['top_quizzes']["quiz_$index"] = $popular_quiz['quiz_id'];
+    $quiz['top_quizzes']["quiz_" . $index . "_id"] = $popular_quiz['quiz_id'];
+    $quiz['top_quizzes']["quiz_" . $index . "_attempts"] = $popular_quiz['attempts'];
 }
 
 ?>
