@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Overzicht</title>
+    <script defer src="../navbar.js"></script>
     <link rel="stylesheet" href="../navbar.css">
     <link href="style.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../favicon/web-app-manifest-192x192.png" />

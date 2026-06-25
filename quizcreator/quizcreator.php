@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Creator</title>
+    <script defer src="../navbar.js"></script>
     <link rel="stylesheet" href="quizcreator.css">
     <link rel="stylesheet" href="../navbar.css">
 </head>
