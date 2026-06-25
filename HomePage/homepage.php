@@ -1,5 +1,5 @@
 <?php
-    require 'homepage_backend.php';
+require 'homepage_backend.php';
 ?>
 
 <!DOCTYPE html>
@@ -12,13 +12,16 @@
     <link rel="stylesheet" href="../navbar.css">
     <link rel="stylesheet" href="homepage.css">
     <link rel="icon" type="image/png" href="../favicon/web-app-manifest-192x192.png" />
-    <!-- to do: verander deze kut slop favicon AUB -->
 </head>
+
+<script>
+    const quizzes = <?= json_encode($quiz['top_quizzes']) ?>;
+</script>
 
 <body>
 
     <?php
-        require '../navbar.php';
+    require '../navbar.php';
     ?>
 
     <section class="hero">
@@ -41,7 +44,8 @@
 
     <section class="featured">
         <h2>Popular Quizzes</h2>
-        <div id="featuredContainer" class="featured-grid"><?php var_dump(json_encode($quiz['top_quizzes'])); ?></div>   <!-- geeft van de top 5 meest populaire quizzes de quiz_id -->
+        <div id="featuredContainer" class="featured-grid">
+        </div>
     </section>
 
     <section class="benefits">
@@ -64,12 +68,13 @@
 
     <section class="cta">
         <h2>Ready for a challenge?</h2>
-        <a href="/Bit-academy-project-week-1/overview/index.php" class="hero-btn">See all of our Quizzes </a>
+        <a href="../overview/index.php" class="hero-btn">See all of our Quizzes </a>
     </section>
 
     <footer>
         © 2026 Trivial
     </footer>
+    <script defer src="homepage.js"></script>
 </body>
 
 </html>
