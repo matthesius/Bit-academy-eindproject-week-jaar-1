@@ -31,10 +31,6 @@
                 <select id="quizFilter">
                     <option value="">Loading quizzes...</option>
                 </select>
-
-                <button class="filter-btn" id="loadLeaderboardBtn">
-                    Load Leaderboard
-                </button>
             </div>
         </section>
 
