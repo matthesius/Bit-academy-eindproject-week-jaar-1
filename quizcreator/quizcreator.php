@@ -1,9 +1,10 @@
 ﻿<?php
-    require '../LogInPage/login_check.php';
+require '../LogInPage/login_check.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,11 +13,15 @@
     <link rel="stylesheet" href="quizcreator.css">
     <link rel="stylesheet" href="../navbar.css">
 </head>
+
 <body>
+    <?php
+    require '../navbar.php';
+    ?>
+
+
+
     <main class="creator-page">
-        <?php
-            require '../navbar.php';
-        ?>
         <section class="creator-card">
             <h1>Quiz Creator</h1>
             <p class="subtitle">Vul de titel, beschrijving en afbeelding in. De gegevens worden omgezet naar een quiz.</p>
@@ -55,4 +60,5 @@
 
     <script src="quizcreator.js"></script>
 </body>
+
 </html>

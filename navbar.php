@@ -42,5 +42,3 @@
         <button id="closenavmodal">X</button>
     </div>
 </div>
-
-<nav style="position: static;"></nav>

@@ -4,19 +4,23 @@
 
 body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     background: linear-gradient(135deg, #5b6ddb 0%, #7e4cc8 100%);
     color: #1f2937;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding-top: 82px;
 }
 
 .creator-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     max-width: 840px;
+    margin-top: 80px;
 }
 
 .creator-card {
