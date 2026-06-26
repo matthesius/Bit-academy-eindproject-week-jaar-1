@@ -43,8 +43,8 @@ require 'homepage_backend.php';
         </div>
     </section>
 
+    <h2 id="poptitle">Popular Quizzes</h2>
     <section class="featured">
-        <h2>Popular Quizzes</h2>
         <div id="featuredContainer" class="featured-grid">
         </div>
     </section>
