@@ -38,13 +38,22 @@ div[id^="questionid"] {
 
 }
 
-div.answerdiv {
+label.answerdiv {
     width: 45%;
     background-color: white;
     border: 1px darkgray solid;
     margin: 3px;
     padding: 5px;
     border-radius: 5px;
+}
+
+label.answerdiv:hover {
+    background-image: linear-gradient(to right, #4f46e5,#7c3aed);
+}
+
+label.answerdiv:hover > label {
+    color: white;
+    font-weight: bold;
 }
 
 button#submit {
@@ -181,4 +190,12 @@ a#homepage, a#overview {
 #errormessage {
     color: white;
     font-weight: bold;
+    position: fixed;
+    padding: 15px;
+    background-image: linear-gradient(to right, #4f46e5,#7c3aed);
+    border: white solid 3px;
+    border-radius: 5px;
+    position: fixed;
+    margin-top: 15px;
+    opacity: 80%;
 }

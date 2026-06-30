@@ -28,8 +28,8 @@ function renderquestions(quiz) {
     quiztitle.textContent = quiz.title;
     progress.max = "100";
     progress.value = "0";
-    document.body.prepend(progress);
-    document.body.prepend(quiztitle);
+    document.body.insertBefore(quiztitle, document.getElementById("questions"));
+    document.body.insertBefore(progress, document.getElementById("questions"));
 
     for (let i = 0; i < quiz.questions.length; i++) {
         const questiondiv = document.createElement("div");
@@ -54,11 +54,12 @@ function renderquestions(quiz) {
 
 
         for (let j = 0; j < quiz.questions[i].options.length; j++) {
-            const answerdiv = document.createElement("div");
+            const answerdiv = document.createElement("label");
             const select = document.createElement("input");
             const answer = document.createElement("label");
 
             answerdiv.setAttribute("class", "answerdiv");
+            answerdiv.setAttribute("for", `option${i}-${j}`);
             select.type = "radio";
             select.name = `answers${i}`;
             select.id = `option${i}-${j}`;
@@ -84,6 +85,7 @@ function renderquestions(quiz) {
                 }
             }
         }
+
         if (answers == quiz.questions.length) {
             let points = 0;
             document.getElementById("resultsmodal").style.display = "block";
@@ -150,13 +152,16 @@ function renderquestions(quiz) {
                     console.error(err);
                 })
         } else {
-            if (document.getElementById("errormessage")) {
-                document.getElementById("errormessage").remove();
+            const message = document.getElementById("errormessage")
+            if (message.style.display = "block") {
+                message.style.display = "none";
             }
-            const errormessage = document.createElement("h2")
-            errormessage.id = "errormessage";
-            errormessage.textContent = "Please Answer all questions";
-            document.body.appendChild(errormessage);
+
+            message.style.display = "block";
+
+            const errortimeout = setTimeout(() => {
+                message.style.display = "none";
+            }, 3000);
         }
     });
     document.body.appendChild(submit);
