@@ -5,8 +5,6 @@ html {
 body {
     font-family: 'Courier New', Courier, monospace;
     margin: 0;
-    padding-top: 82px;
-
 }
 
 .hero {
@@ -60,9 +58,12 @@ body {
 
 .featured {
     padding: 80px 10%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.featured h2 {
+#poptitle {
     text-align: center;
     margin-bottom: 40px;
 }
@@ -170,10 +171,13 @@ footer {
 
 .quiz-content {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .quiz-content h2 {
-    margin-bottom: 10px;
+    margin: 0;
 }
 
 .quiz-info {
@@ -182,7 +186,6 @@ footer {
 }
 
 a.start-btn {
-    display: block;
     text-align: center;
     width: 100%;
     border: none;

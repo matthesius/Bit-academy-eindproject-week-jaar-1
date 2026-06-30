@@ -24,38 +24,10 @@ body {
     color: var(--text);
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 100px 20px 40px;
-    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.18), transparent 24%),
-        radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.12), transparent 20%),
-        linear-gradient(135deg, var(--bg-start), var(--bg-end));
-}
-
-body::before,
-body::after {
-    content: '';
-    position: fixed;
-    pointer-events: none;
-    border-radius: 50%;
-    filter: blur(120px);
-    z-index: 0;
-}
-
-body::before {
-    top: -12%;
-    left: -8%;
-    width: 380px;
-    height: 380px;
-    background: rgba(255, 255, 255, 0.18);
-}
-
-body::after {
-    right: -6%;
-    bottom: -10%;
-    width: 420px;
-    height: 420px;
-    background: rgba(255, 255, 255, 0.1);
+    padding-top: 82px;
 }
 
 .creator-page {

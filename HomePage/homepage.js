@@ -1,12 +1,27 @@
-console.log(quizzes);
 const quizContainer = document.getElementById("featuredContainer");
-const array = 
-    [quizzes.quiz_1_id, quizzes.quiz_2_id, quizzes.quiz_3_id, quizzes.quiz_4_id, quizzes.quiz_5_id];
+const array = [{
+    "id":quizzes.quiz_1_id,
+    "attempts":quizzes.quiz_1_attempts
+},{
+    "id":quizzes.quiz_2_id,
+    "attempts":quizzes.quiz_2_attempts
+},{
+    "id":quizzes.quiz_3_id,
+    "attempts":quizzes.quiz_3_attempts
+},{
+    "id":quizzes.quiz_4_id,
+    "attempts":quizzes.quiz_4_attempts
+},{
+    "id":quizzes.quiz_5_id,
+    "attempts":quizzes.quiz_5_attempts
+}];
+console.log(array);
+
 
 async function renderPopQuizzes() {
     quizContainer.innerHTML = "";
-    for (let i = 0; i < array.length; i++) {
-        const res = await fetch(`../API-Stuff/apithingie.php?action=getQuiz&quiz_id=${array[i]}`);
+    for (let i = 0; i < 5; i++) {
+        const res = await fetch(`../API-Stuff/apithingie.php?action=getQuiz&quiz_id=${array[i].id}`);
         const quiz = await res.json();
         console.log(quiz);
         
@@ -28,13 +43,17 @@ async function renderPopQuizzes() {
         desc.className = "quiz-description";
         desc.textContent = quiz.description ?? "Geen beschrijving";
 
-        const stats = document.createElement("div");
-        stats.className = "quiz-stats";
-        stats.textContent =  `${quiz.questions.length} vragen` //`${quiz[i].questions.length} vragen`; //
+        const questions = document.createElement("div");
+        questions.className = "quiz-stats";
+        questions.textContent =  `${quiz.questions.length} vragen`;
         
+        const attempts = document.createElement("p");
+        attempts.className = "quiz-stats";
+        attempts.textContent = `${array[i].attempts} Global Attempts`;
+
         const button = document.createElement("a");
         button.href = "../quiz/quiz.php";
-        button.textContent = "Start Quiz"
+        button.textContent = "Start Quiz";
         button.className = "start-btn";
 
         button.addEventListener("click", () => {
@@ -43,7 +62,8 @@ async function renderPopQuizzes() {
         
         content.appendChild(title);
         content.appendChild(desc);
-        content.appendChild(stats);
+        content.appendChild(questions);
+        content.appendChild(attempts)
         content.appendChild(button);
 
         card.appendChild(img);
