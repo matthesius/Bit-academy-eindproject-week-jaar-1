@@ -90,6 +90,11 @@ class ApiThingie
             $stmt = $this->pdo->prepare("SELECT * FROM options WHERE question_id = ?");
             $stmt->execute([$question['id']]);
             $question['options'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $questionImage = trim($question['question_image'] ?? $question['image'] ?? $question['img'] ?? $question['image_url'] ?? '');
+            $question['question_image'] = $questionImage;
+            $question['img'] = $questionImage;
+            $question['image'] = $questionImage;
+            $question['image_url'] = $questionImage;
         }
 
         $quiz['questions'] = $questions;

@@ -39,16 +39,18 @@ function renderquestions(quiz) {
 
         questiondiv.id = `questionid${i}`;
         question.textContent = quiz.questions[i].question_text;
-        titlediv.class = "titlediv";
+        titlediv.className = "titlediv";
         titlediv.id = `titlediv${i}`;
 
         maindiv.appendChild(questiondiv);
         questiondiv.appendChild(titlediv);
         questiondiv.appendChild(form);
         titlediv.appendChild(question);
-        if (quiz.questions[i].img) {
+        const questionImageUrl = quiz.questions[i].question_image || quiz.questions[i].img || quiz.questions[i].image || quiz.questions[i].image_url || '';
+        if (questionImageUrl) {
             const questionimage = document.createElement("img");
-            questionimage.setAttribute("src", quiz.questions[i].img);
+            questionimage.src = questionImageUrl;
+            questionimage.alt = `Image for question ${i + 1}`;
             titlediv.appendChild(questionimage);
         }
 

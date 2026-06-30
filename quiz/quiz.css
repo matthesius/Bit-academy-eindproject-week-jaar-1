@@ -9,6 +9,7 @@ body {
     align-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-image: linear-gradient(to bottom, #4f46e5,#7c3aed);
+    
 }
 
 div#questions {

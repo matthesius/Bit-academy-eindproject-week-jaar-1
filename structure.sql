@@ -19,6 +19,7 @@ CREATE TABLE questions (
     id              SERIAL PRIMARY KEY,
     quiz_id         INT NOT NULL REFERENCES quizzes(id) ON DELETE CASCADE,
     question_text   TEXT NOT NULL,
+    question_image  VARCHAR(2048),
     position        INT NOT NULL
 );
 
