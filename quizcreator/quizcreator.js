@@ -40,7 +40,7 @@ function createQuestionItem(index) {
             <label for="question-${index}">Question ${index}</label>
             <button type="button" class="remove-question">Remove question</button>
         </div>
-        <textarea id="question-${index}" name="questionText" rows="3" placeholder="Type the question here" required></textarea>
+        <input type="text" id="question-${index}" name="questionText" placeholder="Type the question here" required>
         <div class="form-row">
             <label for="question-image-${index}">Question image URL (optional)</label>
             <input type="url" id="question-image-${index}" name="questionImage" placeholder="https://...jpg">
@@ -93,11 +93,13 @@ function updateQuestionLabels() {
     const items = questionList.querySelectorAll('.question-item');
     items.forEach((item, index) => {
         const label = item.querySelector('.question-header label');
-        const textarea = item.querySelector('textarea[name="questionText"]');
+        const questionInput = item.querySelector('input[name="questionText"]');
         const currentIndex = index + 1;
         item.dataset.questionIndex = currentIndex;
         label.textContent = `Question ${currentIndex}`;
-        textarea.id = `question-${currentIndex}`;
+        if (questionInput) {
+            questionInput.id = `question-${currentIndex}`;
+        }
         updateOptionLabels(currentIndex);
     });
 }
@@ -135,7 +137,7 @@ form.addEventListener('submit', event => {
     }
 
     const questions = Array.from(questionItems).map((item, index) => {
-        const questionText = item.querySelector('textarea[name="questionText"]').value.trim();
+        const questionText = item.querySelector('input[name="questionText"]')?.value.trim() || '';
         const questionImage = item.querySelector('input[name="questionImage"]')?.value.trim() || '';
         const optionItems = item.querySelectorAll('.option-item');
         const options = Array.from(optionItems).map(optionItem => ({

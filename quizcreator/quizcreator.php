@@ -33,7 +33,7 @@ require '../LogInPage/login_check.php';
                 <input type="text" id="quizTitle" name="quizTitle" placeholder="e.g. World Flags" required>
 
                 <label for="quizDescription">Description</label>
-                <textarea id="quizDescription" name="quizDescription" rows="4" placeholder="Describe the quiz" required></textarea>
+                <input type="text" id="quizDescription" name="quizDescription" placeholder="Describe the quiz" required>
 
                 <label for="quizImage">Quiz image URL</label>
                 <input type="url" id="quizImage" name="quizImage" placeholder="https://...jpg" required>
