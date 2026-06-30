@@ -1,7 +1,4 @@
-﻿* {
-    box-sizing: border-box;
-}
-
+﻿
 :root {
     color-scheme: dark;
     --bg-start: #4349cd;
@@ -24,10 +21,10 @@ body {
     color: var(--text);
     min-height: 100vh;
     display: flex;
+    background-color: #4338ca;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 82px;
 }
 
 .creator-page {
@@ -58,46 +55,6 @@ body {
     line-height: 1.75;
 }
 
-.quiz-preview {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 18px;
-    background: #f8f9ff;
-    border: 1px solid #e5e7eb;
-    border-radius: 22px;
-    padding: 18px;
-    margin-bottom: 22px;
-}
-
-.preview-meta {
-    display: grid;
-    gap: 10px;
-}
-
-.preview-label {
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 0.75rem;
-    color: #6366f1;
-    font-weight: 700;
-}
-
-.preview-meta h2 {
-    margin: 0;
-    font-size: 1.3rem;
-}
-
-.preview-meta p {
-    margin: 0;
-    color: #4b5563;
-    line-height: 1.6;
-}
-
-.preview-stats {
-    color: #1f2937;
-    font-weight: 700;
-}
 
 .button-row--top {
     justify-content: flex-start;

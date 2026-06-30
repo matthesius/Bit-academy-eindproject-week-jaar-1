@@ -25,15 +25,6 @@ require '../LogInPage/login_check.php';
             <p class="subtitle">Enter the quiz title, description, and image URL. The quiz data will be converted into a new quiz.</p>
 
             <form id="quizForm" class="quiz-form">
-                <div class="quiz-preview">
-                    <div class="preview-meta">
-                        <p class="preview-label">Preview</p>
-                        <h2 id="previewTitle">New quiz</h2>
-                        <p id="previewDescription">Enter a title and description to preview the quiz.</p>
-                        <p class="preview-stats"><span id="previewQuestionCount">1 question</span></p>
-                    </div>
-                </div>
-
                 <div class="button-row button-row--top">
                     <button type="submit">Create quiz</button>
                 </div>

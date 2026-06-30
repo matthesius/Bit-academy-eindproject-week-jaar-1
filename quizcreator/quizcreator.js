@@ -5,12 +5,6 @@ const imageInput = document.getElementById('quizImage');
 const questionList = document.getElementById('questionList');
 const addQuestionButton = document.getElementById('addQuestion');
 const formError = document.getElementById('formError');
-const previewTitle = document.getElementById('previewTitle');
-const previewDescription = document.getElementById('previewDescription');
-const previewQuestionCount = document.getElementById('previewQuestionCount');
-
-titleInput.addEventListener('input', updatePreview);
-descInput.addEventListener('input', updatePreview);
 
 function createOptionItem(questionIndex, optionIndex, text = '', checked = false) {
     const optionWrapper = document.createElement('div');
@@ -106,27 +100,17 @@ function updateQuestionLabels() {
         textarea.id = `question-${currentIndex}`;
         updateOptionLabels(currentIndex);
     });
-    updatePreview();
 }
 
 addQuestionButton.addEventListener('click', () => {
     const nextIndex = questionList.querySelectorAll('.question-item').length + 1;
     questionList.appendChild(createQuestionItem(nextIndex));
     updateQuestionLabels();
-    updatePreview();
 });
-
-function updatePreview() {
-    previewTitle.textContent = titleInput.value.trim() || 'New quiz';
-    previewDescription.textContent = descInput.value.trim() || 'Enter a title and description to preview the quiz.';
-    const count = questionList.querySelectorAll('.question-item').length;
-    previewQuestionCount.textContent = `${count} question${count !== 1 ? 's' : ''}`;
-}
 
 function resetQuestionList() {
     questionList.innerHTML = '';
     questionList.appendChild(createQuestionItem(1));
-    updatePreview();
 }
 
 resetQuestionList();
