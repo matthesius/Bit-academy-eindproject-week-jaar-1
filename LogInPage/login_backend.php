@@ -12,14 +12,15 @@ if (isset($_SESSION['LoggedInQuizTaker'])) {
 $naam = null;
 $wachtwoord = null;
 
-if (isset($_POST['username']) && isset($_POST['password'])) {
-        $username = $_POST['username'];
+if (isset($_POST['account']) && isset($_POST['password'])) {
+        $account = $_POST['account'];
         $password = $_POST['password'];
     
     
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+        $stmt = $pdo->prepare("SELECT password, id FROM users WHERE username = :username OR email = :email");
     
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':username', $account, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $account, PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch();
 

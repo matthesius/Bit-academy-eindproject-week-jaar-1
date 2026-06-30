@@ -25,12 +25,8 @@ session_start();
 
             <form method="post" action="login_backend.php" id="loginForm">
                 <div class="input-group">
-                    <label>Username</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="input-group">
-                    <label>E-mail</label>
-                    <input type="email" id="email" name="email" required>
+                    <label>Username or email</label>
+                    <input type="text" id="account" name="account" required>
                 </div>
 
                 <div class="input-group">

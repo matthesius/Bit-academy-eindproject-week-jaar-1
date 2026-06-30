@@ -27,6 +27,9 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
     $user_check = $stmt->fetchall();
 
     try {
+        if (filter_var("$username", FILTER_VALIDATE_EMAIL)) {
+            throw new Exception("email in gebruikersnaam veld" . PHP_EOL);
+        }
         if ($password1 !== $password2) {
             throw new Exception("wachtwoorden zijn verschillend" . PHP_EOL);
         }
