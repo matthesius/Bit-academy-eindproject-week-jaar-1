@@ -19,8 +19,6 @@ require '../LogInPage/login_check.php';
     require '../navbar.php';
     ?>
 
-
-
     <main class="creator-page">
         <section class="creator-card">
             <h1>Quiz Creator</h1>
