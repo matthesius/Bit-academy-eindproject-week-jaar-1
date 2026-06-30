@@ -13,11 +13,11 @@ function createOptionItem(questionIndex, optionIndex, text = '', checked = false
         <div class="option-row">
             <label>
                 <input type="radio" name="correct-${questionIndex}" value="${optionIndex}" ${checked ? 'checked' : ''}>
-                <span>Optie ${optionIndex}</span>
+                <span>Option ${optionIndex}</span>
             </label>
-            <button type="button" class="remove-option">Verwijder</button>
+            <button type="button" class="remove-option">Remove</button>
         </div>
-        <input type="text" name="optionText" value="${text}" placeholder="Antwoordtekst" required>
+        <input type="text" name="optionText" value="${text}" placeholder="Answer text" required>
     `;
 
     optionWrapper.querySelector('.remove-option').addEventListener('click', () => {
@@ -37,18 +37,18 @@ function createQuestionItem(index) {
     wrapper.dataset.questionIndex = index;
     wrapper.innerHTML = `
         <div class="question-header">
-            <label for="question-${index}">Vraag ${index}</label>
-            <button type="button" class="remove-question">Verwijder vraag</button>
+            <label for="question-${index}">Question ${index}</label>
+            <button type="button" class="remove-question">Remove question</button>
         </div>
-        <textarea id="question-${index}" name="questionText" rows="3" placeholder="Typ hier de vraag" required></textarea>
+        <textarea id="question-${index}" name="questionText" rows="3" placeholder="Type the question here" required></textarea>
         <div class="form-row">
-            <label for="question-image-${index}">Afbeelding URL (optioneel)</label>
+            <label for="question-image-${index}">Question image URL (optional)</label>
             <input type="url" id="question-image-${index}" name="questionImage" placeholder="https://...jpg">
         </div>
         <div class="options-section">
             <div class="options-header">
-                <span>Antwoorden</span>
-                <button type="button" class="add-option">Voeg optie toe</button>
+                <span>Answers</span>
+                <button type="button" class="add-option">Add option</button>
             </div>
             <div class="options-list"></div>
         </div>
@@ -85,7 +85,7 @@ function updateOptionLabels(questionIndex) {
         const labelText = option.querySelector('.option-row span');
         radio.value = idx + 1;
         radio.name = `correct-${questionIndex}`;
-        labelText.textContent = `Optie ${idx + 1}`;
+        labelText.textContent = `Option ${idx + 1}`;
     });
 }
 
@@ -96,7 +96,7 @@ function updateQuestionLabels() {
         const textarea = item.querySelector('textarea[name="questionText"]');
         const currentIndex = index + 1;
         item.dataset.questionIndex = currentIndex;
-        label.textContent = `Vraag ${currentIndex}`;
+        label.textContent = `Question ${currentIndex}`;
         textarea.id = `question-${currentIndex}`;
         updateOptionLabels(currentIndex);
     });
@@ -125,12 +125,12 @@ form.addEventListener('submit', event => {
     const questionItems = questionList.querySelectorAll('.question-item');
 
     if (!title || !description || !imageUrl) {
-        formError.textContent = 'Vul eerst alle velden in.';
+        formError.textContent = 'Please fill in all required fields.';
         return;
     }
 
     if (questionItems.length === 0) {
-        formError.textContent = 'Voeg minimaal één vraag toe.';
+        formError.textContent = 'Please add at least one question.';
         return;
     }
 
@@ -153,7 +153,7 @@ form.addEventListener('submit', event => {
 
     for (const question of questions) {
         if (!question.question_text) {
-            formError.textContent = 'Alle vragen moeten tekst hebben.';
+            formError.textContent = 'Every question must include text.';
             return;
         }
 
@@ -161,12 +161,12 @@ form.addEventListener('submit', event => {
         const correctCount = filledOptions.filter(option => option.is_correct).length;
 
         if (filledOptions.length < 2) {
-            formError.textContent = 'Elke vraag heeft minimaal twee opties nodig.';
+            formError.textContent = 'Each question needs at least two options.';
             return;
         }
 
         if (correctCount !== 1) {
-            formError.textContent = 'Elke vraag moet precies één correct antwoord hebben.';
+            formError.textContent = 'Each question must have exactly one correct answer.';
             return;
         }
 
@@ -190,16 +190,16 @@ form.addEventListener('submit', event => {
     .then(response => response.json())
     .then(result => {
         if (result.error) {
-            formError.textContent = 'API-fout: ' + result.error;
+            formError.textContent = 'API error: ' + result.error;
             return;
         }
 
-        formError.textContent = 'Quiz succesvol verzonden naar API.';
+        formError.textContent = 'Quiz successfully sent to the API.';
         form.reset();
         resetQuestionList();
     })
     .catch(error => {
-        formError.textContent = 'Fout bij verzenden naar API.';
+        formError.textContent = 'Error sending quiz to API.';
         console.error(error);
     });
 });
