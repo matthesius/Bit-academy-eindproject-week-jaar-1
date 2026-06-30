@@ -202,5 +202,6 @@ if ($action === 'createQuiz') {
     echo json_encode(["error" => "Onbekende actie"]);
 }
 
+
 //make a quiz = ../API-Stuff/apiPostThingie.php?action=createQuiz
 //submit an attempt = ../API-Stuff/apiPostThingie.php?action=submitAttempt
