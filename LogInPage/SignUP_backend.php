@@ -57,7 +57,7 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
         exit;
     }
 } else {
-    $_SESSION['SignUpError'] = "vul de velden";
+    $_SESSION['SignUpError'] = "vul al de velden in";
 }
 
 ?>
