@@ -44,7 +44,7 @@ function createQuestionItem(index) {
             <label for="question-${index}">Question ${index}</label>
             <button type="button" class="remove-question">Remove question</button>
         </div>
-        <input type="text" id="question-${index}" name="questionText" placeholder="Type the question here" maxlength="10" 0required>
+        <input type="text" id="question-${index}" name="questionText" placeholder="Type the question here" maxlength="100" 0required>
         <div class="form-row">
             <label for="question-image-${index}">Question image URL (optional)</label>
             <input type="url" id="question-image-${index}" name="questionImage" placeholder="https://...jpg">
