@@ -22,6 +22,8 @@ body {
 }
 
 .creator-card {
+    margin-top: 50px;
+    margin-bottom: 50px;
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 32px;
@@ -262,6 +264,7 @@ button[type='submit']:hover {
     border-radius: 14px;
     border: 1px solid #d1d5db;
     background: #fcfcff;
+    box-sizing: border-box;
 }
 
 .form-error {
