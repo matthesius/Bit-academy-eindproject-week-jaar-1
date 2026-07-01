@@ -4,7 +4,7 @@
 
 body {
     margin: 0;
-    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     color: #111827;
     min-height: 100vh;
     display: flex;
@@ -59,8 +59,8 @@ body {
 }
 
 .quiz-form input,
-.quiz-form textarea {
-    width: 100%;
+.quiz-form textarea,
+.quiz-form select {
     padding: 16px 18px;
     border: 1px solid #d1d5db;
     border-radius: 16px;
@@ -76,11 +76,50 @@ body {
 }
 
 .quiz-form input:focus,
-.quiz-form textarea:focus {
+.quiz-form textarea:focus,
+.quiz-form select:focus {
     outline: none;
     border-color: #5b6ddb;
     box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.14);
     transform: translateY(-1px);
+}
+
+.secondary-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: #eef2ff;
+    color: #4338ca;
+    border-radius: 14px;
+    padding: 12px 18px;
+    font-weight: 700;
+}
+
+.secondary-link:hover {
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+}
+
+.editor-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: flex-end;
+}
+
+.editor-controls label {
+    margin: 0;
+    flex: 0 0 100%;
+}
+
+.editor-controls select {
+    flex: 1 1 220px;
+}
+
+.quiz-status {
+    margin: 8px 0 0;
+    color: #4b5563;
+    min-height: 1.2em;
 }
 
 .questions-section {
@@ -160,8 +199,8 @@ button[type='submit'],
 
 .remove-question,
 .remove-option {
-    background: #f8fafc;
-    color: #374151;
+    background: #c71010;
+    color: #ffffff;
     font-weight: 600;
 }
 

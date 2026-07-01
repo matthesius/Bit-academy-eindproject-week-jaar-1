@@ -1,10 +1,14 @@
-﻿const form = document.getElementById('quizForm');
+const form = document.getElementById('quizForm');
+const quizSelect = document.getElementById('quizSelect');
+const quizIdInput = document.getElementById('quizId');
 const titleInput = document.getElementById('quizTitle');
 const descInput = document.getElementById('quizDescription');
 const imageInput = document.getElementById('quizImage');
 const questionList = document.getElementById('questionList');
 const addQuestionButton = document.getElementById('addQuestion');
+const deleteQuizButton = document.getElementById('deleteQuizButton');
 const formError = document.getElementById('formError');
+const quizStatus = document.getElementById('quizStatus');
 
 function createOptionItem(questionIndex, optionIndex, text = '', checked = false) {
     const optionWrapper = document.createElement('div');
@@ -104,30 +108,159 @@ function updateQuestionLabels() {
     });
 }
 
+function resetQuestionList() {
+    questionList.innerHTML = '';
+    questionList.appendChild(createQuestionItem(1));
+}
+
+function clearForm() {
+    form.reset();
+    quizIdInput.value = '';
+    quizSelect.value = '';
+    quizStatus.textContent = '';
+    resetQuestionList();
+    formError.textContent = '';
+}
+
+function fillForm(quiz) {
+    quizIdInput.value = quiz.id;
+    titleInput.value = quiz.title || '';
+    descInput.value = quiz.description || '';
+    imageInput.value = quiz.image_url || '';
+    formError.textContent = '';
+    quizStatus.textContent = `Editing “${quiz.title}”`;
+
+    questionList.innerHTML = '';
+    if (Array.isArray(quiz.questions) && quiz.questions.length > 0) {
+        quiz.questions.forEach((question, index) => {
+            const item = createQuestionItem(index + 1);
+            const questionText = item.querySelector('input[name="questionText"]');
+            const questionImage = item.querySelector('input[name="questionImage"]');
+            questionText.value = question.question_text || question.text || '';
+            questionImage.value = question.question_image || question.image_url || question.image || question.img || '';
+
+            const optionsList = item.querySelector('.options-list');
+            optionsList.innerHTML = '';
+            const options = Array.isArray(question.options) ? question.options : [];
+
+            options.forEach((option, optionIndex) => {
+                const isCorrect = Boolean(option.is_correct);
+                optionsList.appendChild(createOptionItem(index + 1, optionIndex + 1, option.option_text || '', isCorrect));
+            });
+
+            while (optionsList.querySelectorAll('.option-item').length < 4) {
+                const nextIndex = optionsList.querySelectorAll('.option-item').length + 1;
+                optionsList.appendChild(createOptionItem(index + 1, nextIndex, '', false));
+            }
+
+            questionList.appendChild(item);
+        });
+    } else {
+        questionList.appendChild(createQuestionItem(1));
+    }
+}
+
 addQuestionButton.addEventListener('click', () => {
     const nextIndex = questionList.querySelectorAll('.question-item').length + 1;
     questionList.appendChild(createQuestionItem(nextIndex));
     updateQuestionLabels();
 });
 
-function resetQuestionList() {
-    questionList.innerHTML = '';
-    questionList.appendChild(createQuestionItem(1));
+quizSelect.addEventListener('change', async () => {
+    const quizId = quizSelect.value;
+    if (!quizId) {
+        clearForm();
+        return;
+    }
+
+    quizStatus.textContent = 'Loading quiz…';
+    try {
+        const response = await fetch(`../API-Stuff/apithingie.php?action=getQuiz&quiz_id=${encodeURIComponent(quizId)}`);
+        const quiz = await response.json();
+        if (quiz.error) {
+            formError.textContent = quiz.error;
+            quizStatus.textContent = 'Unable to load this quiz.';
+            return;
+        }
+        fillForm(quiz);
+    } catch (error) {
+        formError.textContent = 'Could not load the selected quiz.';
+        quizStatus.textContent = 'Unable to load this quiz.';
+        console.error(error);
+    }
+});
+
+async function loadUserQuizzes() {
+    try {
+        const response = await fetch('../API-Stuff/apithingie.php?action=getUserQuizzes');
+        const quizzes = await response.json();
+        if (!Array.isArray(quizzes)) {
+            quizStatus.textContent = quizzes?.error || 'No quizzes found.';
+            return;
+        }
+
+        quizSelect.innerHTML = '<option value="">Select a quiz to edit</option>';
+        quizzes.forEach((quiz) => {
+            const option = document.createElement('option');
+            option.value = quiz.id;
+            option.textContent = quiz.title;
+            quizSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error(error);
+        quizStatus.textContent = 'Could not load your quizzes.';
+    }
 }
 
-resetQuestionList();
+deleteQuizButton.addEventListener('click', async () => {
+    const quizId = quizIdInput.value.trim();
+    if (!quizId) {
+        formError.textContent = 'Select a quiz to delete.';
+        return;
+    }
 
-form.addEventListener('submit', event => {
+    const confirmed = window.confirm('Delete this quiz entirely? This cannot be undone.');
+    if (!confirmed) {
+        return;
+    }
+
+    try {
+        const response = await fetch('../API-Stuff/apiPostThingie.php?action=deleteQuiz', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ quiz_id: quizId })
+        });
+        const result = await response.json();
+
+        if (result.error) {
+            formError.textContent = 'API error: ' + result.error;
+            return;
+        }
+
+        formError.textContent = 'Quiz deleted successfully.';
+        quizStatus.textContent = 'Quiz removed.';
+        await loadUserQuizzes();
+        clearForm();
+    } catch (error) {
+        formError.textContent = 'Error deleting quiz.';
+        console.error(error);
+    }
+});
+
+form.addEventListener('submit', async (event) => {
     event.preventDefault();
     formError.textContent = '';
 
+    const quizId = quizIdInput.value.trim();
     const title = titleInput.value.trim();
     const description = descInput.value.trim();
     const imageUrl = imageInput.value.trim();
     const questionItems = questionList.querySelectorAll('.question-item');
 
-    if (!title || !description || !imageUrl) {
-        formError.textContent = 'Please fill in all required fields.';
+    if (!quizId || !title || !description || !imageUrl) {
+        formError.textContent = 'Select a quiz and fill in all required fields.';
         return;
     }
 
@@ -176,32 +309,37 @@ form.addEventListener('submit', event => {
     }
 
     const quizData = {
+        quiz_id: quizId,
         quizname: title,
         desc: description,
         quizthumbnail: imageUrl,
         questions
     };
 
-    fetch('../API-Stuff/apiPostThingie.php?action=createQuiz', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }, 
-        body: JSON.stringify(quizData)
-    })
-    .then(response => response.json())
-    .then(result => {
+    try {
+        const response = await fetch('../API-Stuff/apiPostThingie.php?action=updateQuiz', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(quizData)
+        });
+        const result = await response.json();
+
         if (result.error) {
             formError.textContent = 'API error: ' + result.error;
             return;
         }
 
-        formError.textContent = 'Quiz successfully sent to the API.';
-        form.reset();
-        resetQuestionList();
-    })
-    .catch(error => {
-        formError.textContent = 'Error sending quiz to API.';
+        formError.textContent = 'Quiz updated successfully.';
+        quizStatus.textContent = 'Saved changes.';
+        await loadUserQuizzes();
+        quizSelect.value = quizId;
+    } catch (error) {
+        formError.textContent = 'Error updating quiz.';
         console.error(error);
-    });
+    }
 });
+
+resetQuestionList();
+loadUserQuizzes();

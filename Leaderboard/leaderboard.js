@@ -42,6 +42,32 @@ async function fetchLeaderboard(quizId) {
     }
 }
 
+function compareLeaderboardRows(a, b) {
+    const scoreA = Number(a.score) || 0;
+    const scoreB = Number(b.score) || 0;
+
+    if (scoreA !== scoreB) {
+        return scoreB - scoreA;
+    }
+
+    const timeA = Number(a.seconds_per_question);
+    const timeB = Number(b.seconds_per_question);
+
+    if (Number.isFinite(timeA) && Number.isFinite(timeB)) {
+        return timeA - timeB;
+    }
+
+    if (Number.isFinite(timeA)) {
+        return -1;
+    }
+
+    if (Number.isFinite(timeB)) {
+        return 1;
+    }
+
+    return 0;
+}
+
 function renderLeaderboard(rows) {
     leaderboardRows.innerHTML = '';
 
@@ -54,15 +80,17 @@ function renderLeaderboard(rows) {
         return;
     }
 
+    const sortedRows = [...rows].sort(compareLeaderboardRows);
+
     leaderboardEmpty.style.display = 'none';
     podiumFirst.style.display = '';
     podiumSecond.style.display = '';
     podiumThird.style.display = '';
 
-    const topThree = rows.slice(0, 3);
+    const topThree = sortedRows.slice(0, 3);
     updatePodium(topThree);
 
-    rows.forEach((row, index) => {
+    sortedRows.forEach((row, index) => {
         const playerRow = document.createElement('div');
         playerRow.className = 'player-row';
         playerRow.innerHTML = `
