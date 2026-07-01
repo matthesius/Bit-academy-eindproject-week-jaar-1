@@ -36,6 +36,8 @@ div[id^="questionid"] {
     background-color: white;
     margin-bottom: 7.5px;
     margin-top: 7.5px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 label.answerdiv {
@@ -69,6 +71,9 @@ button#submit {
 
 h3 {
     text-align: center;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    padding: 0 12px;
 }
 
 h1 {
@@ -121,6 +126,9 @@ div[id^="titlediv"] {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 12px;
 }
 
 input {
