@@ -52,13 +52,13 @@ class ApiPostThingie
         }
 
         try {
-            $userId = $_SESSION['LoggedInQuizTaker'];
+            $userId = $_SESSION['LoggedInQuizTaker'];       //ik heb met je code moeten spelen arne. had je er maar moeten zijn
 
             $this->pdo->exec("ALTER TABLE questions ADD COLUMN IF NOT EXISTS question_image VARCHAR(2048);");
             $this->pdo->beginTransaction();
-
-            $stmt = $this->pdo->prepare("INSERT INTO quizzes (title, description, image_url, $userId) VALUES (?, ?, ?, ?) RETURNING id, title, description, image_url, created_at");
-            $stmt->execute([$title, $description, $imageUrl]);
+                                                                                             //user id toegevoed aan quiz creator
+            $stmt = $this->pdo->prepare("INSERT INTO quizzes (title, description, image_url, creator_id) VALUES (?, ?, ?, ?) RETURNING id, title, description, image_url, created_at");
+            $stmt->execute([$title, $description, $imageUrl, $userId]);
             $quiz = $stmt->fetch(PDO::FETCH_ASSOC);
 
             $stmtQuestion = $this->pdo->prepare("INSERT INTO questions (quiz_id, question_text, question_image, position) VALUES (?, ?, ?, ?) RETURNING id, question_text, question_image, position");
