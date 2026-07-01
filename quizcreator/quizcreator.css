@@ -199,8 +199,8 @@ button[type='submit'],
 
 .remove-question,
 .remove-option {
-    background: #f8fafc;
-    color: #374151;
+    background: #c71010;
+    color: #ffffff;
     font-weight: 600;
 }
 

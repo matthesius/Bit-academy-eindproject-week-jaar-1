@@ -237,6 +237,55 @@ class ApiPostThingie
         }
     }
 
+    public function deleteQuiz()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode(["error" => "POST required"]);
+            return;
+        }
+
+        $input = json_decode(file_get_contents('php://input'), true);
+        if (!is_array($input)) {
+            echo json_encode(["error" => "Invalid JSON"]);
+            return;
+        }
+
+        $quizId = isset($input['quiz_id']) ? (int) $input['quiz_id'] : 0;
+        if ($quizId <= 0) {
+            echo json_encode(["error" => "quiz_id is required"]);
+            return;
+        }
+
+        try {
+            $userId = $this->getCurrentUserId();
+            if ($userId === null) {
+                echo json_encode(["error" => "Please log in"]);
+                return;
+            }
+
+            $this->ensureQuizCreatorColumn();
+            $this->pdo->beginTransaction();
+
+            $stmt = $this->pdo->prepare("
+                DELETE FROM quizzes
+                WHERE id = ? AND (creator_id IS NULL OR creator_id = ?)
+                RETURNING id
+            ");
+            $stmt->execute([$quizId, $userId]);
+            $deletedQuiz = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$deletedQuiz) {
+                throw new Exception('Quiz not found or not owned by you.');
+            }
+
+            $this->pdo->commit();
+            echo json_encode(["success" => true, "quiz_id" => $quizId]);
+        } catch (Exception $e) {
+            $this->pdo->rollBack();
+            echo json_encode(["error" => $e->getMessage()]);
+        }
+    }
+
     public function submitAttempt()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -327,6 +376,8 @@ if ($action === 'createQuiz') {
     $api->createQuiz();
 } elseif ($action === 'updateQuiz') {
     $api->updateQuiz();
+} elseif ($action === 'deleteQuiz') {
+    $api->deleteQuiz();
 } elseif ($action === 'submitAttempt') {
     $api->submitAttempt();
 } else {

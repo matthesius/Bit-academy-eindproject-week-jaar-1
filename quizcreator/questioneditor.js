@@ -6,6 +6,7 @@ const descInput = document.getElementById('quizDescription');
 const imageInput = document.getElementById('quizImage');
 const questionList = document.getElementById('questionList');
 const addQuestionButton = document.getElementById('addQuestion');
+const deleteQuizButton = document.getElementById('deleteQuizButton');
 const formError = document.getElementById('formError');
 const quizStatus = document.getElementById('quizStatus');
 
@@ -43,7 +44,7 @@ function createQuestionItem(index) {
             <label for="question-${index}">Question ${index}</label>
             <button type="button" class="remove-question">Remove question</button>
         </div>
-        <input type="text" id="question-${index}" name="questionText" placeholder="Type the question here" required>
+        <input type="text" id="question-${index}" name="questionText" placeholder="Type the question here" maxlength="120" required>
         <div class="form-row">
             <label for="question-image-${index}">Question image URL (optional)</label>
             <input type="url" id="question-image-${index}" name="questionImage" placeholder="https://...jpg">
@@ -210,6 +211,43 @@ async function loadUserQuizzes() {
         quizStatus.textContent = 'Could not load your quizzes.';
     }
 }
+
+deleteQuizButton.addEventListener('click', async () => {
+    const quizId = quizIdInput.value.trim();
+    if (!quizId) {
+        formError.textContent = 'Select a quiz to delete.';
+        return;
+    }
+
+    const confirmed = window.confirm('Delete this quiz entirely? This cannot be undone.');
+    if (!confirmed) {
+        return;
+    }
+
+    try {
+        const response = await fetch('../API-Stuff/apiPostThingie.php?action=deleteQuiz', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ quiz_id: quizId })
+        });
+        const result = await response.json();
+
+        if (result.error) {
+            formError.textContent = 'API error: ' + result.error;
+            return;
+        }
+
+        formError.textContent = 'Quiz deleted successfully.';
+        quizStatus.textContent = 'Quiz removed.';
+        await loadUserQuizzes();
+        clearForm();
+    } catch (error) {
+        formError.textContent = 'Error deleting quiz.';
+        console.error(error);
+    }
+});
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault();

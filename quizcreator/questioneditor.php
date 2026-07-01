@@ -27,6 +27,7 @@ require '../LogInPage/login_check.php';
             <form id="quizForm" class="quiz-form">
                 <div class="button-row button-row--top">
                     <a href="quizcreator.php" class="secondary-link">Create a new quiz</a>
+                    <button type="button" id="deleteQuizButton" class="remove-question">Delete quiz</button>
                     <button type="submit">Save changes</button>
                 </div>
 
@@ -41,10 +42,10 @@ require '../LogInPage/login_check.php';
                 <input type="hidden" id="quizId" name="quizId">
 
                 <label for="quizTitle">Quiz title</label>
-                <input type="text" id="quizTitle" name="quizTitle" placeholder="e.g. World Flags" required>
+                <input type="text" id="quizTitle" name="quizTitle" placeholder="e.g. World Flags" maxlength="25" required>
 
                 <label for="quizDescription">Description</label>
-                <input type="text" id="quizDescription" name="quizDescription" placeholder="Describe the quiz" required>
+                <input type="text" id="quizDescription" name="quizDescription" placeholder="Describe the quiz" maxlength="100" required>
 
                 <label for="quizImage">Quiz image URL</label>
                 <input type="url" id="quizImage" name="quizImage" placeholder="https://...jpg" required>
