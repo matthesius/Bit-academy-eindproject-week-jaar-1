@@ -17,7 +17,7 @@ function createOptionItem(questionIndex, optionIndex, text = '', checked = false
             </label>
             <button type="button" class="remove-option">Remove</button>
         </div>
-        <input type="text" name="optionText" value="${text}" placeholder="Answer text" maxlength="80" required>
+        <input type="text" name="optionText" value="${text}" placeholder="Answer text" maxlength="50" required>
     `;
 
     optionWrapper.querySelector('.remove-option').addEventListener('click', () => {
@@ -40,7 +40,7 @@ function createQuestionItem(index) {
             <label for="question-${index}">Question ${index}</label>
             <button type="button" class="remove-question">Remove question</button>
         </div>
-        <input type="text" id="question-${index}" name="questionText" placeholder="Type the question here" maxlength="120" required>
+        <input type="text" id="question-${index}" name="questionText" placeholder="Type the question here" maxlength="100" required>
         <div class="form-row">
             <label for="question-image-${index}">Question image URL (optional)</label>
             <input type="url" id="question-image-${index}" name="questionImage" placeholder="https://...jpg">
