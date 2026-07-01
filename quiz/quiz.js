@@ -96,6 +96,7 @@ function renderquestions(quiz) {
 
             answerdiv.setAttribute("class", "answerdiv");
             answerdiv.setAttribute("for", `option${i}-${j}`);
+            answer.setAttribute("class", `option${i}-${j}`)
             select.type = "radio";
             select.name = `answers${i}`;
             select.id = `option${i}-${j}`;
@@ -151,6 +152,7 @@ function renderquestions(quiz) {
             const count = document.createElement("p");
             const percentage = document.createElement("p");
             const time = document.createElement("p");
+            const view = document.createElement("a");
             const homepage = document.createElement("a");
             const overview = document.createElement("a");
             const buttondiv = document.createElement("div");
@@ -158,6 +160,7 @@ function renderquestions(quiz) {
             count.id = "count";
             percentage.id = "percentage";
             time.id = "time";
+            view.id = "view";
             homepage.id = "homepage";
             overview.id = "overview";
             buttondiv.id = "buttondiv";
@@ -165,6 +168,23 @@ function renderquestions(quiz) {
             count.textContent = `${points} / ${quiz.questions.length} Correct`;
             percentage.textContent = `${Math.round((points / quiz.questions.length) * 100)}%`;
             time.textContent = `Time: ${minutes}:${seconds}`;
+
+            view.addEventListener("click", () => {
+                document.getElementById("outermodal").style.display = "none";
+                document.getElementById("submit").style.display = "none";
+                document.getElementById("questions").style.marginBottom = "30px";
+                for (let i = 0; i < quiz.questions.length; i++) {
+                    for (let j = 0; j < quiz.questions[i].options.length; j++) {
+                        if (quiz.questions[i].options[j].is_correct) {
+                            document.querySelector(`label.option${i}-${j}`).style.color = "green";
+                        } else {
+                            document.querySelector(`label.option${i}-${j}`).style.color = "red";
+                        }
+                        document.getElementById(`option${i}-${j}`).setAttribute("disabled", "");
+                    }
+                }
+            });
+            view.textContent = "View your answers";
             homepage.href = "../HomePage/homepage.php";
             homepage.textContent = "To Homepage";
             overview.href = "../overview/index.php";
@@ -174,12 +194,12 @@ function renderquestions(quiz) {
             resultspage.appendChild(percentage);
             resultspage.appendChild(time);
             resultspage.appendChild(buttondiv);
+            buttondiv.appendChild(view);
             buttondiv.appendChild(homepage);
             buttondiv.appendChild(overview);
 
             const table1 = constructTableOne(quiz, points, starttime);
             const table2 = constructTableTwo(quiz);
-            console.log(JSON.stringify({ table1, table2 }));
 
             fetch('../API-Stuff/apiPostThingie.php?action=submitAttempt', {
                 method: 'POST',

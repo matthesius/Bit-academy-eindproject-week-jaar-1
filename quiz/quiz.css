@@ -36,7 +36,6 @@ div[id^="questionid"] {
     background-color: white;
     margin-bottom: 7.5px;
     margin-top: 7.5px;
-
 }
 
 label.answerdiv {
@@ -77,13 +76,16 @@ h1 {
 }
 
 h2 {
+    color: white;
     text-align: center;
     margin: 0;
     margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 p {
     text-align: center;
+    color: white;
 }
 
 form {
@@ -147,9 +149,10 @@ div#resultsmodal {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
     border-radius: 15px;
-    border: black 3px solid;
-    background-color: white;
+    border: white 3px solid;
+    background-color: black;
     height: 80%;
     width: 40vw;
 }
@@ -160,17 +163,27 @@ div#resultsmodal > p {
 
 div#buttondiv {
     display: flex;
-    justify-content: space-around;
-    margin-top: 100px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
-a#homepage, a#overview {
+a#homepage, a#overview, a#view {
     padding: 5px;
+    margin: 10px;
+    text-align: center;
     background-color: blue;
     color: white;
     border: solid darkblue 2px;
     border-radius: 5px;
     text-decoration: none;
+    width: 60%;
+    transition: width 1s ease;
+}
+
+a#homepage:hover, a#overview:hover, a#view:hover {
+    width: 70%;
 }
 
 #progressWrapper {
@@ -199,4 +212,9 @@ a#homepage, a#overview {
     position: fixed;
     margin-top: 15px;
     opacity: 80%;
+}
+
+#timer {
+    color: white;
+    font-weight: bold;
 }
