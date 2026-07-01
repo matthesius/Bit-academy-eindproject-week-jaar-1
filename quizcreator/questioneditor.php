@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require '../LogInPage/login_check.php';
 ?>
 
@@ -8,7 +8,7 @@ require '../LogInPage/login_check.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Creator</title>
+    <title>Question Editor</title>
     <script defer src="../navbar.js"></script>
     <link rel="stylesheet" href="quizcreator.css">
     <link rel="stylesheet" href="../navbar.css">
@@ -21,14 +21,24 @@ require '../LogInPage/login_check.php';
 
     <main class="creator-page">
         <section class="creator-card">
-            <h1>Quiz Creator</h1>
-            <p class="subtitle">Enter the quiz title, description, and image URL. The quiz data will be converted into a new quiz.</p>
+            <h1>Edit your questions</h1>
+            <p class="subtitle">Choose one of your quizzes, update the quiz details, and replace its questions.</p>
 
             <form id="quizForm" class="quiz-form">
                 <div class="button-row button-row--top">
-                    <a href="questioneditor.php" class="secondary-link">Edit your quizzes</a>
-                    <button type="submit">Create quiz</button>
+                    <a href="quizcreator.php" class="secondary-link">Create a new quiz</a>
+                    <button type="submit">Save changes</button>
                 </div>
+
+                <div class="editor-controls">
+                    <label for="quizSelect">Your quizzes</label>
+                    <select id="quizSelect" name="quizSelect" required>
+                        <option value="">Loading your quizzes…</option>
+                    </select>
+                </div>
+
+                <p id="quizStatus" class="quiz-status" aria-live="polite"></p>
+                <input type="hidden" id="quizId" name="quizId">
 
                 <label for="quizTitle">Quiz title</label>
                 <input type="text" id="quizTitle" name="quizTitle" placeholder="e.g. World Flags" required>
@@ -52,7 +62,7 @@ require '../LogInPage/login_check.php';
         </section>
     </main>
 
-    <script src="quizcreator.js"></script>
+    <script src="questioneditor.js"></script>
 </body>
 
 </html>

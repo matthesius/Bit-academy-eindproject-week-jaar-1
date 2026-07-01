@@ -2,6 +2,10 @@
 
 require_once '../DB.php';
 
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
 header("Content-Security-Policy: default-src 'self'; connect-src 'self' http://127.0.0.1:5500;");
 header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
@@ -27,6 +31,9 @@ class ApiThingie
         switch ($action) {
             case 'getQuizzes':
                 $this->getQuizzes();
+                break;
+            case 'getUserQuizzes':
+                $this->getUserQuizzes();
                 break;
             case 'getQuiz':
                 $this->getQuiz();
@@ -57,6 +64,38 @@ class ApiThingie
         GROUP BY q.id
         ORDER BY q.created_at DESC
     ");
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+    }
+
+    private function getCurrentUserId()
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+
+        $userId = $_SESSION['LoggedInQuizTaker'] ?? null;
+        return $userId !== null ? (int) $userId : null;
+    }
+
+    private function getUserQuizzes()
+    {
+        $userId = $this->getCurrentUserId();
+        if ($userId === null) {
+            echo json_encode(["error" => "Please log in"]);
+            return;
+        }
+
+        $this->pdo->exec("ALTER TABLE quizzes ADD COLUMN IF NOT EXISTS creator_id INT REFERENCES users(id) ON DELETE SET NULL;");
+
+        $stmt = $this->pdo->prepare("
+            SELECT q.*, COUNT(qu.id) AS question_count
+            FROM quizzes q
+            LEFT JOIN questions qu ON qu.quiz_id = q.id
+            WHERE q.creator_id = ?
+            GROUP BY q.id
+            ORDER BY q.created_at DESC
+        ");
+        $stmt->execute([$userId]);
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
     }
 

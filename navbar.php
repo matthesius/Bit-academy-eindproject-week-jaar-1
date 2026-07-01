@@ -6,6 +6,7 @@
         <a href="../overview/index.php">Quizzes</a>
         <a href="../Leaderboard/leaderboard.php">Leaderboard</a>
         <a href="../quizcreator/quizcreator.php">Quiz Creator</a>
+        <a href="../quizcreator/questioneditor.php">Edit questions</a>
 
         <?php
         if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -27,6 +28,7 @@
         <a href="../overview/index.php">Quizzes</a>
         <a href="../Leaderboard/leaderboard.php">Leaderboard</a>
         <a href="../quizcreator/quizcreator.php">Quiz Creator</a>
+        <a href="../quizcreator/questioneditor.php">Edit questions</a>
 
         <?php
         if (session_status() !== PHP_SESSION_ACTIVE) {
