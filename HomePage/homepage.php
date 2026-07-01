@@ -34,12 +34,12 @@ require 'homepage_backend.php';
     <section class="stats">
         <div class="stat-card">
             <h2 id="quizCount"><?= $quiz['quiz_count'] ?></h2>
-            <p>Quizzes</p>
+            <p>Quizzes to play</p>
         </div>
 
         <div class="stat-card">
             <h2 id="questionCount"><?= $quiz['question_count'] ?></h2>
-            <p>Questions</p>
+            <p>Questions to answer</p>
         </div>
     </section>
 
