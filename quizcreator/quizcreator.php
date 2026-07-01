@@ -31,10 +31,10 @@ require '../LogInPage/login_check.php';
                 </div>
 
                 <label for="quizTitle">Quiz title</label>
-                <input type="text" id="quizTitle" name="quizTitle" placeholder="e.g. World Flags" maxlength="25" required>
+                <input type="text" id="quizTitle" name="quizTitle" placeholder="e.g. World Flags" maxlength="45" required>
 
                 <label for="quizDescription">Description</label>
-                <input type="text" id="quizDescription" name="quizDescription" placeholder="Describe the quiz" maxlength="100" required>
+                <input type="text" id="quizDescription" name="quizDescription" placeholder="Describe the quiz" maxlength="120" required>
 
                 <label for="quizImage">Quiz image URL</label>
                 <input type="url" id="quizImage" name="quizImage" placeholder="https://...jpg" required>
