@@ -21,7 +21,7 @@ function createOptionItem(questionIndex, optionIndex, text = '', checked = false
             </label>
             <button type="button" class="remove-option">Remove</button>
         </div>
-        <input type="text" name="optionText" value="${text}" placeholder="Answer text" required>
+        <input type="text" name="optionText" value="${text}" placeholder="Answer text" maxlength="80" required>
     `;
 
     optionWrapper.querySelector('.remove-option').addEventListener('click', () => {
