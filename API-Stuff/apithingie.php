@@ -160,9 +160,9 @@ class ApiThingie
                 JOIN users u ON u.id = a.user_id
                 JOIN questions q ON q.quiz_id = a.quiz_id
                 WHERE a.quiz_id = ? AND a.completed = TRUE
-                ORDER BY a.user_id, a.score DESC
+                ORDER BY a.user_id, a.score DESC, a.finished_at ASC
             ) ranked
-            ORDER BY score DESC
+            ORDER BY score DESC, seconds_per_question ASC
             LIMIT 10
         ");
         $stmt->execute([$_GET['quiz_id']]);
