@@ -15,6 +15,18 @@ function shuffleArray(array) {
     }
 }
 
+function updateProgress(quiz, progress) {
+    let answered = 0;
+
+    for (let i = 0; i < quiz.questions.length; i++) {
+        if (document.querySelector(`input[name="answers${i}"]:checked`)) {
+            answered++;
+        }
+    }
+
+    progress.value = answered;
+}
+
 function renderquestions(quiz) {
     const starttime = Temporal.Now.zonedDateTimeISO();
     for (const question of quiz.questions) {
@@ -24,12 +36,34 @@ function renderquestions(quiz) {
     const maindiv = document.getElementById("questions");
     const quiztitle = document.createElement("h1");
     const progress = document.createElement("progress");
+    const timer = document.createElement("p");
 
     quiztitle.textContent = quiz.title;
-    progress.max = "100";
-    progress.value = "0";
+
+    progress.max = quiz.questions.length;
+    progress.value = 0;
+    progress.id = "quiz-progress";
+
+    timer.id = "timer";
+    timer.textContent = "Time: 00:00";
+
+    const quizStart = Date.now();
+
+    const interval = setInterval(() => {
+        const elapsed = Math.floor((Date.now() - quizStart) / 1000);
+
+        const minutes = String(Math.floor(elapsed / 60)).padStart(2, "0");
+        const seconds = String(elapsed % 60).padStart(2, "0");
+
+        timer.textContent = `Time: ${minutes}:${seconds}`;
+    }, 1000);
+
+    quiztitle.textContent = quiz.title;
+    progress.max = quiz.questions.length;
+    progress.value = 0;
     document.body.insertBefore(quiztitle, document.getElementById("questions"));
     document.body.insertBefore(progress, document.getElementById("questions"));
+    document.body.insertBefore(timer, document.getElementById("questions"));
 
     for (let i = 0; i < quiz.questions.length; i++) {
         const questiondiv = document.createElement("div");
@@ -66,6 +100,10 @@ function renderquestions(quiz) {
             select.name = `answers${i}`;
             select.id = `option${i}-${j}`;
 
+            select.addEventListener("change", () => {
+                updateProgress(quiz, progress);
+            });
+
             answer.textContent = quiz.questions[i].options[j].option_text;
             answer.setAttribute("for", `option${i}-${j}`);
 
@@ -78,6 +116,7 @@ function renderquestions(quiz) {
     const submit = document.createElement("button");
     submit.id = "submit";
     submit.textContent = "Submit Answers";
+    submit.type = "button";
     submit.addEventListener("click", () => {
         let answers = 0;
         for (let i = 0; i < quiz.questions.length; i++) {
@@ -99,6 +138,13 @@ function renderquestions(quiz) {
                 }
             }
 
+            clearInterval(interval);
+            timer.textContent += " (Finished)";
+
+            const totalSeconds = Math.floor((Date.now() - quizStart) / 1000);
+            const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+            const seconds = String(totalSeconds % 60).padStart(2, "0");
+
             const resultspage = document.getElementById("resultsmodal");
             document.getElementById("outermodal").style.display = "block";
 
@@ -118,7 +164,7 @@ function renderquestions(quiz) {
 
             count.textContent = `${points} / ${quiz.questions.length} Correct`;
             percentage.textContent = `${Math.round((points / quiz.questions.length) * 100)}%`;
-            time.textContent = `Time: ${10}`;
+            time.textContent = `Time: ${minutes}:${seconds}`;
             homepage.href = "../HomePage/homepage.php";
             homepage.textContent = "To Homepage";
             overview.href = "../overview/index.php";
@@ -154,14 +200,11 @@ function renderquestions(quiz) {
                     console.error(err);
                 })
         } else {
-            const message = document.getElementById("errormessage")
-            if (message.style.display = "block") {
-                message.style.display = "none";
-            }
+            const message = document.getElementById("errormessage");
 
             message.style.display = "block";
 
-            const errortimeout = setTimeout(() => {
+            setTimeout(() => {
                 message.style.display = "none";
             }, 3000);
         }
