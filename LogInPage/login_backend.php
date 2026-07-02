@@ -50,11 +50,7 @@ function login_throttling() //stopt login attempt spam
             $target_time = "$current_time[0] " . $current_time[1] + $login_penalties[3];
             $_SESSION['sleep_until'] = $target_time;
             break;
-        case 20:
-            $target_time = "$current_time[0] " . $current_time[1] + $login_penalties[4];
-            $_SESSION['sleep_until'] = $target_time;
-            break;
-        case count($_SESSION['failed_logins']) > 20:
+        case count($_SESSION['failed_logins']) >= 20:
             $target_time = "$current_time[0] " . $current_time[1] + $login_penalties[4];
             $_SESSION['sleep_until'] = $target_time;
             break;
