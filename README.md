@@ -7,7 +7,10 @@ Welcome to Trivial, a quiz platform where users can browse quizzes, take them, c
 
 ### Setup
 The website is accesible through the repository and you can access it by using a platform like apache (through xampp) to make the PHP code work.
-you will need to make sure postgresql is enabled too to allow the connection to the online database.
+
+you will need to make sure postgresql is enabled too to allow the connection to the online supabase database.
+edit the information in (DB.php) to connect to the correct database, the current values connect to our existing database (though admittedly they should be in a .env file).
+for a local database, use the (structure.sql) document to create the required database and tables to allow the project to work, though this will not copy any users or quizzes, instead giving you a blank slate.
 
 ## Main pages
 
