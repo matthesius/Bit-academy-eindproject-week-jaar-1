@@ -6,7 +6,11 @@ Welcome to Trivial, a quiz platform where users can browse quizzes, take them, c
 
 
 ### Setup
-The website is accesible online and you can access it by ...
+The website is accesible through the repository and you can access it by using a platform like apache (through xampp) to make the PHP code work.
+
+you will need to make sure postgresql is enabled too to allow the connection to the online supabase database.
+edit the information in (DB.php) to connect to the correct database, the current values connect to our existing database (though admittedly they should be in a .env file).
+for a local database, use the (structure.sql) document to create the required database and tables to allow the project to work, though this will not copy any users or quizzes, instead giving you a blank slate.
 
 ## Main pages
 
@@ -18,11 +22,12 @@ When a quiz is started, the quiz page loads the selected quiz and presents the q
 - The user can answer each question
 - A timer runs during the quiz
 - Progress is shown while answering
-- The quiz ends with a score summary and links back to the homepage or overview
+- The quiz ends with a score summary and links back to the homepage or overview as well as an overview of your responses
 
 Users can log in to access personalized features.
 - Enter a username and password
 - If the credentials are valid, the user is sent to the homepage
+- logins are throttled to prevent bruteforcing
 
 New users can create an account.
 
@@ -34,9 +39,10 @@ To create a quiz:
 2. Enter a description
 3. Add an image URL
 4. Add one or more questions
-5. Add answer options for each question
-6. Mark exactly one answer as correct
-7. Submit the quiz
+5. (add an image to your question)
+6. Add answer options for each question
+7. Mark exactly one answer as correct
+8. Submit the quiz
 
 The quiz is sent to the backend API and stored in the database.
 
