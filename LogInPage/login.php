@@ -13,7 +13,7 @@ session_start();
     <title>Login - Trivial</title>
     <link rel="stylesheet" href="login.css">
     <link rel="icon" type="image/png" href="../favicon/web-app-manifest-192x192.png" />
-    <!-- to do: verander deze kut slop favicon AUB -->
+    <!-- to do: verander deze slop favicon AUB -->
 </head>
 
 <body>
